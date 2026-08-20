@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#06060C" />
+  <meta name="theme-color" content="#000000" />
   <title>The Harness Lab · Engineering</title>
   <meta name="description" content="The engineering studio of The Harness Lab — verified, reproducible agent systems that automate expert knowledge work, from websites to full business automation." />
   <link rel="canonical" href="https://theharnesslab.dev/" />
@@ -27,39 +27,39 @@
   :root {
     color-scheme: dark;
 
-    /* ground + panels */
-    --obsidian: #06060C;
-    --obsidian-2: #0A0A14;
-    --obsidian-3: #050509;
-    --panel: rgba(17, 17, 32, 0.72);
-    --panel-2: rgba(12, 12, 24, 0.86);
-    --panel-solid: #10101F;
+    /* ground + panels — true black, no tint anywhere */
+    --obsidian: #000000;
+    --panel: rgba(11, 11, 11, 0.82);
+    --panel-2: #080808;
+    --panel-solid: #141414;
 
-    /* ink */
-    --marble: #f5f3ff;
-    --marble-soft: #c9cbe8;
-    --muted: #a6a8c4;
-    --dim: #6b6e8e;
+    /* ink — neutral greys, no lavender cast */
+    --marble: #ffffff;
+    --marble-soft: #d0d0d0;
+    --muted: #949494;
+    --dim: #626262;
 
-    /* accents */
+    /* accents — gold anchor, ember signal, green reserved for PASS */
     --gold: #f4c87a;
     --gold-bright: #ffe6b0;
     --gold-deep: #7a5a22;
-    --ember: #ff5c7a;
-    --green: #5cffaa;
+    --ember: #ff3b2f;
+    --ember-bright: #ff6a3d;
+    --green: #3dffa8;
     --cyan: #72e7ff;
-    --aurora-a: #34e3d0;
-    --aurora-b: #6d6bff;
-    --aurora-c: #d96bff;
+    --sig-a: #ff6a3d;
+    --sig-b: #ff3b2f;
+    --sig-c: #d81f4a;
 
-    --grad-aurora: linear-gradient(96deg, var(--aurora-a) 0%, var(--aurora-b) 52%, var(--aurora-c) 100%);
+    --grad-signal: linear-gradient(100deg, var(--sig-a) 0%, var(--sig-b) 55%, var(--sig-c) 100%);
     --grad-gold: linear-gradient(135deg, #ffe6b0 0%, #f4c87a 55%, #e2a85c 100%);
+    --hazard: repeating-linear-gradient(45deg, var(--gold) 0 7px, #000 7px 14px);
 
-    --line: rgba(199, 201, 255, 0.12);
-    --line-2: rgba(199, 201, 255, 0.20);
-    --line-gold: rgba(244, 200, 122, 0.42);
-    --shadow: 0 40px 100px -40px rgba(0, 0, 0, 0.92);
-    --shadow-soft: 0 20px 60px -30px rgba(0, 0, 0, 0.8);
+    --line: rgba(255, 255, 255, 0.11);
+    --line-2: rgba(255, 255, 255, 0.22);
+    --line-gold: rgba(244, 200, 122, 0.45);
+    --shadow: 0 40px 100px -40px #000;
+    --shadow-soft: 0 20px 60px -30px #000;
 
     --max: 1200px;
     --gutter: clamp(20px, 5vw, 56px);
@@ -96,12 +96,7 @@
     line-height: 1.6;
     font-size: var(--t-body);
     color: var(--marble);
-    background:
-      radial-gradient(1200px 640px at 84% -10%, rgba(109, 107, 255, 0.18), transparent 58%),
-      radial-gradient(980px 600px at -8% 14%, rgba(52, 227, 208, 0.12), transparent 56%),
-      radial-gradient(880px 760px at 54% 116%, rgba(217, 107, 255, 0.10), transparent 62%),
-      linear-gradient(180deg, var(--obsidian) 0%, var(--obsidian-2) 48%, var(--obsidian-3) 100%);
-    background-attachment: fixed;
+    background: #000;
   }
 
   /* fixed atmospheric layers */
@@ -113,12 +108,22 @@
   }
   .field--grid {
     background-image:
-      linear-gradient(rgba(199, 201, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(199, 201, 255, 0.035) 1px, transparent 1px);
-    background-size: 74px 74px;
-    -webkit-mask-image: radial-gradient(120% 92% at 50% 0%, #000 22%, transparent 84%);
-    mask-image: radial-gradient(120% 92% at 50% 0%, #000 22%, transparent 84%);
+      linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(118% 90% at 50% 0%, #000 18%, transparent 82%);
+    mask-image: radial-gradient(118% 90% at 50% 0%, #000 18%, transparent 82%);
+    opacity: 0.7;
+  }
+  /* CRT scanlines — the texture that keeps pure black from reading as a void */
+  .field--scan {
+    background-image: repeating-linear-gradient(
+      0deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 4px);
     opacity: 0.6;
+  }
+  /* hard vignette: crushes the edges so content sits in a lit centre */
+  .field--vignette {
+    background: radial-gradient(125% 88% at 50% 34%, transparent 46%, rgba(0, 0, 0, 0.92) 100%);
   }
   .field--noise {
     opacity: 0.05;
@@ -136,18 +141,18 @@
   }
 
   a { color: inherit; text-decoration: none; }
-  ::selection { background: rgba(244, 200, 122, 0.28); color: var(--marble); }
+  ::selection { background: var(--ember); color: #fff; }
   :focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 0;
   }
 
   /* ---------- shared type ---------- */
   .eyebrow {
     font-family: var(--font-mono);
     font-size: var(--t-eyebrow);
-    letter-spacing: 0.28em;
+    letter-spacing: 0.34em;
     text-transform: uppercase;
     color: var(--gold);
     display: inline-flex;
@@ -157,9 +162,10 @@
   }
   .eyebrow::before {
     content: "";
-    width: 26px;
-    height: 1px;
-    background: linear-gradient(90deg, var(--gold), transparent);
+    width: 9px;
+    height: 9px;
+    background: var(--gold);
+    flex: none;
   }
   h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 600; }
   .display {
@@ -176,7 +182,7 @@
   }
   .mono { font-family: var(--font-mono); }
   .grad-text {
-    background: var(--grad-aurora);
+    background: var(--grad-signal);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -195,28 +201,29 @@
     align-items: center;
     gap: 0.6em;
     font-family: var(--font-mono);
-    font-size: 0.86rem;
-    letter-spacing: 0.06em;
-    padding: 0.85em 1.35em;
-    border-radius: 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.95em 1.5em;
+    border-radius: 0;
     border: 1px solid var(--line-2);
     background: var(--_bg);
     color: var(--marble);
     cursor: pointer;
-    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-    will-change: transform;
+    transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
   }
-  .btn:hover { transform: translateY(-2px); border-color: var(--line-gold); }
-  .btn .arrow { transition: transform 0.18s ease; }
-  .btn:hover .arrow { transform: translateX(3px); }
+  .btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(244, 200, 122, 0.07); }
+  .btn .arrow { transition: transform 0.16s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  /* primary is flat gold ink-on-metal; hover trips it to the ember signal */
   .btn--primary {
-    color: var(--gold-ink, #1c1206);
-    background: var(--grad-gold);
-    border-color: transparent;
+    color: #000;
+    background: var(--gold);
+    border-color: var(--gold);
     font-weight: 600;
-    box-shadow: 0 14px 40px -18px rgba(244, 200, 122, 0.6);
   }
-  .btn--primary:hover { box-shadow: 0 18px 50px -16px rgba(244, 200, 122, 0.75); }
+  .btn--primary:hover { background: var(--ember); border-color: var(--ember); color: #fff; }
 
   /* ---------- header ---------- */
   header {
@@ -225,8 +232,8 @@
     z-index: 40;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    background: linear-gradient(180deg, rgba(6, 6, 12, 0.86), rgba(6, 6, 12, 0.4));
-    border-bottom: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid var(--line-2);
   }
   .nav {
     display: flex;
@@ -236,11 +243,11 @@
     height: 68px;
   }
   .brand { display: inline-flex; align-items: center; gap: 0.7rem; }
-  .brand svg { width: 34px; height: 34px; display: block; border-radius: 8px; }
+  .brand svg { width: 34px; height: 34px; display: block; border-radius: 0; }
   .brand-name {
     font-family: var(--font-roman);
     font-size: 0.98rem;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--marble);
   }
@@ -256,8 +263,20 @@
   .nav-cta { display: inline-flex; align-items: center; gap: 0.8rem; }
   @media (min-width: 900px) { .nav-links { display: flex; } }
 
+  /* narrow screens: keep the lockup and CTA on one line each — the wordmark
+     wrapped to two lines here even before the restyle */
+  @media (max-width: 620px) {
+    .nav { height: 60px; gap: 0.7rem; }
+    .brand { gap: 0.55rem; }
+    .brand img.brand-logo { width: 28px; height: 28px; }
+    .brand-name { font-size: 0.72rem; letter-spacing: 0.1em; white-space: nowrap; }
+    .nav-cta .btn { font-size: 0.66rem; letter-spacing: 0.09em; padding: 0.78em 0.85em; white-space: nowrap; }
+  }
+
   /* ---------- section rhythm ---------- */
   section { padding-block: clamp(64px, 9vw, 130px); }
+  /* full-bleed hairlines: hard structural division, no soft fades */
+  main > section + section { border-top: 1px solid var(--line); }
   .section-head { display: grid; gap: 1.1rem; max-width: 72ch; margin-bottom: clamp(36px, 5vw, 64px); }
   .section-head h2 { font-size: var(--t-h2); }
   .section-head .display { font-family: var(--font-display); }
@@ -271,14 +290,26 @@
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--marble-soft);
-    padding: 0.4em 0.8em;
-    border: 1px solid var(--line);
-    border-radius: 999px;
+    padding: 0.5em 0.9em 0.5em 0.8em;
+    border: 1px solid var(--line-2);
+    border-left: 0;
+    border-radius: 0;
     background: var(--panel);
+    position: relative;
+    margin-left: 7px;
   }
+  .hero-badge::before {
+    content: "";
+    position: absolute;
+    left: -7px; top: -1px; bottom: -1px;
+    width: 7px;
+    background: var(--gold);
+  }
+  /* square status LED, not a dot — reads as HUD, not decoration */
   .hero-badge .dot {
-    width: 7px; height: 7px; border-radius: 50%;
+    width: 7px; height: 7px; border-radius: 0;
     background: var(--green);
     box-shadow: 0 0 12px var(--green);
     animation: pulse 2.6s ease-in-out infinite;
@@ -301,7 +332,7 @@
     gap: 1px;
     background: var(--line);
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: 0;
     overflow: hidden;
   }
   @media (min-width: 720px) { .metrics { grid-template-columns: repeat(3, 1fr); } }
@@ -323,13 +354,23 @@
   /* ---------- pipeline (signature) ---------- */
   .pipe-shell {
     border: 1px solid var(--line);
-    border-radius: 20px;
-    background:
-      radial-gradient(700px 300px at 20% -10%, rgba(109,107,255,0.10), transparent 60%),
-      var(--panel-2);
+    border-radius: 0;
+    background: var(--panel-2);
     box-shadow: var(--shadow);
     overflow: hidden;
+    position: relative;
   }
+  /* machined corner ticks — the frame reads as an instrument, not a card */
+  .pipe-shell::before,
+  .pipe-shell::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+  }
+  .pipe-shell::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+  .pipe-shell::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
   .pipe-topbar {
     display: flex;
     align-items: center;
@@ -344,10 +385,10 @@
     flex-wrap: wrap;
   }
   .pipe-dots { display: inline-flex; gap: 0.4rem; }
-  .pipe-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-2); display: block; }
-  .pipe-dots i:nth-child(1){ background: rgba(255,92,122,0.7); }
-  .pipe-dots i:nth-child(2){ background: rgba(244,200,122,0.7); }
-  .pipe-dots i:nth-child(3){ background: rgba(92,255,170,0.7); }
+  .pipe-dots i { width: 10px; height: 10px; border-radius: 0; background: var(--line-2); display: block; }
+  .pipe-dots i:nth-child(1){ background: var(--ember); }
+  .pipe-dots i:nth-child(2){ background: var(--gold); }
+  .pipe-dots i:nth-child(3){ background: var(--green); }
   .pipe-conf { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--marble-soft); }
   .pipe-conf b { color: var(--green); font-weight: 600; }
 
@@ -364,13 +405,13 @@
     color: var(--muted);
   }
   .pipe-legend span { display: inline-flex; align-items: center; gap: 0.5rem; }
-  .pipe-legend .swatch { width: 12px; height: 12px; border-radius: 3px; display: block; }
+  .pipe-legend .swatch { width: 12px; height: 12px; border-radius: 0; display: block; }
 
   /* svg element styles */
-  .node-box { fill: rgba(16,16,31,0.9); stroke: var(--line-2); stroke-width: 1.5; }
-  .node-gate { fill: rgba(20,14,6,0.9); stroke: var(--line-gold); stroke-width: 1.5; }
+  .node-box { fill: #0c0c0c; stroke: var(--line-2); stroke-width: 1.5; }
+  .node-gate { fill: #140c02; stroke: var(--line-gold); stroke-width: 1.5; }
   .node-label { fill: var(--marble); font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; }
-  .node-sub { fill: var(--dim); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; }
+  .node-sub { fill: var(--dim); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0; }
   .gate-label { fill: var(--gold); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; }
   .flow { fill: none; stroke: url(#flowgrad); stroke-width: 2; }
   .flow-dash {
@@ -379,14 +420,14 @@
     stroke-width: 2.4;
     stroke-linecap: round;
     stroke-dasharray: 10 190;
-    filter: drop-shadow(0 0 4px rgba(92,255,170,0.7));
+    filter: drop-shadow(0 0 5px rgba(61,255,168,0.75));
     animation: dashmove 3.4s linear infinite;
   }
   @keyframes dashmove { to { stroke-dashoffset: -200; } }
   .gate-ring { fill: none; stroke: var(--gold); stroke-width: 1.5; opacity: 0.5; animation: gatepulse 3s ease-in-out infinite; }
   @keyframes gatepulse { 0%,100%{ opacity: 0.2; } 50%{ opacity: 0.75; } }
   .check { stroke: var(--green); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  .seal { fill: rgba(92,255,170,0.10); stroke: var(--green); stroke-width: 1.6; }
+  .seal { fill: rgba(61,255,168,0.12); stroke: var(--green); stroke-width: 1.6; }
 
   /* ---------- engineering grid ---------- */
   .eng-grid {
@@ -395,7 +436,7 @@
     gap: 1px;
     background: var(--line);
     border: 1px solid var(--line);
-    border-radius: 18px;
+    border-radius: 0;
     overflow: hidden;
   }
   @media (min-width: 640px) { .eng-grid { grid-template-columns: 1fr 1fr; } }
@@ -408,18 +449,29 @@
     align-content: start;
     transition: background 0.2s ease;
   }
+  .eng-cell { position: relative; }
+  /* gold rail wipes in from the left edge on hover */
+  .eng-cell::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.22s ease;
+  }
   .eng-cell:hover { background: var(--panel-solid); }
+  .eng-cell:hover::before { transform: scaleY(1); }
   .eng-idx {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     color: var(--gold);
   }
   .eng-cell h3 { font-size: var(--t-h3); font-family: var(--font-display); font-weight: 600; }
   .eng-cell p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
   /* ---------- capability spine ---------- */
-  .spine { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .spine { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 0; overflow: hidden; }
   .step {
     background: var(--panel-2);
     display: grid;
@@ -456,7 +508,7 @@
   @media (min-width: 1040px) { .cards { grid-template-columns: repeat(4, 1fr); } }
   .card {
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: 0;
     background: var(--panel-2);
     padding: 1.6rem 1.4rem;
     display: grid;
@@ -469,13 +521,13 @@
   .card::before {
     content: "";
     position: absolute; inset: 0 0 auto 0; height: 2px;
-    background: var(--grad-aurora);
-    opacity: 0.6;
+    background: var(--grad-signal);
+    opacity: 0.75;
     transform: scaleX(0.3);
     transform-origin: left;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
-  .card:hover { transform: translateY(-4px); border-color: var(--line-2); }
+  .card:hover { transform: translateY(-3px); border-color: var(--line-gold); }
   .card:hover::before { transform: scaleX(1); opacity: 1; }
   .card .k { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
   .card h3 { font-size: 1.2rem; font-family: var(--font-display); font-weight: 600; }
@@ -484,17 +536,25 @@
   /* ---------- closing CTA ---------- */
   .cta-block {
     border: 1px solid var(--line-gold);
-    border-radius: 24px;
+    border-radius: 0;
     background:
-      radial-gradient(600px 320px at 80% -20%, rgba(217,107,255,0.14), transparent 60%),
-      radial-gradient(500px 300px at 0% 120%, rgba(52,227,208,0.12), transparent 60%),
+      radial-gradient(620px 320px at 80% -20%, rgba(255, 59, 47, 0.13), transparent 62%),
+      radial-gradient(520px 300px at 0% 120%, rgba(244, 200, 122, 0.09), transparent 62%),
       var(--panel-2);
-    padding: clamp(2.4rem, 5vw, 4rem);
+    padding: clamp(2.9rem, 5vw, 4rem) clamp(2.4rem, 5vw, 4rem) clamp(2.4rem, 5vw, 4rem);
+    position: relative;
+    overflow: hidden;
     text-align: center;
     display: grid;
     gap: 1.4rem;
     justify-items: center;
     box-shadow: var(--shadow);
+  }
+  /* hazard tape across the top edge — the loudest single mark on the page */
+  .cta-block::before {
+    content: "";
+    position: absolute; inset: 0 0 auto 0; height: 6px;
+    background: var(--hazard);
   }
   .cta-block h2 { font-size: var(--t-h2); font-family: var(--font-display); max-width: 20ch; }
   .cta-block .lead { text-align: center; margin-inline: auto; }
@@ -517,7 +577,7 @@
   .foot .brand-name { font-size: 0.82rem; }
 
   /* ---------- gate detail ---------- */
-  .gate-detail { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-top: 1.4rem; }
+  .gate-detail { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 0; overflow: hidden; margin-top: 1.4rem; }
   @media (min-width: 640px) { .gate-detail { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1000px) { .gate-detail { grid-template-columns: repeat(3, 1fr); } }
   .gate-item { background: var(--panel-2); padding: 1.2rem 1.3rem; display: grid; gap: 0.35rem; }
@@ -525,19 +585,19 @@
   .gate-item p { margin: 0; color: var(--muted); font-size: 0.9rem; }
 
   /* ---------- callout ---------- */
-  .callout { margin-top: 1.6rem; border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: 12px; background: var(--panel); padding: 1.4rem 1.6rem; display: grid; gap: 0.5rem; }
-  .callout .c-k { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .callout { margin-top: 1.6rem; border: 1px solid var(--line); border-left: 3px solid var(--ember); border-radius: 0; background: var(--panel); padding: 1.4rem 1.6rem; display: grid; gap: 0.5rem; }
+  .callout .c-k { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ember-bright); }
   .callout p { margin: 0; color: var(--marble-soft); max-width: 72ch; }
 
   /* ---------- process timeline ---------- */
-  .timeline { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .timeline { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 0; overflow: hidden; }
   .tl-row { background: var(--panel-2); display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; padding: 1.5rem clamp(1.2rem, 3vw, 2rem); align-items: start; }
-  .tl-row .n { font-family: var(--font-mono); font-size: 0.92rem; font-weight: 600; color: #1c1206; background: var(--grad-gold); width: 2rem; height: 2rem; border-radius: 8px; display: grid; place-items: center; }
+  .tl-row .n { font-family: var(--font-mono); font-size: 0.92rem; font-weight: 700; color: #000; background: var(--gold); width: 2rem; height: 2rem; border-radius: 0; display: grid; place-items: center; }
   .tl-row h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
   .tl-row p { margin: 0; color: var(--muted); font-size: 0.94rem; }
 
   /* ---------- principles ---------- */
-  .principles { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .principles { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 0; overflow: hidden; }
   @media (min-width: 720px) { .principles { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1080px) { .principles { grid-template-columns: repeat(4, 1fr); } }
   .principle { background: var(--panel-2); padding: 1.6rem 1.4rem; display: grid; gap: 0.5rem; }
@@ -547,8 +607,8 @@
   /* ---------- emblem ---------- */
   .emblem { padding-block: clamp(64px, 8vw, 120px); text-align: center; }
   .emblem-art { position: relative; width: min(340px, 68vw); margin-inline: auto; }
-  .emblem-art img { position: relative; z-index: 1; width: 100%; height: auto; display: block; border-radius: 50%; filter: drop-shadow(0 30px 80px rgba(255, 120, 60, 0.22)); }
-  .emblem-art::before { content: ""; position: absolute; inset: -12%; z-index: 0; border-radius: 50%; background: radial-gradient(circle at 50% 45%, rgba(244, 200, 122, 0.20), rgba(217, 107, 255, 0.05) 55%, transparent 70%); }
+  .emblem-art img { position: relative; z-index: 1; width: 100%; height: auto; display: block; border-radius: 50%; filter: drop-shadow(0 30px 80px rgba(255, 59, 47, 0.26)); }
+  .emblem-art::before { content: ""; position: absolute; inset: -12%; z-index: 0; border-radius: 50%; background: radial-gradient(circle at 50% 45%, rgba(244, 200, 122, 0.22), rgba(255, 59, 47, 0.10) 52%, transparent 70%); }
   .emblem h2 { font-family: var(--font-display); font-size: var(--t-h2); margin-top: 2.2rem; }
   .emblem p { color: var(--muted); max-width: 54ch; margin: 0.9rem auto 0; }
 
@@ -563,7 +623,7 @@
   }
 
   /* shared Harness Lab logo (img form) */
-  .brand img.brand-logo { width: 34px; height: 34px; display: block; border-radius: 8px; }
+  .brand img.brand-logo { width: 34px; height: 34px; display: block; border-radius: 0; }
   .foot .brand img.brand-logo { width: 26px; height: 26px; }
 </style>
 </head>
@@ -571,7 +631,9 @@
 
 
 <div class="field field--grid" aria-hidden="true"></div>
+<div class="field field--scan" aria-hidden="true"></div>
 <div class="field field--noise" aria-hidden="true"></div>
+<div class="field field--vignette" aria-hidden="true"></div>
 
 <!-- reusable logo defined once via <symbol> -->
 <header>
@@ -711,9 +773,9 @@
           <svg class="pipe-svg" viewBox="0 0 980 300" role="img" aria-label="Diagram: raw sources flow through research, compute, assemble, and accuracy gates into a signed package.">
             <defs>
               <linearGradient id="flowgrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#34e3d0"/>
-                <stop offset="0.5" stop-color="#6d6bff"/>
-                <stop offset="1" stop-color="#d96bff"/>
+                <stop offset="0" stop-color="#f4c87a"/>
+                <stop offset="0.5" stop-color="#ff6a3d"/>
+                <stop offset="1" stop-color="#d81f4a"/>
               </linearGradient>
             </defs>
 
@@ -731,19 +793,19 @@
 
             <!-- stage: sources -->
             <g>
-              <rect class="node-box" x="40" y="60" width="110" height="60" rx="10"/>
+              <rect class="node-box" x="40" y="60" width="110" height="60"/>
               <text class="node-label" x="95" y="86" text-anchor="middle">Sources</text>
               <text class="node-sub" x="95" y="104" text-anchor="middle">20+ · online + local</text>
             </g>
             <!-- stage: research -->
             <g>
-              <rect class="node-box" x="250" y="60" width="100" height="60" rx="10"/>
+              <rect class="node-box" x="250" y="60" width="100" height="60"/>
               <text class="node-label" x="300" y="86" text-anchor="middle">Research</text>
               <text class="node-sub" x="300" y="104" text-anchor="middle">extract + locate</text>
             </g>
             <!-- stage: compute -->
             <g>
-              <rect class="node-box" x="450" y="60" width="100" height="60" rx="10"/>
+              <rect class="node-box" x="450" y="60" width="100" height="60"/>
               <text class="node-label" x="500" y="86" text-anchor="middle">Compute</text>
               <text class="node-sub" x="500" y="104" text-anchor="middle">exact reconcile</text>
             </g>
@@ -751,35 +813,35 @@
             <!-- accuracy gates row -->
             <!-- gate template repeated -->
             <g transform="translate(150,180)">
-              <rect class="node-gate" x="0" y="0" width="118" height="60" rx="10"/>
+              <rect class="node-gate" x="0" y="0" width="118" height="60"/>
               <circle class="gate-ring" cx="20" cy="30" r="10"/>
               <path class="check" d="M15 30 l4 4 l7 -9"/>
               <text class="gate-label" x="38" y="27">SOURCE</text>
               <text class="gate-label" x="38" y="42">CLOSURE</text>
             </g>
             <g transform="translate(288,180)">
-              <rect class="node-gate" x="0" y="0" width="118" height="60" rx="10"/>
+              <rect class="node-gate" x="0" y="0" width="118" height="60"/>
               <circle class="gate-ring" cx="20" cy="30" r="10" style="animation-delay:-0.6s"/>
               <path class="check" d="M15 30 l4 4 l7 -9"/>
               <text class="gate-label" x="38" y="27">FACT</text>
               <text class="gate-label" x="38" y="42">VALUE</text>
             </g>
             <g transform="translate(426,180)">
-              <rect class="node-gate" x="0" y="0" width="118" height="60" rx="10"/>
+              <rect class="node-gate" x="0" y="0" width="118" height="60"/>
               <circle class="gate-ring" cx="20" cy="30" r="10" style="animation-delay:-1.2s"/>
               <path class="check" d="M15 30 l4 4 l7 -9"/>
               <text class="gate-label" x="38" y="27">PROVEN-</text>
               <text class="gate-label" x="38" y="42">ANCE</text>
             </g>
             <g transform="translate(564,180)">
-              <rect class="node-gate" x="0" y="0" width="118" height="60" rx="10"/>
+              <rect class="node-gate" x="0" y="0" width="118" height="60"/>
               <circle class="gate-ring" cx="20" cy="30" r="10" style="animation-delay:-1.8s"/>
               <path class="check" d="M15 30 l4 4 l7 -9"/>
               <text class="gate-label" x="38" y="27">MATH</text>
               <text class="gate-label" x="38" y="42">EXACT</text>
             </g>
             <g transform="translate(702,180)">
-              <rect class="node-gate" x="0" y="0" width="118" height="60" rx="10"/>
+              <rect class="node-gate" x="0" y="0" width="118" height="60"/>
               <circle class="gate-ring" cx="20" cy="30" r="10" style="animation-delay:-2.4s"/>
               <path class="check" d="M15 30 l4 4 l7 -9"/>
               <text class="gate-label" x="38" y="27">PACKAGE</text>
@@ -788,18 +850,18 @@
 
             <!-- signed package endpoint -->
             <g transform="translate(830,55)">
-              <rect class="seal" x="0" y="0" width="112" height="70" rx="12"/>
-              <path class="check" d="M22 35 l7 7 l14 -18" transform="translate(6,-2)"/>
-              <text class="node-label" x="56" y="30" text-anchor="middle" style="fill:var(--green)">Signed</text>
-              <text class="node-sub" x="56" y="48" text-anchor="middle">Ed25519 · package</text>
+              <rect class="seal" x="0" y="0" width="112" height="70"/>
+              <path class="check" d="M22 35 l7 7 l14 -18" transform="translate(23.5,-18)"/>
+              <text class="node-label" x="56" y="44" text-anchor="middle" style="fill:var(--green)">Signed</text>
+              <text class="node-sub" x="56" y="60" text-anchor="middle">Ed25519 · package</text>
             </g>
           </svg>
         </div>
 
         <div class="pipe-legend" aria-hidden="true">
-          <span><span class="swatch" style="background:url(#flowgrad),var(--aurora-b)"></span> data flow</span>
-          <span><span class="swatch" style="background:rgba(20,14,6,0.9);border:1px solid var(--line-gold)"></span> accuracy gate</span>
-          <span><span class="swatch" style="background:rgba(92,255,170,0.2);border:1px solid var(--green)"></span> signed artifact</span>
+          <span><span class="swatch" style="background:var(--sig-b)"></span> data flow</span>
+          <span><span class="swatch" style="background:#140c02;border:1px solid var(--line-gold)"></span> accuracy gate</span>
+          <span><span class="swatch" style="background:rgba(61,255,168,0.18);border:1px solid var(--green)"></span> signed artifact</span>
         </div>
       </div>
 
