@@ -320,8 +320,46 @@
     margin-top: 1.4rem;
     max-width: 16ch;
   }
+  /* the grid column already constrains the measure — the 16ch cap on top of it
+     forced a fifth line and split "The harness / proves it's" */
+  @media (min-width: 1000px) { .hero h1 { max-width: none; } }
   .hero .lead { margin-top: 1.6rem; }
   .hero-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.2rem; }
+
+  /* hero splits at desktop: copy left, emblem right. Metrics stay full-bleed below. */
+  .hero-grid { display: grid; gap: clamp(2.2rem, 5vw, 4rem); align-items: center; }
+  @media (min-width: 1000px) {
+    .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr); }
+  }
+  .hero-copy { min-width: 0; }
+
+  .hero-art {
+    position: relative;
+    justify-self: center;
+    /* Sized as a padded box so the rings live INSIDE it. Negative insets put
+       them outside the element, which overflowed the page once the emblem
+       filled its column on mobile. */
+    width: min(540px, 100%);
+    aspect-ratio: 1;
+    padding: 11%;
+  }
+  .hero-art img {
+    position: relative;
+    z-index: 1;
+    width: 100%; height: auto;
+    display: block;
+    filter: drop-shadow(0 0 70px rgba(255, 106, 61, 0.30));
+  }
+  /* concentric instrument rings — the emblem reads as mounted, not pasted on */
+  .hero-art::before,
+  .hero-art::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-art::before { inset: 5.5%; border: 1px solid var(--line-gold); opacity: 0.55; }
+  .hero-art::after  { inset: 0;    border: 1px solid var(--line);      opacity: 0.7; }
 
   /* metric strip */
   .metrics {
@@ -673,6 +711,8 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
+      <div class="hero-grid">
+      <div class="hero-copy">
       <span class="hero-badge"><span class="dot" aria-hidden="true"></span> Selective engagements · currently building</span>
       <h1 class="display reveal">
         The agent does the whole job.<br>
@@ -687,6 +727,15 @@
       <div class="hero-cta reveal">
         <a class="btn btn--primary" href="#contact">Start a build <span class="arrow">→</span></a>
         <a class="btn" href="#pipeline">See how it verifies <span class="arrow">↓</span></a>
+      </div>
+      </div>
+
+      <div class="hero-art reveal">
+        <picture>
+          <source srcset="harness-lab-emblem-hero.webp" type="image/webp" />
+          <img src="harness-lab-emblem-512.png" alt="" width="430" height="430" fetchpriority="high" decoding="async" />
+        </picture>
+      </div>
       </div>
 
       <div class="metrics reveal" role="list">
@@ -1042,7 +1091,10 @@
   <section class="emblem">
     <div class="wrap">
       <div class="emblem-art reveal">
-        <img src="advancedhermes-hero-round.png" alt="The Harness Lab emblem — a winged, helmed figure in white-and-gold relief over circuitry and an ember ring." width="900" height="900" />
+        <picture>
+          <source srcset="harness-lab-emblem-hero.webp" type="image/webp" />
+          <img src="harness-lab-emblem-512.png" alt="The Harness Lab emblem — a winged, helmed figure in white-and-gold relief over circuitry and an ember ring." width="760" height="760" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <h2 class="display reveal">Speed, with proof.</h2>
       <p class="reveal">The messenger's speed, an engineer's discipline. We build the systems that carry expert work at machine speed — and the proof that every answer arrived intact.</p>
