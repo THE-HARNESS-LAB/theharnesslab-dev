@@ -240,7 +240,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    height: 68px;
+    height: 84px;
   }
   .brand { display: inline-flex; align-items: center; gap: 0.7rem; }
   .brand svg { width: 34px; height: 34px; display: block; border-radius: 0; }
@@ -266,9 +266,8 @@
   /* narrow screens: keep the lockup and CTA on one line each — the wordmark
      wrapped to two lines here even before the restyle */
   @media (max-width: 620px) {
-    .nav { height: 60px; gap: 0.7rem; }
+    .nav { height: 68px; gap: 0.7rem; }
     .brand { gap: 0.55rem; }
-    .brand img.brand-logo { width: 28px; height: 28px; }
     .brand-name { font-size: 0.72rem; letter-spacing: 0.1em; white-space: nowrap; }
     .nav-cta .btn { font-size: 0.66rem; letter-spacing: 0.09em; padding: 0.78em 0.85em; white-space: nowrap; }
   }
@@ -622,9 +621,24 @@
     .flow-dash { display: none; }
   }
 
-  /* shared Harness Lab logo (img form) */
-  .brand img.brand-logo { width: 34px; height: 34px; display: block; border-radius: 0; }
-  .foot .brand img.brand-logo { width: 26px; height: 26px; }
+  /* shared Harness Lab logo (img form) — 512px source, alpha, sits on the black */
+  .brand img.brand-logo {
+    width: 56px; height: 56px;
+    display: block;
+    border-radius: 0;
+    filter: drop-shadow(0 0 14px rgba(255, 106, 61, 0.30));
+    transition: filter 0.22s ease, transform 0.22s ease;
+  }
+  .brand:hover img.brand-logo {
+    filter: drop-shadow(0 0 20px rgba(255, 106, 61, 0.55));
+    transform: scale(1.04);
+  }
+  .foot .brand img.brand-logo { width: 44px; height: 44px; }
+  /* must follow the base rule above — identical specificity, so order decides */
+  @media (max-width: 620px) {
+    .brand img.brand-logo { width: 40px; height: 40px; }
+    .foot .brand img.brand-logo { width: 34px; height: 34px; }
+  }
 </style>
 </head>
 <body>
@@ -639,7 +653,7 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="The Harness Lab — home">
-      <img class="brand-logo" src="hermes-mark.png" alt="The Harness Lab" width="34" height="34" />
+      <img class="brand-logo" src="harness-lab-emblem-512.png" alt="The Harness Lab" width="56" height="56" />
       <span class="brand-name">The Harness Lab</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
@@ -1039,7 +1053,7 @@
 <footer>
   <div class="wrap foot">
     <a class="brand" href="#top" aria-label="The Harness Lab">
-      <img class="brand-logo" src="hermes-mark.png" alt="The Harness Lab" width="34" height="34" />
+      <img class="brand-logo" src="harness-lab-emblem-512.png" alt="The Harness Lab" width="44" height="44" />
       <span class="brand-name">The Harness Lab</span>
     </a>
     <span>Spencer Teague · Founder &amp; Lead Engineer</span>
