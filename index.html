@@ -132,7 +132,7 @@
 
         <!-- Interactive Dual-Face .dev / .com Medallion Vitrine -->
         <aside class="medallion-vitrine marquina-card" data-medallion data-face="dev" aria-label="Interactive dual-face Harness Lab medallion">
-          <div class="medallion-stage" data-medallion-stage tabindex="0" role="button" aria-label="Flip between the Black Nero Marquina .dev seal and Copper Carrara .com seal">
+          <div class="medallion-stage" data-medallion-stage tabindex="0" role="button" aria-pressed="false" aria-label="Flip between the Black Nero Marquina .dev seal and Copper Carrara .com seal">
             <div class="medallion-pool" aria-hidden="true"></div>
             <svg class="medallion-bezel" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
               <circle class="medallion-bezel-ring" cx="500" cy="500" r="490"/>
@@ -291,7 +291,7 @@
         <article class="marquina-card pillar-card pillar-card--wide">
           <div class="pillar-index">
             <span>05 / Create, Harden &amp; Lawful No-Copy Reverse-Engineering</span>
-            <span class="status-pill is-pass">Live-Proven Modes</span>
+            <span class="status-pill">Live-Proven Modes</span>
           </div>
           <h3>Three execution disciplines: <code>klh run</code>, <code>klh harden</code>, and <code>klh forge</code></h3>
 
@@ -328,14 +328,14 @@
         </div>
 
         <div class="cockpit-tabs" role="tablist" aria-label="Perihelion Loop cockpit views">
-          <button class="cockpit-tab is-active" type="button" role="tab" aria-selected="true" data-cockpit-tab="0">01 Fleet Overview</button>
-          <button class="cockpit-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-cockpit-tab="1">02 Outer DAG &amp; Gate</button>
-          <button class="cockpit-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-cockpit-tab="2">03 Karpathy Sandbox</button>
-          <button class="cockpit-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-cockpit-tab="3">04 Frontier Council</button>
-          <button class="cockpit-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-cockpit-tab="4">05 Graphify AST Map</button>
+          <button class="cockpit-tab is-active" id="cockpit-tab-0" type="button" role="tab" aria-selected="true" aria-controls="cockpit-panel" data-cockpit-tab="0">01 Fleet Overview</button>
+          <button class="cockpit-tab" id="cockpit-tab-1" type="button" role="tab" aria-selected="false" aria-controls="cockpit-panel" tabindex="-1" data-cockpit-tab="1">02 Outer DAG &amp; Gate</button>
+          <button class="cockpit-tab" id="cockpit-tab-2" type="button" role="tab" aria-selected="false" aria-controls="cockpit-panel" tabindex="-1" data-cockpit-tab="2">03 Karpathy Sandbox</button>
+          <button class="cockpit-tab" id="cockpit-tab-3" type="button" role="tab" aria-selected="false" aria-controls="cockpit-panel" tabindex="-1" data-cockpit-tab="3">04 Frontier Council</button>
+          <button class="cockpit-tab" id="cockpit-tab-4" type="button" role="tab" aria-selected="false" aria-controls="cockpit-panel" tabindex="-1" data-cockpit-tab="4">05 Graphify AST Map</button>
         </div>
 
-        <div class="cockpit-stage">
+        <div class="cockpit-stage" id="cockpit-panel" role="tabpanel" aria-labelledby="cockpit-tab-0">
           <div class="bezel cockpit-viewport">
             <img
               data-cockpit-img
@@ -352,7 +352,7 @@
           <div class="cockpit-meta" aria-live="polite">
             <div class="cockpit-meta-row">
               <span class="eyebrow" data-cockpit-code>01 / FLEET &amp; CREDIT LEDGER</span>
-              <span class="status-pill is-pass" data-cockpit-metric>30,079 LOC · $0 Vendor Overrun</span>
+              <span class="status-pill" data-cockpit-metric>30,079 LOC · $0 Vendor Overrun</span>
             </div>
             <h4 data-cockpit-title>Perihelion Fleet Deck &amp; Atomic $0-Spend CreditLedger</h4>
             <p class="mono" style="font-size:0.7rem;color:var(--gold);" data-cockpit-plane>CONTROL PLANE · klh v2.2</p>
@@ -658,7 +658,7 @@
                 <span class="system-domain">klh v2.2 · Native macOS SwiftUI Forge</span>
                 <h3>Perihelion Loop &amp; Kiln</h3>
               </div>
-              <span class="status-pill is-pass">0.00% Overlap</span>
+              <span class="status-pill is-pass">0.00% Overlap · VERIFIED</span>
             </div>
             <p>Our multi-account frontier engineering harness and its flagship lawful no-copy reverse-engineering proof: <strong>Kiln</strong>, a native macOS disk &amp; artifact cleaner forged with explicit hazard gates.</p>
             <ul class="system-invariants">
@@ -710,7 +710,7 @@
                 <span class="system-domain">Multi-Tenant SaaS · Private Investor OS</span>
                 <h3>BrandStreams &amp; Wealth &amp; Powers OS</h3>
               </div>
-              <span class="status-pill is-pass">16 Audits Closed</span>
+              <span class="status-pill is-pass">16/16 Audits VERIFIED</span>
             </div>
             <p>Production multi-tenant campaign infrastructure and a bespoke 10-surface multi-asset investor command center engineered for deterministic operational control.</p>
             <ul class="system-invariants">

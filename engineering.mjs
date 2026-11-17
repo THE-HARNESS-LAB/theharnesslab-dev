@@ -685,6 +685,9 @@ export function mountSiteUI(doc = document) {
       flipButtons.forEach((btn) => {
         btn.setAttribute('aria-pressed', String(isCom));
       });
+      if (stage) {
+        stage.setAttribute('aria-pressed', String(isCom));
+      }
       if (faceStatus) {
         faceStatus.textContent = isCom
           ? 'REVERSE FACE · THEHARNESSLAB.COM · COPPER & CARRARA COMMERCIAL FORGE'
@@ -702,6 +705,10 @@ export function mountSiteUI(doc = document) {
     });
 
     if (stage) {
+      stage.addEventListener('click', (e) => {
+        if (e.target?.closest?.('a')) return;
+        setFace(medallion.dataset.face === 'com' ? 'dev' : 'com');
+      });
       stage.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
           e.preventDefault();
@@ -775,6 +782,7 @@ export function mountSiteUI(doc = document) {
   const lightbox = doc.querySelector('#perihelion-lightbox');
   if (explorer) {
     const tabs = [...explorer.querySelectorAll('[data-cockpit-tab]')];
+    const panel = explorer.querySelector('#cockpit-panel');
     const img = explorer.querySelector('[data-cockpit-img]');
     const codeEl = explorer.querySelector('[data-cockpit-code]');
     const titleEl = explorer.querySelector('[data-cockpit-title]');
@@ -811,6 +819,9 @@ export function mountSiteUI(doc = document) {
         tab.tabIndex = active ? 0 : -1;
         if (active && focusTab) tab.focus();
       });
+      if (panel && tabs[activeIndex]?.id) {
+        panel.setAttribute('aria-labelledby', tabs[activeIndex].id);
+      }
       if (img) {
         img.loading = 'eager';
         img.src = plate.src;
