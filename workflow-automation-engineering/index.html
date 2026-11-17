@@ -1,24 +1,207 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI Workflow Automation Engineering | The Harness Lab</title><meta name="description" content="Design reliable AI workflow automation with explicit state, constrained tools, effect reconciliation, evidence provenance and artifact-level verification."><link rel="canonical" href="https://theharnesslab.dev/workflow-automation-engineering/">
-<meta name="robots" content="index,follow,max-image-preview:large"><meta name="theme-color" content="#000000">
-<meta property="og:type" content="article"><meta property="og:site_name" content="The Harness Lab Engineering"><meta property="og:title" content="AI Workflow Automation Engineering | The Harness Lab"><meta property="og:description" content="Design reliable AI workflow automation with explicit state, constrained tools, effect reconciliation, evidence provenance and artifact-level verification."><meta property="og:url" content="https://theharnesslab.dev/workflow-automation-engineering/"><meta property="og:image" content="https://theharnesslab.dev/harness-lab-emblem-512.png"><meta name="twitter:card" content="summary">
-<link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/engineering.css"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://theharnesslab.dev/workflow-automation-engineering/#article","url":"https://theharnesslab.dev/workflow-automation-engineering/","headline":"Workflow automation engineering beyond the model response.","description":"Design reliable AI workflow automation with explicit state, constrained tools, effect reconciliation, evidence provenance and artifact-level verification.","datePublished":"2026-10-26","dateModified":"2026-10-26","author":{"@type":"Organization","name":"The Harness Lab","url":"https://theharnesslab.com/"},"publisher":{"@type":"Organization","name":"The Harness Lab","url":"https://theharnesslab.com/"},"isPartOf":{"@id":"https://theharnesslab.dev/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Engineering","item":"https://theharnesslab.dev/"},{"@type":"ListItem","position":2,"name":"Workflow automation engineering beyond the model response.","item":"https://theharnesslab.dev/workflow-automation-engineering/"}]}]}</script></head>
-<body><a class="skip" href="#main">Skip to engineering content</a><header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/harness-lab-emblem-512.png" alt="" width="52" height="52"><span>The Harness Lab<small>Engineering</small></span></a><nav aria-label="Primary"><a href="/#architecture">Architecture</a><a href="/landman-title-systems/">Landman title systems</a></nav></div></header>
-<main id="main" class="section wrap"><article class="chapter"><p class="eyebrow">Engineering field notes · Updated October 26, 2026</p><h1>Workflow automation engineering beyond the model response.</h1>
-<p class="lead">A workflow continues after a model returns text. Reliable automation needs a definition of valid state, a boundary around permitted effects and evidence that the intended output reached the next step.</p>
-<h2>Compile the workflow into explicit contracts</h2>
-<p>Start with the input, required output and invariants that distinguish a useful result from a plausible one. Identify deterministic steps, interpretation and decisions requiring human approval. Make missing evidence a state the system can represent rather than a gap it quietly fills with a guess.</p>
-<p>Typed boundaries separate an untrusted candidate from a validated value. Validation should evaluate the domain contract, not just whether a response parses as JSON.</p>
-<h2>Persist state before recovery depends on it</h2>
-<p>A restart should not erase the meaning of completed work. Record the assignment revision, attempted transitions and evidence attached to each result. A resumed worker needs to distinguish completed operations, failures and uncertain external outcomes.</p>
-<p>A timeout after dispatch can mean the remote service committed a change before the caller stopped waiting. Retrying without reconciliation can duplicate a purchase, publication or delivery. Check the available receipt or remote state before deciding what a retry may do.</p>
-<h2>Keep data outside the authority boundary</h2>
-<p>Documents, retrieved pages and model output can contain instructions. They remain input data. Tool access comes from workflow policy and the user's authorization, with defined scope for reads, writes and external effects.</p>
-<p>Reading a document, preparing a draft and sending the result need distinct permissions. Keep credentials outside the content being processed and out of prompts, logs and artifacts.</p>
-<h2>Verify at the artifact boundary</h2>
-<p>Check the object the next person or system will receive. A report can be wrong when its calculation module passes tests; a packaged process can fail when it works in development. Evidence should identify the input revision, runtime and output it establishes.</p>
-<p>The <a href="/landman-title-systems/">landman title systems notes</a> show why source identity, exact arithmetic and report verification need separate checks. The same separation applies to other document and business workflows.</p>
-<h2>Explore the architecture or discuss a build</h2>
-<p>The <a href="/#architecture">architecture overview</a> separates control, execution and evidence. The <a href="/#execution-lab">interactive lab</a> demonstrates synthetic failures. For a business project, visit <a href="https://theharnesslab.com/ai-workflow-automation/">AI workflow automation services</a> or <a href="mailto:spencer@theharnesslab.com">discuss the requirements with Spencer</a>.</p></article></main>
-<footer><div class="wrap footer-inner"><a href="/">Engineering home</a><a href="https://theharnesslab.com/">The Harness Lab services</a><a href="https://title-desk.com/">TitleDesk landman software</a><span class="copyright">© 2026 The Harness Lab</span></div></footer></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Workflow Automation Engineering | The Harness Lab (.dev)</title>
+<meta name="description" content="Design reliable AI workflow automation with Perihelion Loop patterns: explicit state, constrained tools, effect reconciliation, evidence provenance, and holdout-level verification.">
+<link rel="canonical" href="https://theharnesslab.dev/workflow-automation-engineering/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Harness Lab Engineering Foundry">
+<meta property="og:title" content="AI Workflow Automation Engineering | The Harness Lab (.dev)">
+<meta property="og:description" content="Explicit state transitions, zero-trust tool boundaries, post-dispatch receipt reconciliation, and transactional Karpathy holdout gates.">
+<meta property="og:url" content="https://theharnesslab.dev/workflow-automation-engineering/">
+<meta property="og:image" content="https://theharnesslab.dev/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/hermes-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&amp;family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Spline+Sans:wght@400;500;600;700&amp;family=Spline+Sans+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/engineering.css">
+<script type="module" src="/engineering.mjs"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://theharnesslab.dev/workflow-automation-engineering/#article",
+      "url": "https://theharnesslab.dev/workflow-automation-engineering/",
+      "headline": "Workflow automation engineering beyond the model response.",
+      "description": "Design reliable AI workflow automation with explicit state, constrained tools, effect reconciliation, evidence provenance and artifact-level verification.",
+      "datePublished": "2026-10-26",
+      "dateModified": "2026-11-17",
+      "author": {
+        "@type": "Organization",
+        "name": "The Harness Lab",
+        "url": "https://theharnesslab.com/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Harness Lab",
+        "url": "https://theharnesslab.com/"
+      },
+      "isPartOf": {
+        "@id": "https://theharnesslab.dev/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Engineering Foundry (.dev)",
+          "item": "https://theharnesslab.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI Workflow Automation Engineering",
+          "item": "https://theharnesslab.dev/workflow-automation-engineering/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to engineering content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="The Harness Lab — Engineering Foundry (.dev) home">
+      <img class="brand-seal" src="/assets/brand/harness-lab-black-marble-512.webp" width="44" height="44" alt="">
+      <span class="brand-text">
+        <span class="brand-wordmark">The Harness Lab</span>
+        <span class="brand-badge">Engineering Foundry (.dev)</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav" aria-label="Toggle engineering navigation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div class="main-nav" id="main-nav">
+      <nav aria-label="Primary engineering chapters">
+        <ul class="nav-list">
+          <li><a href="/#perihelion-loop"><span class="nav-num">I</span> Perihelion Loop</a></li>
+          <li><a href="/#architecture"><span class="nav-num">II</span> Architecture</a></li>
+          <li><a href="/#execution-lab"><span class="nav-num">III</span> Execution Lab</a></li>
+          <li><a href="/landman-title-systems/">Landman Systems</a></li>
+          <li><a href="/workflow-automation-engineering/" aria-current="page">Workflow Guide</a></li>
+          <li><a href="/business-software-engineering/">Business Systems</a></li>
+        </ul>
+      </nav>
+      <a class="com-bridge-btn" href="https://theharnesslab.com/" aria-label="Visit theharnesslab.com Commercial Forge">
+        <img class="com-bridge-dot" src="/assets/brand/harness-lab-copper-marble-512.webp" width="20" height="20" alt="">
+        <span>theharnesslab.com · Commercial Forge ↗</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="section wrap">
+  <article class="chapter subpage-shell">
+    <nav class="subpage-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Foundry Home (.dev)</a>
+      <span aria-hidden="true">/</span>
+      <span>Monograph B · AI Workflow Automation Engineering</span>
+    </nav>
+
+    <p class="eyebrow">Engineering Monograph · Updated November 17, 2026</p>
+    <h1>Workflow automation engineering beyond the <em>model response.</em></h1>
+    <p class="lead">A production workflow begins—not ends—when a language model returns tokens. Reliable automation requires a formal definition of valid state, a zero-trust boundary around permitted effects, and independent proof that the intended output survived every transformation.</p>
+
+    <div class="subpage-callout-grid">
+      <div class="marquina-card subpage-callout-card">
+        <span>Typed DAG Discipline</span>
+        <strong><code>ONE JOB · ONE INPUT · ONE OUTPUT · FAILS AS</code></strong>
+        <p style="font-size:0.84rem;color:var(--muted);">Every node in <a class="inline-link" href="/#perihelion-loop">Perihelion Loop</a> declares explicit artifact edges, max-3 retry bounds, and deterministic joins.</p>
+      </div>
+      <div class="marquina-card subpage-callout-card">
+        <span>Holdout &amp; Council Gate</span>
+        <strong>Immutable Evaluator Separation</strong>
+        <p style="font-size:0.84rem;color:var(--muted);">Workers cannot inspect or mutate holdout suites; contaminated patches trigger immediate <code>git reset --hard</code>.</p>
+      </div>
+    </div>
+
+    <h2>Compile the workflow into executable contracts</h2>
+    <p>Start with the input envelope, required output schema, and conservation laws that separate a valid result from a fluent guess. Partition the graph into deterministic code (parsers, exact math, branch merges), bounded model interpretation, and high-undo-cost human approval gates. Missing evidence must be a first-class machine-readable state rather than a void a model quietly bridges with fabrication.</p>
+    <p>Typed boundaries quarantine untrusted candidates until domain invariants hold. Structural JSON parsing clears only syntax; semantic validation verifies entity scope, conservation rules, and revision currency.</p>
+
+    <h2>Persist state before recovery depends on it</h2>
+    <p>Process crashes, rate-limit windows, and container restarts should never erase the meaning of completed or in-flight work. Persist the assignment revision, monotonic state counter, and immutable outbound intent before crossing any external wire.</p>
+    <p>A timeout after dispatch can mean the remote service committed the charge, webhook, or publication milliseconds before the caller's socket closed. Blindly retrying duplicates external side effects. Hold the step in <code>UNCERTAIN</code>, query the provider's transaction log or idempotency receipt, and reconcile before allowing further dispatch.</p>
+
+    <h2>Keep untrusted data outside the authority boundary</h2>
+    <p>Retrieved web pages, PDFs, emails, and model completions are data—never instructions. Tool adapters enforce narrow capability grants derived from authenticated workflow policy, never from text inside the prompt context.</p>
+    <p>In <a class="inline-link" href="/#perihelion-loop">Perihelion Loop's hardened <code>cloudroom.dev</code> fabric</a>, pre-spawn <code>safety.ts</code> verifies <code>macAccessLevel === "off"</code> and disconnects cloud GitHub before a VM starts, while <code>transfer.ts</code> verifies sorted SHA-256 manifests inside the VM and quarantines returned diffs locally against symlinks, path traversal, and <code>.git</code> spoofing.</p>
+
+    <h2>Verify at the out-of-band artifact boundary</h2>
+    <p>Evaluate the exact bytes the downstream operator or customer will consume, using an independent local runner the proposing agent cannot touch. Combine null-tested regressions (must fail on unchanged <code>BASE</code>, pass on <code>HEAD</code>), hidden holdout suites, and tool-less advisor diff audits.</p>
+    <p>See our <a class="inline-link" href="/landman-title-systems/">landman title systems monograph</a> and <a class="inline-link" href="/business-software-engineering/">custom business software monograph</a> for how these boundaries govern financial, legal-support, and multi-tenant SaaS builds.</p>
+
+    <h2>Operate the simulation or scope a production harness</h2>
+    <p>Step through post-dispatch timeouts and Karpathy Loop holdout rejections in our <a class="inline-link" href="/#execution-lab">interactive Execution &amp; Karpathy Labs</a>, review the <a class="inline-link" href="/#verification-kit">12-tool verification bench</a>, or engage The Harness Lab commercially via <a class="inline-link" href="https://theharnesslab.com/ai-workflow-automation/">AI workflow automation services on theharnesslab.com</a>.</p>
+
+    <div class="hero-actions" style="margin-top:28px;">
+      <a class="button primary" href="https://theharnesslab.com/#contact">Open a Commercial Work Order on .com ↗</a>
+      <a class="button" href="/#execution-lab">Run the Interactive Labs →</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <a class="brand" href="/">
+          <img class="brand-seal" src="/assets/brand/harness-lab-black-marble-512.webp" width="40" height="40" alt="">
+          <span class="brand-text">
+            <span class="brand-wordmark">The Harness Lab</span>
+            <span class="brand-badge">Engineering Foundry (.dev)</span>
+          </span>
+        </a>
+        <p>Deterministic orchestration, fail-closed sandboxes, and artifact-bound verification.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Foundry (.dev)</h3>
+        <ul>
+          <li><a href="/">Engineering Foundry Home</a></li>
+          <li><a href="/#perihelion-loop">I · Perihelion Loop</a></li>
+          <li><a href="/#architecture">II · Three-Plane Architecture</a></li>
+          <li><a href="/#verification-kit">V · 12-Tool Verification Bench</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Monographs (.dev)</h3>
+        <ul>
+          <li><a href="/landman-title-systems/">Landman Title Research Systems</a></li>
+          <li><a href="/workflow-automation-engineering/">AI Workflow Automation Engineering</a></li>
+          <li><a href="/business-software-engineering/">Custom Business Software Engineering</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Commercial Forge (.com)</h3>
+        <ul>
+          <li><a href="https://theharnesslab.com/">theharnesslab.com · Studio Home ↗</a></li>
+          <li><a href="https://theharnesslab.com/ai-workflow-automation/">AI Workflow Automation Services ↗</a></li>
+          <li><a href="mailto:spencer@theharnesslab.com">spencer@theharnesslab.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Harness Lab · Engineered by Spencer Teague</span>
+      <span><a class="inline-link" href="/">theharnesslab.dev</a> ↔ <a class="inline-link" href="https://theharnesslab.com/">theharnesslab.com</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

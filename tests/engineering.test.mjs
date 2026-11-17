@@ -1,11 +1,36 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createRun, stepRun, reconcileRun, syntheticReceipt, callerState } from '../engineering.mjs';
+import {
+  SCENARIOS,
+  createRun,
+  stepRun,
+  reconcileRun,
+  syntheticReceipt,
+  callerState,
+  mountLab,
+  bootExecutionLab,
+  KARPATHY_SCENARIOS,
+  KARPATHY_STAGES,
+  createKarpathyRun,
+  stepKarpathyRun,
+  karpathyState,
+  formatResultsTsv,
+  PERIHELION_PLATES,
+} from '../engineering.mjs';
 
 const advance = (run, count) => {
   for (let i = 0; i < count; i++) run = stepRun(run);
   return run;
 };
+
+const advanceKarpathy = (run, count) => {
+  for (let i = 0; i < count; i++) run = stepKarpathyRun(run);
+  return run;
+};
+
+// ============================================================================
+// Original 13 Execution Lab tests (100% preserved)
+// ============================================================================
 
 test('normal run confirms exactly one dispatch with a bound receipt', () => {
   const run = advance(createRun(), 4);
@@ -81,4 +106,123 @@ test('pure transitions preserve old snapshots and reject unknown scenarios', () 
   advance(original, 4);
   assert.deepEqual(original, snapshot);
   assert.throws(() => createRun('unknown'), RangeError);
+});
+
+// ============================================================================
+// Karpathy Loop + Holdout Gate & Perihelion Exports tests
+// ============================================================================
+
+test('legacy and new module exports stay aligned', () => {
+  assert.deepEqual(SCENARIOS, ['normal', 'timeout', 'evidence', 'policy', 'mutation']);
+  assert.equal(bootExecutionLab, mountLab);
+  assert.deepEqual(KARPATHY_SCENARIOS, [
+    'verified_fix',
+    'monkey_patched_assert',
+    'null_test_failed',
+    'transfer_hash_mismatch',
+  ]);
+  assert.deepEqual(KARPATHY_STAGES, [
+    'BASELINE',
+    'PATCH',
+    'UNIT_CHECK',
+    'HOLDOUT_CHECK',
+    'COUNCIL_REVIEW',
+    'KEEP',
+  ]);
+  assert.equal(PERIHELION_PLATES.length, 5);
+});
+
+test('verified_fix traverses full Karpathy Loop and commits KEEP to results.tsv', () => {
+  const run = advanceKarpathy(createKarpathyRun('verified_fix'), 5);
+  assert.equal(run.state, 'KEEP');
+  assert.equal(run.worktreeHead, 'cand/3b8e10d');
+  assert.equal(run.manifestVerified, true);
+  assert.equal(run.vmPromptReleased, true);
+  assert.equal(run.nullTestRedOnBase, true);
+  assert.equal(run.unitSuite, 'pass');
+  assert.equal(run.holdoutSuite, 'pass');
+  assert.equal(run.councilVerdict, 'approved');
+  assert.equal(run.failureCode, null);
+  assert.deepEqual(run.journal.map(({ state }) => state), [
+    'BASELINE',
+    'PATCH',
+    'UNIT_CHECK',
+    'HOLDOUT_CHECK',
+    'COUNCIL_REVIEW',
+    'KEEP',
+  ]);
+  assert.deepEqual(run.resultsTsv, [
+    { attempt: 1, commit: 'cand/3b8e10d', status: 'keep', reason: 'ALL_GATES_VERIFIED' },
+  ]);
+  assert.match(formatResultsTsv(run), /1\tcand\/3b8e10d\tkeep\tALL_GATES_VERIFIED/);
+  assert.equal(stepKarpathyRun(run), run);
+});
+
+test('monkey_patched_assert passes mutable unit check, fails holdout + council, and triggers GIT_RESET_HARD', () => {
+  const run = advanceKarpathy(createKarpathyRun('monkey_patched_assert'), 8);
+  assert.equal(run.state, 'GIT_RESET_HARD');
+  assert.equal(run.unitSuite, 'pass');
+  assert.equal(run.holdoutSuite, 'fail');
+  assert.match(run.councilVerdict, /assert\.equal/);
+  assert.equal(run.worktreeHead, 'base/9f4c21a');
+  assert.equal(run.candidateCommit, null);
+  assert.equal(run.failureCode, 'MONKEY_PATCHED_ASSERT');
+  assert.deepEqual(run.journal.map(({ state }) => state), [
+    'BASELINE',
+    'PATCH',
+    'UNIT_CHECK',
+    'HOLDOUT_CHECK',
+    'COUNCIL_REVIEW',
+    'GIT_RESET_HARD',
+  ]);
+  assert.deepEqual(run.resultsTsv, [
+    { attempt: 1, commit: 'cand/3b8e10d', status: 'discard', reason: 'MONKEY_PATCHED_ASSERT' },
+  ]);
+  assert.equal(stepKarpathyRun(run), run);
+});
+
+test('null_test_failed rejects regression tests that pass on unchanged BASE via GIT_RESET_HARD', () => {
+  const run = advanceKarpathy(createKarpathyRun('null_test_failed'), 8);
+  assert.equal(run.state, 'GIT_RESET_HARD');
+  assert.equal(run.nullTestRedOnBase, false);
+  assert.equal(run.worktreeHead, 'base/9f4c21a');
+  assert.equal(run.candidateCommit, null);
+  assert.equal(run.failureCode, 'NULL_TEST_PASSED_ON_BASE');
+  assert.deepEqual(run.journal.map(({ state }) => state), [
+    'BASELINE',
+    'PATCH',
+    'UNIT_CHECK',
+    'GIT_RESET_HARD',
+  ]);
+  assert.deepEqual(run.resultsTsv, [
+    { attempt: 1, commit: 'cand/3b8e10d', status: 'discard', reason: 'NULL_TEST_PASSED_ON_BASE' },
+  ]);
+});
+
+test('transfer_hash_mismatch blocks prompt release inside cloud VM before any patch', () => {
+  const run = advanceKarpathy(createKarpathyRun('transfer_hash_mismatch'), 8);
+  assert.equal(run.state, 'GIT_RESET_HARD');
+  assert.equal(run.manifestVerified, false);
+  assert.equal(run.vmPromptReleased, false);
+  assert.equal(run.worktreeHead, 'base/9f4c21a');
+  assert.equal(run.candidateCommit, null);
+  assert.equal(run.failureCode, 'INPUT_TRANSFER_UNVERIFIED');
+  assert.deepEqual(run.journal.map(({ state }) => state), ['BASELINE', 'GIT_RESET_HARD']);
+  assert.deepEqual(run.resultsTsv, [
+    { attempt: 1, commit: 'base/9f4c21a', status: 'crash', reason: 'INPUT_TRANSFER_UNVERIFIED' },
+  ]);
+});
+
+test('Karpathy state machine is pure, exposes structured view, and rejects unknown scenarios', () => {
+  const initial = createKarpathyRun('verified_fix');
+  const snapshot = structuredClone(initial);
+  const next = advanceKarpathy(initial, 3);
+  assert.deepEqual(initial, snapshot);
+  assert.equal(karpathyState(next).state, 'HOLDOUT_CHECK');
+  assert.deepEqual(karpathyState(next).safetyGate, {
+    macAccessLevel: 'off',
+    githubConnected: false,
+    creditSpendUsd: 0,
+  });
+  assert.throws(() => createKarpathyRun('invalid_mode'), RangeError);
 });
