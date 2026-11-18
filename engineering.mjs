@@ -559,7 +559,7 @@ export const PERIHELION_PLATES = Object.freeze([
     id: 'council',
     code: '04 / FRONTIER COUNCIL & ROUTER',
     tabLabel: '04 Frontier Council',
-    title: '7-Tier All-Account Frontier Router & Sealed Advisor Council',
+    title: '7-Tier Multi-Provider Frontier Router & Sealed Advisor Council',
     src: '/assets/showcase/karpathy-loop-harness/04-providers-frontier-council.webp',
     src640: '/assets/showcase/karpathy-loop-harness/04-providers-frontier-council-640.webp',
     alt: 'Frontier provider rotation schedule and kernel-sealed tool-less Advisor Council adversarial diff review',
