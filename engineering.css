@@ -2634,3 +2634,690 @@ tr:last-child td {
     overflow-wrap: anywhere;
   }
 }
+
+/* ==========================================================================
+   2026-11-17 · In-house harness vitrine, title engines, showcase galleries,
+   War-Ledger campaigns and the 28-build evolution ledger (ledger.mjs).
+   Gold anchors, ember only for hot/fault semantics, green strictly PASS.
+   ========================================================================== */
+
+/* --- Shared stat list ---------------------------------------------------- */
+.vitrine-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+  align-self: start;
+}
+.vitrine-stats > div {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #0d0d12, #060609);
+  min-width: 0;
+}
+.vitrine-stats dt,
+.harness-card-stats dt,
+.build-stats dt,
+.trench-metrics dt {
+  font: 500 0.6rem/1.4 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.vitrine-stats dd,
+.harness-card-stats dd,
+.build-stats dd,
+.trench-metrics dd {
+  margin: 0;
+  font: 700 0.95rem/1.35 var(--mono);
+  color: var(--gold-hi);
+  overflow-wrap: anywhere;
+}
+
+/* --- Chapter I · In-house harness vitrine -------------------------------- */
+.harness-vitrine {
+  margin-top: clamp(56px, 6vw, 88px);
+  padding-top: clamp(40px, 4.5vw, 64px);
+  border-top: 1px solid var(--line);
+}
+.vitrine-head {
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+.vitrine-head h3 {
+  font: 600 clamp(1.4rem, 1.1rem + 1.2vw, 2.1rem) / 1.2 var(--display);
+  color: var(--ivory);
+}
+.rogue-agents-card {
+  padding: clamp(20px, 2.5vw, 30px);
+}
+.rogue-head,
+.engine-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+  gap: clamp(18px, 2.6vw, 36px);
+  align-items: start;
+  margin-bottom: 22px;
+}
+.rogue-head h3,
+.engine-head h3 {
+  margin: 6px 0 10px;
+  font: 600 clamp(1.5rem, 1.2rem + 1.1vw, 2.2rem) / 1.15 var(--display);
+  color: var(--ivory);
+}
+.rogue-head p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.72;
+}
+.harness-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.harness-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 20px;
+}
+.harness-card--shot {
+  grid-row: span 2;
+}
+.harness-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+.harness-card h4 {
+  font: 600 1.15rem/1.3 var(--display);
+  color: var(--ivory);
+}
+.harness-card p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.harness-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 2px 0 0;
+}
+.harness-card-stats > div {
+  display: grid;
+  gap: 2px;
+}
+
+/* --- Screenshot buttons (galleries + build cards) ------------------------ */
+.build-shot,
+.gallery-viewport {
+  display: block;
+  width: 100%;
+  color: inherit;
+  cursor: zoom-in;
+  text-align: left;
+}
+.build-shot img,
+.gallery-viewport img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 2px;
+}
+.build-shot:hover,
+.gallery-viewport:hover {
+  border-color: var(--hair-strong);
+}
+.gallery-viewport {
+  position: relative;
+}
+.gallery-zoom-pill {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 4px 10px;
+  border: 1px solid var(--hair-strong);
+  border-radius: 2px;
+  background: rgba(5, 5, 7, 0.86);
+  color: var(--gold-hi);
+  font: 600 0.62rem/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* --- Galleries ----------------------------------------------------------- */
+.showcase-gallery {
+  padding: clamp(14px, 1.8vw, 20px);
+  background: linear-gradient(180deg, #08080b, #050507);
+}
+.gallery-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 132px), 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.gallery-stage .cockpit-meta h4 {
+  font: 600 1.12rem/1.35 var(--display);
+  color: var(--ivory);
+}
+
+/* --- Chapter II · title engines ------------------------------------------ */
+.engine-block {
+  padding-block: clamp(28px, 3vw, 44px);
+  border-top: 1px solid var(--line);
+}
+.engine-block:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+.engine-steps,
+.engine-pipeline {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+.engine-steps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.engine-pipeline {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.engine-steps li,
+.engine-pipeline li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--gold-mid);
+  border-radius: 3px;
+  background: #07070a;
+  min-width: 0;
+}
+.engine-steps strong,
+.engine-pipeline strong {
+  color: var(--ivory);
+  font-weight: 600;
+}
+.engine-steps li > span:last-child,
+.engine-pipeline li > span:last-child {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+.pipeline-num {
+  font: 700 0.72rem/1 var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+.engine-links,
+.trench-links,
+.live-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  margin-top: 16px;
+}
+.live-platforms {
+  margin-top: 28px;
+  padding: 16px 20px;
+  border: 1px solid var(--hair);
+  border-radius: 4px;
+  background: linear-gradient(180deg, #0d0d12, #060609);
+}
+
+/* --- Chapter VII · ledger monuments -------------------------------------- */
+.ledger-monuments {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 28px;
+  border: 1px solid var(--hair);
+  border-radius: 4px;
+  background: linear-gradient(180deg, #0d0d12, #060609);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.85);
+}
+.ledger-monument {
+  padding: 20px 22px;
+  border-left: 1px solid var(--line);
+  min-width: 0;
+}
+.ledger-monument:first-child {
+  border-left: 0;
+}
+.ledger-monument .telemetry-value {
+  font: 600 clamp(1.15rem, 0.95rem + 0.8vw, 1.6rem) / 1.2 var(--display);
+}
+
+/* --- War-Ledger campaigns ------------------------------------------------ */
+.trench-ledger {
+  padding: clamp(20px, 2.5vw, 30px);
+  margin-bottom: 28px;
+}
+.trench-head {
+  margin-bottom: 14px;
+}
+.trench-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.trench-tab {
+  display: grid;
+  gap: 4px;
+}
+.trench-tab strong {
+  font: 600 0.92rem/1.3 var(--body);
+  color: inherit;
+}
+.trench-tab span {
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--ash);
+}
+.trench-headline {
+  margin-bottom: 10px;
+  font: 600 clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem) / 1.25 var(--display);
+  color: var(--ivory);
+}
+.trench-metrics {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  margin: 20px 0;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+.trench-metrics > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  padding: 12px 14px;
+  background: #08080b;
+  min-width: 0;
+}
+.trench-walls {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trench-walls li {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #07070a;
+}
+.trench-walls .eyebrow {
+  display: block;
+  margin-bottom: 4px;
+}
+.trench-broke {
+  color: var(--ivory);
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.trench-broke .eyebrow {
+  color: var(--ember);
+}
+.trench-solved {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+.trench-log {
+  margin-top: 16px;
+}
+
+/* --- Parallel timeline chart --------------------------------------------- */
+.ledger-chart-card {
+  margin: 0 0 28px;
+  padding: clamp(16px, 2vw, 24px);
+}
+.ledger-chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.ledger-legend {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  font: 500 0.66rem/1.4 var(--mono);
+  color: var(--muted);
+}
+.tl-key {
+  display: inline-block;
+  width: 18px;
+  height: 8px;
+  margin-right: -8px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+.tl-key--flagship,
+.tl-bar--flagship {
+  background: var(--gold);
+  fill: var(--gold);
+}
+.tl-key--harness,
+.tl-bar--harness {
+  background: var(--ember);
+  fill: var(--ember);
+}
+.tl-key--build,
+.tl-bar--build {
+  background: #5d574b;
+  fill: #6b6457;
+}
+.ledger-chart-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+.ledger-chart {
+  display: block;
+  width: 100%;
+  min-width: 760px;
+  height: auto;
+}
+.tl-tick line {
+  stroke: rgba(243, 239, 230, 0.06);
+  stroke-width: 1;
+}
+.tl-tick.is-major line {
+  stroke: rgba(244, 200, 122, 0.22);
+}
+.tl-tick text {
+  fill: var(--ash);
+  font: 500 10px var(--mono);
+}
+.tl-tick.is-major text {
+  fill: var(--gold);
+}
+.tl-label {
+  fill: var(--muted);
+  font: 500 11px var(--body);
+  text-anchor: end;
+}
+.tl-row:hover .tl-label,
+.tl-row:focus .tl-label {
+  fill: var(--gold-hi);
+}
+.tl-row:hover .tl-bar,
+.tl-row:focus .tl-bar {
+  stroke: var(--gold-hi);
+  stroke-width: 1.5;
+}
+.tl-hit {
+  fill: transparent;
+}
+.tl-row:hover .tl-hit,
+.tl-row:focus .tl-hit {
+  fill: rgba(244, 200, 122, 0.05);
+}
+.tl-row.is-dimmed {
+  opacity: 0.22;
+}
+.tl-row {
+  transition: opacity 200ms ease;
+}
+
+/* --- Filters + build grid ------------------------------------------------ */
+.ledger-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.ledger-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ledger-filter[aria-pressed="true"] {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, rgba(244, 200, 122, 0.14), rgba(15, 14, 18, 0.95));
+  color: var(--gold-hi);
+}
+.ledger-count {
+  font: 500 0.7rem/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+.build-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.build-card {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  scroll-margin-top: 110px;
+}
+.build-card--flagship {
+  border-top: 2px solid var(--gold);
+}
+.build-card--harness {
+  border-top: 2px solid var(--ember);
+}
+.build-card:target {
+  border-color: var(--gold-hi);
+  box-shadow: 0 0 0 1px var(--gold-hi), 0 20px 44px rgba(0, 0, 0, 0.86);
+}
+.build-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+.build-index {
+  font: 600 0.62rem/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.build-card h4 {
+  font: 600 1.15rem/1.3 var(--display);
+  color: var(--ivory);
+}
+.build-category {
+  margin-top: -6px;
+  color: var(--ash);
+  font-size: 0.8rem;
+}
+.build-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+  margin: 0;
+  padding: 12px 0;
+  border-block: 1px solid var(--line);
+}
+.build-stats > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.build-stats dd {
+  font-size: 0.82rem;
+}
+.build-idea {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.build-details {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #07070a;
+}
+.build-details > summary {
+  padding: 9px 12px;
+  font: 600 0.68rem/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  cursor: pointer;
+  list-style-position: inside;
+}
+.build-details > summary:hover {
+  color: var(--gold-hi);
+}
+.build-details[open] > summary {
+  border-bottom: 1px solid var(--line);
+}
+.build-details > p,
+.build-details > dl,
+.build-details > ol {
+  margin: 0;
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+.build-ai {
+  display: grid;
+  gap: 8px;
+}
+.build-ai dt {
+  font: 600 0.62rem/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.build-ai dd {
+  margin: 2px 0 0;
+}
+.build-langs,
+.build-lineage {
+  font: 500 0.7rem/1.5 var(--mono) !important;
+  color: var(--ash) !important;
+  overflow-wrap: anywhere;
+}
+.git-trail {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+}
+.git-trail li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 10px;
+}
+.git-trail time {
+  font: 600 0.68rem/1.5 var(--mono);
+  color: var(--gold);
+}
+.git-trail code {
+  font: 500 0.68rem/1.5 var(--mono);
+  color: var(--ember);
+  overflow-wrap: anywhere;
+}
+.git-trail span {
+  grid-column: 1 / -1;
+  color: var(--muted);
+}
+.build-live {
+  margin-top: 2px;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .harness-card-grid,
+  .build-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rogue-head,
+  .engine-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .engine-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .engine-pipeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ledger-monuments {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ledger-monument:nth-child(3) {
+    border-left: 0;
+  }
+  .ledger-monument:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+  .trench-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  .harness-card-grid,
+  .build-grid,
+  .engine-steps,
+  .engine-pipeline,
+  .trench-tabs,
+  .trench-walls li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .harness-card--shot {
+    grid-row: auto;
+  }
+  .ledger-monuments {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ledger-monument {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .ledger-monument:first-child {
+    border-top: 0;
+  }
+  .trench-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .vitrine-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tl-row {
+    transition: none;
+  }
+}
