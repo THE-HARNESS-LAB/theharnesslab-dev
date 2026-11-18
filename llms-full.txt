@@ -1,14 +1,19 @@
 # The Harness Lab — Engineering Foundry (.dev) · Complete Technical Reference
 
-> Exhaustive technical specification for AI coding assistants, search engines, and systems engineers inspecting `https://theharnesslab.dev/` (updated 2026-11-18). Founded and engineered by Spencer Teague. Commercial studio: `https://theharnesslab.com/`.
+> Exhaustive technical specification for AI coding assistants, search engines, and systems engineers inspecting `https://theharnesslab.dev/` (commit-pinned forensics updated `2026-11-18`). Operated by `The Harness Lab LLC, a Texas limited liability company (Texas SOS File No. 806765129)`, `Tom Green County, Texas`. Founded and engineered by Spencer Teague. Commercial studio: `https://theharnesslab.com/`.
 
 ---
 
-## 1. Operating Philosophy & Dual-Site Topology
+## 1. Operating Philosophy, Provenance & Dual-Site Topology
 
 The Harness Lab operates across two paired properties:
-1. **`https://theharnesslab.dev/` (Black Nero Marquina Engineering Foundry):** Systems R&D, autonomous verification harnesses, pure deterministic state-machine laboratories, architectural monographs, the 12-tool pinned verification bench, and the commit-verified 27-build evolution ledger.
-2. **`https://theharnesslab.com/` (Copper & White Carrara Commercial Forge):** Commercial studio flagship for custom software engineering, AI workflow automation, internal operator tools, API integrations, teardowns, and 100% client-owned software delivery.
+1. **`https://theharnesslab.dev/` (The Harness Lab · Engineering Foundry (.dev)):** Systems R&D, autonomous verification harnesses, pure in-browser deterministic state-machine teaching laboratories, architectural monographs, the 12-tool pinned verification bench, and the commit-pinned 27-build evolution ledger.
+2. **`https://theharnesslab.com/` (Commercial Studio · theharnesslab.com):** Commercial studio flagship for custom software engineering, AI workflow automation, internal operator tools, API integrations, teardowns, and 100% client-owned software delivery.
+
+**Verification & Scope Provenance (as of `2026-11-18`):**
+- Repository LOC, commit counts, and suite totals on `.dev` are commit-pinned forensics excluding `node_modules`, lockfiles, generated/vendored artifacts, and binaries, deduplicated across shared trees (`1,031,828` authored LOC across `3,922` tracked default/release commits).
+- Chapter IV state-machine laboratories execute pure zero-I/O teaching reducers in `engineering.mjs` (no network calls, persistence, or live provider dispatch).
+- Live production platforms (`title-desk.com`, `desktop.title-desk.com`, `artificiallandman.io`, `apex-build.dev`, `theharnesslab.com`) are linked directly.
 
 **Foundry Invariant:** Models participate in bounded interpretation; deterministic harness code owns state, authority, isolation, exact domain arithmetic, and release proof. An untrusted candidate never mutates authoritative state until an immutable out-of-worktree evaluator, null-tested regression witness, and cryptographic manifest receipt establish exact byte identity.
 
@@ -46,46 +51,52 @@ Inspired by Andrej Karpathy's `autoresearch` discipline, every unit executes a p
 - Bounded execution: **max 3 retry attempts** per unit and a **2-dry-round stop** when open-ended exploration produces no measurable metric delta, pausing once at irreversible human gates.
 
 ### 3.3 Zero-Trust `cloudroom.dev` Linux VM Fabric (`klh-cloudroom`)
-- **Pre-spawn `safety.ts`:** Enforces `macAccessLevel === "off"`, verifies cloud GitHub is disconnected (mechanically preventing unauthorized pushes), disables cloud skills, activates Command Guard, and reserves an atomic `CreditLedger` free-tier slot (`$0` vendor spend overrun).
+- **Pre-spawn `safety.ts`:** Enforces `macAccessLevel === "off"`, verifies cloud GitHub is disconnected (mechanically preventing unauthorized pushes), disables cloud skills, activates Command Guard, and reserves an atomic `CreditLedger` quota slot under bounded budget ceilings.
 - **Exact-bytes `transfer.ts`:** Pushes workspace bytes plus a sorted SHA-256 manifest via idempotent `room-cli vm push --request-id` and verifies every digest *inside* the Linux VM prior to worker prompt release. Returned diffs enter local quarantine blocking symlinks, path traversal, Unicode-NFC drift, and `.git` spoofing before independent local holdout re-execution.
 
 ### 3.4 Multi-Provider Failover & Kernel-Sealed Advisor Council
-- Stateful `--resume` failover across subscription windows (`Claude Fable 5.2 @ xhigh -> Gemini 4 Carbon -> Codex GPT-6 Astra @ xhigh -> Claude Opus 5.5 @ xhigh -> Gemini 4 Argon -> Codex GPT-6.1 Sol -> Grok 4.7`).
+- Stateful `--resume` failover across quota-governed provider rate windows (`Claude Fable 5.2 @ xhigh -> Gemini 4 Carbon -> Codex GPT-6 Astra @ xhigh -> Claude Opus 5.5 @ xhigh -> Gemini 4 Argon -> Codex GPT-6.1 Sol -> Grok 4.7`).
 - Kernel-sealed, tool-less Advisor Council reviews syntax-aware AST diffs (`Difftastic`). Caught and blocked a live builder worker monkey-patching `node:assert` `assert.equal` to fake a green test suite.
 
 ### 3.5 Three Live Execution Modes
-- **`klh run` (Targeted Repair):** Automated `git bisect`, fault localization, and unit-scoped repair. Verified live on **TitleDesk** (`7,070 / 7,070 PASS` across 431 test files on attempt 1) and **Rogue Agents** (`730 / 730 PASS` on attempt 1).
+- **`klh run` (Targeted Repair):** Automated `git bisect`, fault localization, and unit-scoped repair. Verified live on **TitleDesk Desktop** (`7,070 / 7,070 PASS` across 431 test files at `8a2cc971` on attempt 1) and **Rogue Agents** (`730 / 730 PASS` at `1d7a1cde` on attempt 1).
 - **`klh harden` (Null-Tested Regression):** Enforces `null_tested_regression`: every candidate bug fix is rejected unless its `regress/` witness test **fails on unchanged `BASE` and passes on `HEAD`**.
-- **`klh forge` & `klh forge-plan` (Lawful No-Copy Reverse-Engineering):** OS kernel wall (`sandbox-exec` on macOS / `bubblewrap` on Linux) restricting static artifact inspection strictly to the `ANALYSE` unit (`forge/spec/**`). Downstream `DESIGN`, `PLAN`, `TESTS`, and `BUILD` workers cannot read the subject binary or bundle and must pass `0.00%` winnowed token/shingle/asset overlap and double-blind `TEST_DISPUTE` arbitration. Proven live on **Kiln** (29-feature behavioral spec, 15-screen dark/gold macOS design, 8-milestone native SwiftUI build plan). Legal/EULA clearance and product taste remain explicit human sign-off responsibilities.
+- **`klh forge` & `klh forge-plan` (Lawful No-Copy Reverse-Engineering):** OS kernel wall (`sandbox-exec` on macOS / `bubblewrap` on Linux) restricting static artifact inspection strictly to the `ANALYSE` unit (`forge/spec/**`). Downstream `DESIGN`, `PLAN`, `TESTS`, and `BUILD` workers cannot read the subject binary or bundle and must pass `0.00%` winnowed token/shingle/asset overlap and double-blind `TEST_DISPUTE` arbitration. Proven live on **Kiln** (29-feature behavioral spec, 15-screen dark/gold macOS design, 8-milestone native SwiftUI implementation plan across `1,000` spec lines, plus verified Phase-1 Swift Package scaffold of `181` authored LOC at `85c929e8`). Legal/EULA clearance and product taste remain explicit human sign-off responsibilities.
 
 ---
 
-## 4. In-House Engineering Harnesses & Host Security Tooling
+## 4. In-House Engineering Harnesses & Host Security Architecture
 
-- **Rogue Agents (22,582 LOC · 103 commits · `730 / 730 PASS`):** Multi-agent desktop & CLI command center running Claude, Codex, Antigravity, and Grok side by side as co-leads with multi-provider failover, subordinate Ollama Cloud workers, live 5-hour/weekly allowance meters, per-job isolated git worktrees, four-agent council endorsement votes, voice brainstorm rooms, and SHA-bound verification reports.
+- **Rogue Agents (22,582 LOC · 103 commits · `730 / 730 PASS`):** Multi-agent desktop & CLI command center running Claude, Codex, Antigravity, and Grok side by side as co-leads under quota-governed multi-provider failover, subordinate Ollama Cloud workers, live 5-hour/weekly allowance meters, per-job isolated git worktrees, four-agent council endorsement votes, voice brainstorm rooms, and SHA-bound verification reports.
 - **Agent Browser Hub (23,406 LOC · 6 commits):** Authenticated multi-agent browser fleet over Model Context Protocol (MCP) with isolated keyring-backed profiles per agent, warm session pools, live operator watch/pause/takeover/handback controls, and credential-suppression guards so human operators retain sole custody of passwords and MFA.
 - **Mythos OS (28,734 LOC · 62 commits · 17 surfaces):** Internal studio operating system and `Graphify` persistent structural knowledge graph (20,911+ AST/module nodes) uniting work ledgers, delegation receipts, mail triage, and remote fleet telemetry.
-- **Claude-Estate Autonomy Bridges (39,726 repo LOC · 47,986 suite LOC · 66 commits · 2 Months):** Synchronized cross-machine engineering doctrine (evidence gate, root-cause debugging gate, SSRF-fenced browser bridge, depth-capped peer review bridge, keyring-only secret custody, and supply-chain-verified installs).
-- **Workstation Integrity & Red-Teamed Lead Daemon (High-Level Architecture):** Explainable host-configuration sentinel with confirm-or-restore snapshot rollback, privileged change-guard batching, and a read-only IMAP lead watcher (`EXAMINE` + `BODY.PEEK`, 1,396 LOC) with tool-less fenced triage and adversarial prompt-injection red-team tests.
+- **Claude-Estate Autonomy Bridges (39,726 repo LOC · 47,986 suite LOC · 66 commits · 2 Months):** Synchronized cross-workstation engineering doctrine (evidence gate, root-cause debugging gate, SSRF-fenced browser bridge, depth-capped peer review bridge, keyring-only secret custody, and supply-chain-verified installs).
+- **Workstation Integrity & Red-Teamed Lead Triage Daemon (High-Level Architecture):** Explainable Linux host-integrity sentinel with deterministic policy risk scoring, operator confirm-or-restore overlay, signed snapshot rollback, and validator-gated capability staging (2,519 LOC), paired with a scheduled read-only mail-triage daemon (1,396 LOC) featuring tool-less fenced classification and adversarial prompt-injection red-team evaluation tests.
 
 ---
 
-## 5. Oil-and-Gas Title Examination Engines (312,379 Campaign LOC · 1,662 Campaign Commits)
+## 5. Texas Mineral Title Examination Engines (312,379 Raw Campaign LOC · 1,662 Campaign Commits)
 
-Engineered across a 6-month campaign (305+ branches, 40 isolated worktrees, 64 packaged builds, 321 hard courthouse edge-case fixes, 24 GB of primary-source audit fixtures, `7,070 / 7,070 PASS` core engine tests):
+Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 TractPilot prototype through core desktop and November hosted launches: 305+ branches, 40 isolated worktrees, 64 packaged builds, 321 hard courthouse edge-case fixes, 24 GB of primary-source audit fixtures, `7,070 / 7,070 PASS` core engine tests). Across the `312,379` raw repository lines (`262,305` desktop core, `4,288` TractPilot prototype, `22,638` `titledesk-hosted`, and `23,148` `artificial-landman`), `titledesk-hosted` and `artificial-landman` share ~`16,732` common engine lines that are counted once in the deduplicated `1,031,828` studio total.
 
-### 5.1 Title-Desk Web (`https://title-desk.com/`)
-- **Scale:** 22,638 hosted LOC, 53 hosted commits, `282 / 282 PASS` web tests + `7,070 / 7,070 PASS` shared engine tests.
-- **Pipeline:** Survey landing -> Passwordless examiner sign-in -> Deterministic pre-run intake verifier (reconciles stated acreage against tract rows, abstract numbers against legal descriptions, and recited source deeds against uploaded instruments before any paid run) -> Blind dual examiners (`Gemini 4 Carbon`) + independent cross-family validator (`GPT-6 Astra`) -> Four-sheet Excel mineral ownership & source-linked runsheet workbook + two-step manual-capture Stripe billing.
-- **Launch & Legal Scope:** Upload examination runs are open today; hosted county-record retrieval (Hybrid and Full service) is by invitation at launch. Every workbook is explicitly a **draft examination for review by a qualified professional — never a legal title opinion**.
+### Capability, Validation, Readback & Billing Invariants
+- **Scope & Owners:** Texas, one county per run; current **mineral** interest owners only (`interestType: ['MI']` — not royalty, NPRI, ORRI, working interest, leasehold, or division orders).
+- **Deliverable:** A source-linked four-sheet `.xlsx` draft for review by a qualified landman or attorney — never a title opinion and never a certification.
+- **Run Types & Billing:** Upload runs are open to everyone; Hybrid and Full service runs (county record retrieval) are by invitation only and bound copy budgets with reservation holds. Hosted runs are prepaid before the run starts: a run finishing with unresolved items (including missing records) remains charged, while a failed run returns a run credit (not a cash refund).
+- **Validation:** Two Gemini sessions examine the records separately, and a program checks every fraction exactly. A third model, from a different provider, then checks the final answer against the page images. If it finds a problem, the examiner gets one repair and the third model checks the repaired answer again. Anything still unresolved stays a proposal, not a verified ownership, and the finding is listed first among the curative requirements. If the third model cannot run, the workbook says so.
+- **Workbook Readback:** After the `.xlsx` workbook is written, a separate reader reopens the file and compares every owner, mineral interest fraction, net mineral acres figure, and curative requirement against the examination result (stopping delivery and handling the run as failed on any mismatch, splitting cells over Excel's `32,767`-character limit rather than truncating, and writing fractions whose numerator or denominator exceeds `15` digits as exact text rather than rounded numbers).
 
-### 5.2 TitleDesk Agent (`https://desktop.title-desk.com/`)
+### 5.1 TitleDesk (`https://title-desk.com/`)
+- **Scale:** 22,638 hosted LOC, 53 hosted commits, `7,070 / 7,070 PASS` shared engine tests.
+- **Audience & Pipeline:** Hosted Texas mineral title examination for independent landmen and abstractors. Survey landing -> Passwordless email sign-in -> Deterministic pre-run intake verifier + ClamAV Linux worker scan -> Prepaid run execution -> Readback-verified four-sheet draft Excel workbook.
+
+### 5.2 TitleDesk Desktop (`https://desktop.title-desk.com/`)
 - **Scale:** 262,305 authored LOC, 1,084 main-branch commits, `7,070 / 7,070 PASS` across 431 test files. Public issue/release coordination: `https://github.com/THE-HARNESS-LAB/titledesk`.
-- **Capabilities:** Native macOS Electron workstation operating through landman-authenticated sessions on CountyRecords.com, CourthouseDirect, and TexasFile; clerk index merging (where sheriffs and the State are never mistaken for grantor surnames, and ambiguous initialed decedents never corrupt estates); stated-source-deed direct book/page retrieval when clerk index rows are missing; zero-cost local `tesseract.js` + `@napi-rs/canvas` main-process OCR with automatic exhibit spillover re-reads; human-approved conveyance queue; heirship family graphs; and `exact.mjs` reduced `BigInt` numerator/denominator mineral fraction & net-mineral-acre arithmetic (zero IEEE-754 floating-point drift).
+- **Capabilities:** Cross-platform Electron desktop app (Windows, macOS, and Linux; sold and licensed at `desktop.title-desk.com`, installed binary named `TitleDesk Agent`) operating through landman-authenticated sessions on CountyRecords.com, CourthouseDirect, and TexasFile; clerk index merging (where sheriffs and the State are never mistaken for grantor surnames, and ambiguous initialed decedents never corrupt estates); stated-source-deed direct book/page retrieval when clerk index rows are missing; zero-cost local `tesseract.js` + `@napi-rs/canvas` main-process OCR with automatic exhibit spillover re-reads; human-approved conveyance queue; heirship family graphs; and `exact.mjs` reduced `BigInt` numerator/denominator mineral fraction & net-mineral-acre arithmetic.
 
 ### 5.3 Artificial Landman (`https://artificiallandman.io/`)
-- **Scale:** 23,148 hosted LOC, 54 commits, `282 / 282 PASS` web tests.
-- **Scope & Roadmap:** Runs the shared deterministic intake verifier, blind dual-examiner + validator pipeline, and `exact.mjs` rational ownership engine under a dedicated brass-and-topographic identity. **Live in Texas today, with dedicated New Mexico expansion planned on the roadmap.**
+- **Scale:** 23,148 hosted LOC, 54 commits, `7,070 / 7,070 PASS` shared engine tests.
+- **Positioning:** Hosted Texas mineral title examination for land teams, brokerages and operators who run many assignments. Artificial Landman runs the same Texas mineral-interest engine as TitleDesk, packaged, sold and supported on its own.
 
 ---
 
@@ -108,7 +119,7 @@ Engineered across a 6-month campaign (305+ branches, 40 isolated worktrees, 64 p
 
 ## 7. Complete 27-Build Evolution Ledger (July 2025 – November 2026)
 
-- **Methodology:** Authored source lines counted reproducibly at first and latest git commits excluding `node_modules`, lockfiles, build outputs, vendored SDKs, and binary assets; deduplicated across shared trees. Durations rounded UP to whole months; under 1 month labeled `1 Month (Rapid Sprint)`.
+- **Methodology:** Authored source lines counted reproducibly at first and latest git commits as of `2026-11-18` excluding `node_modules`, lockfiles, build outputs, vendored SDKs, and binary assets; deduplicated across shared trees. Durations rounded UP to whole months; under 1 month labeled `1 Month (Rapid Sprint)`.
 - **Totals:** **27 Verified Builds** · **1,031,828 Deduplicated Authored LOC** · **3,922 Verified Commits** · **Peak Parallelism: 9 concurrent builds in flight (August 2026)**.
 
 | # | Build | Category | Duration | Commits | Initial -> Latest LOC | Live Surface |
@@ -128,22 +139,24 @@ Engineered across a 6-month campaign (305+ branches, 40 isolated worktrees, 64 p
 | 13 | Settings Sentinel & Security Broker | Linux Workstation Security & Capability Broker | 1 Month (Rapid Sprint) | 1 | 2,519 -> 2,519 | In-house security |
 | 14 | TractPilot Agent | Vertical AI Desktop Prototype (Land Title) | 1 Month (Rapid Sprint) | 1 | 4,288 -> 4,288 | Lineage prototype |
 | 15 | CRG / Boundary-Star Instability | Mathematical Physics Simulation | 1 Month (Rapid Sprint) | 1 | 8,283 -> 8,283 | Research |
-| 16 | TitleDesk Agent | Flagship Desktop Vertical AI (Oil & Gas Title) | 4 Months | 1,084 | 25,623 -> 262,305 | https://desktop.title-desk.com/ |
+| 16 | TitleDesk Desktop | Flagship Desktop Vertical AI (Texas Mineral Title) | 4 Months | 1,084 | 25,623 -> 262,305 | https://desktop.title-desk.com/ |
 | 17 | Escalera County Clerk | Synthetic Public-Records Demo Portal | 1 Month (Rapid Sprint) | 3 | 264 -> 264 | Demo fixture |
 | 18 | Paystub Studio | Local-First Financial Document Tool | 1 Month (Rapid Sprint) | 1 | 3,366 -> 3,366 | Utility |
 | 19 | Claude-Estate Autonomy Bridges | Cross-Machine Agent Infrastructure & Security | 2 Months | 66 | 1,378 -> 39,726 | In-house infra |
 | 20 | Rogue Agents | Flagship Multi-Agent Command Center | 1 Month (Rapid Sprint) | 103 | 1,461 -> 22,582 | https://theharnesslab.dev/#harness-vitrine |
-| 21 | Hermes Multi-VPS Agent Fleet | Multi-VPS Agent Fleet & Transport Hardening | 1 Month (Rapid Sprint) | 1 | 6,992 -> 6,992 | In-house infra |
+| 21 | Hermes Multi-VPS Agent Fleet | Multi-Node Agent Fleet & Transport Hardening | 1 Month (Rapid Sprint) | 1 | 6,992 -> 6,992 | In-house infra |
 | 22 | Agent Browser Hub | Multi-Agent Browser Coordination & MCP Fleet | 1 Month (Rapid Sprint) | 6 | 11,374 -> 23,406 | https://theharnesslab.dev/#harness-vitrine |
 | 23 | Perihelion Loop | Autonomous Create, Fix & No-Copy Forge Harness | 1 Month (Rapid Sprint) | 62 | 3,957 -> 30,079 | https://theharnesslab.dev/#perihelion-loop |
-| 24 | Kiln | Native macOS SwiftUI Application | 1 Month (Rapid Sprint) | 4 | 181 -> 181 | Forged macOS app |
-| 25 | TitleDesk Hosted Service | Hosted Vertical AI Examination Platform | 1 Month (Rapid Sprint) | 53 | 61 -> 22,638 | https://title-desk.com/ |
-| 26 | Artificial Landman | Hosted Mineral & Subsurface Title Platform | 1 Month (Rapid Sprint) | 54 | 61 -> 23,148 | https://artificiallandman.io/ |
-| 27 | 24/7 AI Inbox Lead Watcher | Hardened Daemon & Prompt-Injection Red-Team | 1 Month (Rapid Sprint) | 2 | 1,394 -> 1,396 | In-house daemon |
+| 24 | Kiln | Native macOS SwiftUI Forge Spec & Phase-1 Scaffold | 1 Month (Rapid Sprint) | 4 | 181 -> 181 | Forged macOS spec & scaffold |
+| 25 | TitleDesk | Flagship Hosted Texas Mineral Title Platform | 1 Month (Rapid Sprint) | 53 | 61 -> 22,638 | https://title-desk.com/ |
+| 26 | Artificial Landman | Flagship Hosted Texas Mineral Title Platform | 1 Month (Rapid Sprint) | 54 | 61 -> 23,148 | https://artificiallandman.io/ |
+| 27 | 24/7 AI Lead Triage Daemon | Hardened Daemon & Prompt-Injection Red-Team | 1 Month (Rapid Sprint) | 2 | 1,394 -> 1,396 | In-house daemon |
 
 ---
 
-## 8. Technical Contact & Commercial Handoff
+## 8. Legal Entity, Contact & Security Disclosure
 
+- **Legal Entity:** `The Harness Lab LLC, a Texas limited liability company (Texas SOS File No. 806765129)` · Venue: `Tom Green County, Texas` · `© 2026 The Harness Lab LLC`
 - **Principal Systems Engineer:** Spencer Teague — `spencer@theharnesslab.com`
-- **Commercial Work Orders & Architecture Teardowns:** `https://theharnesslab.com/#contact` (`sales@theharnesslab.com`)
+- **Commercial Work Orders & Public Contact:** `https://theharnesslab.com/#contact` (`sales@theharnesslab.com`)
+- **Security Policy:** `https://theharnesslab.dev/.well-known/security.txt` (`mailto:sales@theharnesslab.com`)

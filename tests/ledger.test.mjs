@@ -62,7 +62,7 @@ test('every build carries a whole, rounded-up month label derived from its commi
     assert.equal(bySlug[slug], RAPID_SPRINT, slug);
   }
   for (const c of TRENCH_CAMPAIGNS) assert.doesNotMatch(c.meta, /\d\.\d/, c.id);
-  assert.match(TRENCH_CAMPAIGNS[0].meta, /^6 Months · 1,662 Commits/);
+  assert.match(TRENCH_CAMPAIGNS[0].meta, /^4 Months\b.*1,662 Commits/);
   assert.match(TRENCH_CAMPAIGNS[1].meta, /^14 Months · 9 Generations · 1,364 Commits/);
   assert.match(TRENCH_CAMPAIGNS[2].meta, /^5 Months · 1,064 APEX Commits/);
 });
@@ -258,8 +258,132 @@ test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay va
     assert.match(content, /Perihelion Loop/);
     assert.match(content, /1,031,828/);
     assert.match(content, /3,922/);
-    assert.match(content, /New Mexico/);
+    assert.doesNotMatch(content, /New Mexico/i, llmFile);
     assert.doesNotMatch(content, /brandstream\.my/i, llmFile);
     assert.doesNotMatch(content, /happy[\s-]?homes|charlie|screen[\s-]?saver|HarnessLabSaver/i, llmFile);
+  }
+});
+
+test('SHARED-FACTS naming, legal entity, OPSEC scrub, security.txt, and accessibility hygiene hold across all .dev files', () => {
+  const checkedFiles = {
+    'index.html': html,
+    'engineering.mjs': readFileSync(join(root, 'engineering.mjs'), 'utf8'),
+    'ledger-data.mjs': sources['ledger-data.mjs'],
+    'showcase-data.mjs': sources['showcase-data.mjs'],
+    'llms.txt': readFileSync(join(root, 'llms.txt'), 'utf8'),
+    'llms-full.txt': readFileSync(join(root, 'llms-full.txt'), 'utf8'),
+    'landman-title-systems/index.html': readFileSync(join(root, 'landman-title-systems/index.html'), 'utf8'),
+    'workflow-automation-engineering/index.html': readFileSync(join(root, 'workflow-automation-engineering/index.html'), 'utf8'),
+    'business-software-engineering/index.html': readFileSync(join(root, 'business-software-engineering/index.html'), 'utf8'),
+  };
+
+  const bannedPatterns = [
+    /28-build/i,
+    /Title-Desk/,
+    /TITLE-DESK/,
+    /(?<!https:\/\/)(?<!https:\/\/desktop\.)\btitle-desk\b(?!\.com)/i,
+    /\bTitle Desk\b/i,
+    /Title-?Desk Web/i,
+    /TitleDesk Desktop Agent/i,
+    /New Mexico/i,
+    /written only when all three agree/i,
+    /three-way consensus/i,
+    /triple-check/i,
+    /\bsame day\b/i,
+    /\b15 minutes\b/i,
+    /zero working hours/i,
+    /week's pay/i,
+    /every step[^.\n]{0,40}automated/i,
+    /fully automated/i,
+    /signed workbook/i,
+    /tenant-isolated/i,
+    /\bguaranteed\b/i,
+    /\b282\b/,
+    /Jake Powers/i,
+    /Ubuntu Omen/i,
+    /\bOmen\b/,
+    /omenctl/i,
+    /MacBook Air/i,
+    /Hostinger/i,
+    /PAM change-guard/i,
+    /change-guard/i,
+    /settings_sentinel/i,
+    /events\.jsonl/i,
+    /\b(?:ui|risk|broker|watcher|ctl)\.py\b/i,
+    /secfeat/i,
+    /sudoers/i,
+    /\bEXAMINE\b/,
+    /BODY\.PEEK/i,
+    /test_eval_and_redteam/i,
+    /GOLD002TX/i,
+    /gte002tx/i,
+    /rogue-tools/i,
+    /brandstream\.my/i,
+    /\/Users\/spencerteague/i,
+    /\/home\/spencer/i,
+    /Nero Marquina/i,
+    /Obverse face/i,
+    /Reverse face/i,
+    /Copper\s*(?:&|&amp;|and)\s*(?:White\s*)?Carrara/i,
+    /2027 cinema/i,
+    /existing subscription/i,
+    /subscription sign-in/i,
+    /studio subscription/i,
+    /free-tier/i,
+    /free tier/i,
+    /\$0/,
+    /vendor spend/i,
+    /Vendor Overrun/i,
+    /security@theharnesslab/i,
+    /support@theharnesslab/i,
+    /licenses@theharnesslab/i,
+  ];
+
+  for (const [name, content] of Object.entries(checkedFiles)) {
+    for (const re of bannedPatterns) {
+      assert.doesNotMatch(content, re, `${name} matched banned pattern ${re}`);
+    }
+  }
+
+  // Legal entity & 27-Build footer parity across HTML pages
+  for (const pageName of [
+    'index.html',
+    'landman-title-systems/index.html',
+    'workflow-automation-engineering/index.html',
+    'business-software-engineering/index.html',
+  ]) {
+    const doc = checkedFiles[pageName];
+    assert.match(doc, /© 2026 The Harness Lab LLC, a Texas limited liability company \(Texas SOS File No\. 806765129\)/, pageName);
+    assert.match(doc, /Tom Green County, Texas/, pageName);
+    assert.match(doc, /Verification &amp; Scope Provenance/, pageName);
+    if (pageName !== 'index.html') {
+      assert.match(doc, /VII · 27-Build Ledger/, `${pageName} footer must link 27-Build Ledger`);
+    }
+  }
+
+  assert.match(checkedFiles['ledger-data.mjs'], /private investor Jayson Powers/);
+  assert.match(html, /Verifiable autonomous harnesses <br>&amp; deterministic <em>state machines\.<\/em>/);
+  assert.match(html, /<pre tabindex="0" aria-label="Executable step contract TypeScript definition">/);
+  assert.match(html, /<button[^>]*data-cockpit-stage-zoom[^>]*>[\s\S]*?<img[\s\S]*?data-cockpit-img/);
+
+  // .nojekyll + .well-known/security.txt
+  assert.equal(existsSync(join(root, '.nojekyll')), true);
+  assert.equal(existsSync(join(root, '.well-known/security.txt')), true);
+  const secTxt = readFileSync(join(root, '.well-known/security.txt'), 'utf8');
+  assert.equal(
+    secTxt.trim(),
+    [
+      'Contact: mailto:sales@theharnesslab.com',
+      'Expires: 2027-11-18T00:00:00Z',
+      'Preferred-Languages: en',
+      'Canonical: https://theharnesslab.dev/.well-known/security.txt',
+    ].join('\n'),
+  );
+
+  // Unreferenced root images removed; core brand assets retained
+  assert.equal(existsSync(join(root, 'advancedhermes-hero-round.png')), false);
+  assert.equal(existsSync(join(root, 'harness-lab-emblem-hero.webp')), false);
+  for (const keep of ['social-card.png', 'favicon.png', 'hermes-mark.png', 'harness-lab-emblem-512.png']) {
+    assert.equal(existsSync(join(root, keep)), true, keep);
   }
 });

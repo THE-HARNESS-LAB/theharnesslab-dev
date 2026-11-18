@@ -207,6 +207,7 @@ export function renderLedger() {
         <p class="chapter-eyebrow"><span class="chapter-numeral">VII</span> The War-Ledger &amp; ${n}-Build Evolution Archive</p>
         <h2 id="build-ledger-title">Every build, from commit #1 to HEAD — <em>engineered in parallel.</em></h2>
         <p class="lead">Repository forensics across ${n} builds from July 2025 to November 2026: authored source lines at the first and latest commit (excluding dependencies, lockfiles, build output and vendor SDKs), source files, commits, the frontier models available at the time, and the verbatim git trail. Months are rounded up to whole months; anything shorter is a Rapid Sprint.</p>
+        <p class="provenance-meta"><strong>Verification &amp; Scope Provenance ·</strong> Commit-pinned repository forensics as of 2026-11-18 across ${n} repositories (${formatInt(LEDGER_SUMMARY.authoredLoc)} deduplicated authored LOC; ${formatInt(LEDGER_SUMMARY.commits)} tracked default/release commits; 1,662 all-branch commits across the Aug–Nov 2026 Texas title campaign; ~16,732 shared engine lines between TitleDesk and Artificial Landman counted once).</p>
       </div>
 
       <div class="ledger-monuments" aria-label="Ledger totals">

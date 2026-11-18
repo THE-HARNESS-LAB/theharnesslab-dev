@@ -200,7 +200,7 @@ export function createKarpathyRun(scenario = 'verified_fix') {
     throw new RangeError('Unknown Karpathy Loop simulation scenario');
   }
   const message =
-    'Baseline pinned at base/9f4c21a. Pre-spawn safety.ts gate (macAccessLevel="off", cloud GitHub disconnected, $0 CreditLedger reservation) ready for transfer.ts manifest check.';
+    'Baseline pinned at base/9f4c21a. Pre-spawn safety.ts gate (macAccessLevel="off", cloud GitHub disconnected, atomic CreditLedger quota reservation) ready for transfer.ts manifest check.';
   return {
     scenario,
     state: 'BASELINE',
@@ -520,14 +520,14 @@ export const PERIHELION_PLATES = Object.freeze([
     id: 'fleet',
     code: '01 / FLEET & CREDIT LEDGER',
     tabLabel: '01 Fleet Overview',
-    title: 'Perihelion Fleet Deck & Atomic $0-Spend CreditLedger',
+    title: 'Perihelion Fleet Deck & Atomic CreditLedger Quota Gate',
     src: '/assets/showcase/karpathy-loop-harness/01-perihelion-fleet-overview.webp',
     src640: '/assets/showcase/karpathy-loop-harness/01-perihelion-fleet-overview-640.webp',
     alt: 'Perihelion Loop cockpit overview showing active worktrees, run health, and atomic CreditLedger reservations',
     plane: 'CONTROL PLANE · klh v2.2',
-    metric: '30,079 LOC · $0 Vendor Overrun',
+    metric: '30,079 LOC · Bounded-Budget Gate',
     caption:
-      'Live fleet command deck tracking concurrent isolated git worktrees, atomic CreditLedger free-tier reservations, and pre-spawn safety.ts invariants (macAccessLevel === "off", cloud GitHub disconnected).',
+      'Live fleet command deck tracking concurrent isolated git worktrees, atomic CreditLedger budget reservations, and pre-spawn safety.ts invariants (macAccessLevel === "off", cloud GitHub disconnected).',
   },
   {
     id: 'dag',
@@ -566,7 +566,7 @@ export const PERIHELION_PLATES = Object.freeze([
     plane: 'MODEL BOUNDARY · Sealed Advisors',
     metric: '7 Frontier Tiers · Tool-Less Diff Audit',
     caption:
-      'Seamless --resume rotation across 5-hour subscription windows (Claude Fable 5.2 → Gemini 4 Carbon → Codex GPT-6 Astra → Claude Opus 5.5 → Gemini 4 Argon → Codex GPT-6.1 Sol → Grok 4.7) paired with kernel-sealed advisors that caught a live assert.equal monkey-patch.',
+      'Seamless --resume rotation across quota-governed 5-hour rate windows (Claude Fable 5.2 → Gemini 4 Carbon → Codex GPT-6 Astra → Claude Opus 5.5 → Gemini 4 Argon → Codex GPT-6.1 Sol → Grok 4.7) paired with kernel-sealed advisors that caught a live assert.equal monkey-patch.',
   },
   {
     id: 'graphify',
@@ -688,8 +688,8 @@ export function mountSiteUI(doc = document) {
       });
       if (faceStatus) {
         faceStatus.textContent = isCom
-          ? 'REVERSE FACE · THEHARNESSLAB.COM · COPPER & CARRARA COMMERCIAL FORGE'
-          : 'OBVERSE FACE · THEHARNESSLAB.DEV · NERO MARQUINA ENGINEERING FOUNDRY';
+          ? 'COMMERCIAL STUDIO · THEHARNESSLAB.COM · CLIENT SOFTWARE & AUTOMATION'
+          : 'ENGINEERING SEAL · THEHARNESSLAB.DEV · SYSTEMS R&D FOUNDRY';
       }
       if (comJump) {
         comJump.dataset.highlighted = String(isCom);
@@ -785,6 +785,7 @@ export function mountSiteUI(doc = document) {
     const metricEl = explorer.querySelector('[data-cockpit-metric]');
     const captionEl = explorer.querySelector('[data-cockpit-caption]');
     const zoomTrigger = explorer.querySelector('[data-cockpit-zoom]');
+    const stageZoom = explorer.querySelector('[data-cockpit-stage-zoom]');
     let activeIndex = 0;
     let lastTrigger = null;
 
@@ -823,6 +824,7 @@ export function mountSiteUI(doc = document) {
         img.srcset = `${plate.src640} 640w, ${plate.src} 1440w`;
         img.alt = plate.alt;
       }
+      stageZoom?.setAttribute('aria-label', `Inspect full-resolution plate: ${plate.title}`);
       if (codeEl) codeEl.textContent = plate.code;
       if (titleEl) titleEl.textContent = plate.title;
       if (planeEl) planeEl.textContent = plate.plane;
@@ -848,7 +850,11 @@ export function mountSiteUI(doc = document) {
     };
 
     zoomTrigger?.addEventListener('click', () => openLightbox(zoomTrigger));
-    img?.addEventListener('click', () => openLightbox(zoomTrigger || img));
+    if (stageZoom) {
+      stageZoom.addEventListener('click', () => openLightbox(stageZoom));
+    } else {
+      img?.addEventListener('click', () => openLightbox(zoomTrigger || img));
+    }
 
     if (lightbox) {
       lightbox.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => {
@@ -862,6 +868,15 @@ export function mountSiteUI(doc = document) {
       });
       lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) lightbox.close();
+      });
+      lightbox.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          selectPlate(activeIndex + 1);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          selectPlate(activeIndex - 1);
+        }
       });
       lightbox.addEventListener('close', () => {
         lastTrigger?.focus?.();

@@ -41,7 +41,7 @@ export const LEDGER_BUILDS = Object.freeze([
   {
     "order": 1,
     "slug": "brandstreams",
-    "title": "MyAIMediaMgr → BrandStreams (brandstream.my)",
+    "title": "MyAIMediaMgr → BrandStreams",
     "shortTitle": "MyAIMediaMgr → BrandStreams",
     "category": "Flagship SaaS Platform",
     "eraId": "2025-early",
@@ -80,7 +80,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "liveUrl": null,
     "liveLabel": null,
     "idea": "Spencer's first major AI SaaS platform — built to give small and medium-sized businesses an autonomous AI social-media agency capable of multi-slot campaign planning, brand-consistent image/video generation, approval workflows, and multi-platform scheduling across Instagram, Facebook, X, LinkedIn, and TikTok. Born in July 2025 when early cloud sandboxes (Replit) repeatedly corrupted environments and forced full rebuilds (v1 -> v6 -> v8.1 -> v10 -> MAIMM_FINAL_PROD -> BrandStreams), directly inspiring Spencer to build Apex-Build.",
-    "architecture": "TypeScript full-stack monorepo: React + Vite + Tailwind + Framer Motion client (client/src, 155+ components/views including 14-slot Campaign Board V2, Multi-Model AI Brainstorm Studio, Grok Imagine Studio, Content Calendar, and Approval Queue) paired with an Express + Drizzle ORM + PostgreSQL + BullMQ/Redis worker backend (server/), Stripe billing, Ayrshare default-deny tenant-isolated publishing, and Docker/Traefik production deployment on brandstream.my.",
+    "architecture": "TypeScript full-stack monorepo: React + Vite + Tailwind + Framer Motion client (client/src, 155+ components/views including 14-slot Campaign Board V2, Multi-Model AI Brainstorm Studio, Grok Imagine Studio, Content Calendar, and Approval Queue) paired with an Express + Drizzle ORM + PostgreSQL + BullMQ/Redis worker backend (server/), Stripe billing, Ayrshare default-deny per-tenant profile routing, and Docker/Traefik production deployment.",
     "aiLandscape": {
       "openai": "ChatGPT defaulted to GPT-4o alongside transitional GPT-4.5 (Feb 2025), developer API models GPT-4.1 / 4.1-mini / 4.1-nano (Apr 14, 2025; ChatGPT May 14, 2025), and separate chain-of-thought reasoning models o3 & o4-mini (Apr 16, 2025) plus o3-pro (Jun 10, 2025). GPT-5 had NOT launched yet, and Codex CLI (Apr 2025) was in its infancy; cloud 'vibe-coding' sandboxes like Replit frequently corrupted state and lost multi-file work.",
       "anthropic": "Claude Opus 4 and Claude Sonnet 4 (launched May 22, 2025, succeeding Feb 2025's Claude 3.7 Sonnet) offered early hybrid extended thinking with beta tool interleaving, while Claude Code had just entered general availability.",
@@ -143,8 +143,8 @@ export const LEDGER_BUILDS = Object.freeze([
       "src640": "/assets/showcase/brandstreams/05-brandstreams-post-rename-landing-640.webp",
       "width": 1600,
       "height": 1000,
-      "alt": "Post-rename BrandStream (BRANDSTREAM.MY) landing page hero featuring the raised-neon metallic BrandStream emblem, orbital circuitry, and updated AI workflow positioning.",
-      "caption": "Post-rename BrandStream (BRANDSTREAM.MY) landing page hero featuring the raised-neon metallic BrandStream emblem, orbital circuitry, and updated AI workflow positioning."
+      "alt": "Post-rename BrandStreams landing page hero featuring the raised-neon metallic BrandStreams emblem, orbital circuitry, and updated AI workflow positioning.",
+      "caption": "Post-rename BrandStreams landing page hero featuring the raised-neon metallic BrandStreams emblem, orbital circuitry, and updated AI workflow positioning."
     }
   },
   {
@@ -600,7 +600,7 @@ export const LEDGER_BUILDS = Object.freeze([
       "width": 1440,
       "height": 900,
       "alt": "Earlier theharnesslab.dev engineering landing page: custom software for complex workflows",
-      "caption": "An earlier generation of the theharnesslab.dev engineering site, before the Nero Marquina foundry rebuild."
+      "caption": "An earlier generation of the theharnesslab.dev engineering site, prior to the Engineering Foundry (.dev) architecture rebuild."
     }
   },
   {
@@ -645,7 +645,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "Lineage: Claude Code OS → Mythos OS | spencers-agent-os",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Visual operating system and control center for managing autonomous coding harnesses, live Graphify knowledge-graph topology, background 'Dream engine' memory consolidation, and multi-provider subscription telemetry in one dark cockpit.",
+    "idea": "Visual operating system and control center for managing autonomous coding harnesses, live Graphify knowledge-graph topology, background 'Dream engine' memory consolidation, and multi-provider quota telemetry in one dark cockpit.",
     "architecture": "Next.js + React + TypeScript application (28,734 authored LOC across 176 source files) backed by Supabase REST/PostgreSQL persistence, interactive force-directed Graphify visualization, shell daemon bridges, and Playwright verification.",
     "aiLandscape": {
       "openai": "GPT-5.4 / transitional GPT-5.5 builds and Codex parallel orchestration led OpenAI's stack as OpenAI began the 90-day deprecation window for legacy o3.",
@@ -704,7 +704,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "wealth-powers-os",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Bespoke personal wealth and portfolio operating system built for Jake Powers, unifying asset allocation, cash-flow command, tax/entity tracking, and AI-assisted scenario modeling inside an executive dashboard.",
+    "idea": "Bespoke personal wealth and portfolio operating system built for private investor Jayson Powers, unifying asset allocation, cash-flow command, tax/entity tracking, and AI-assisted scenario modeling inside an executive dashboard.",
     "architecture": "Next.js + React + TypeScript single-repo web platform (7,110 authored LOC across 45 files) with modular wealth analytics views and multi-model financial copilot adapters.",
     "aiLandscape": {
       "openai": "GPT-5.4 / transitional GPT-5.5 builds and Codex parallel orchestration led OpenAI's stack as OpenAI began the 90-day deprecation window for legacy o3.",
@@ -807,11 +807,11 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 8.3
       }
     ],
-    "lineage": "Ubuntu Omen workstation",
+    "lineage": "Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Built on August 1, 2026 to make autonomous multi-agent execution safe on Spencer's primary Ubuntu workstation without sacrificing root integrity: Settings Sentinel watches /etc, /boot, dotfiles, dconf, browser policies, and TTY executions with a 15-second GTK4 layer-shell confirmation overlay and instant rollback, while Security Broker provides a narrow, TOCTOU-free, validator-gated capability bridge.",
-    "architecture": "Python 3 + GTK4 Layer Shell daemon (settings_sentinel/ui.py, risk.py, events.jsonl, Chrome/Firefox enterprise policy guards, 2,519 LOC) paired with security-broker (broker.py, 364 LOC, single-read staging into /usr/local/lib/secfeat/, JSONL audit log, strict refusal of PAM/sudoers/SSH/firewall weakened rules).",
+    "idea": "Built in August 2026 to keep autonomous multi-agent execution safe on Linux R&D workstations without sacrificing host integrity: Settings Sentinel monitors privileged configuration surfaces and interactive shell launches with deterministic risk scoring, an always-on-top operator confirmation overlay, and signed snapshot rollback, while Security Broker enforces narrow, validator-gated capability staging.",
+    "architecture": "Python 3 + GTK4 Layer Shell host-integrity daemon (2,519 authored LOC across 15 files) with deterministic policy risk triage, enterprise browser-policy guards, and signed rollback journals, paired with a TOCTOU-hardened capability broker enforcing single-read staging and structured audit logging.",
     "aiLandscape": {
       "openai": "OpenAI's GPT-5.6 family (Sol flagship, Terra mid-tier, Luna fast tier, launched July 2026 with ultra parallel agent mode) received major August 2026 API price cuts (up to 80% on Luna, 20%+ on Sol/Terra) and Cerebras Ultrafast previews; legacy o3 retired in late August.",
       "anthropic": "Claude Opus 5 (launched July 24, 2026) and Claude Sonnet 5 (June 30, 2026) delivered full 5th-generation agentic coding and verification.",
@@ -823,8 +823,8 @@ export const LEDGER_BUILDS = Object.freeze([
       "src640": "/assets/showcase/settings-sentinel/01-gtk-alert-overlay-640.webp",
       "width": 1600,
       "height": 1000,
-      "alt": "Settings Sentinel — Always-on-top 15-second Gtk4LayerShell security alert overlay flagging a 96%-risk /etc/sudoers.d escalation with diff and instant rollback controls",
-      "caption": "Settings Sentinel — Always-on-top 15-second Gtk4LayerShell security alert overlay flagging a 96%-risk /etc/sudoers.d escalation with diff and instant rollback controls"
+      "alt": "Settings Sentinel — Always-on-top GTK4 Layer Shell policy alert overlay flagging a high-risk privilege configuration change with diff inspection and instant snapshot rollback controls",
+      "caption": "Settings Sentinel — Always-on-top GTK4 Layer Shell policy alert overlay flagging a high-risk privilege configuration change with diff inspection and instant snapshot rollback controls"
     }
   },
   {
@@ -865,10 +865,10 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 3.2
       }
     ],
-    "lineage": "Ubuntu Omen workstation",
+    "lineage": "Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "August 2, 2026 Electron desktop prototype built on Omen that proved the core TitleDesk thesis four days before titledesk-agent commit #1: converting company Google Drive folders and county clerk research into a cited document index, runsheet, exact NMA ownership ledger, and completed Excel workbook.",
+    "idea": "August 2, 2026 Electron desktop prototype built on a Linux R&D workstation that proved the core TitleDesk thesis four days before titledesk-agent commit #1: converting company Google Drive folders and county clerk research into a cited document index, runsheet, exact NMA ownership ledger, and completed Excel workbook.",
     "architecture": "Electron + React + Vite + TypeScript + tesseract.js + Playwright desktop workspace (4,288 authored LOC across 71 source files).",
     "aiLandscape": {
       "openai": "OpenAI's GPT-5.6 family (Sol flagship, Terra mid-tier, Luna fast tier, launched July 2026 with ultra parallel agent mode) received major August 2026 API price cuts (up to 80% on Luna, 20%+ on Sol/Terra) and Cerebras Ultrafast previews; legacy o3 retired in late August.",
@@ -915,7 +915,7 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 100
       }
     ],
-    "lineage": "Ubuntu Omen workstation",
+    "lineage": "Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
     "idea": "Computational mathematical-physics investigation discovering and proving that 'Boundary-Star Instability' obstructs naive trace-compatibility tests in recursive 3D Turaev–Viro / SU(2)_k state-sum refinements — enforcing Spencer's standing falsification rule: always null-test a proposed test before trusting its signal.",
@@ -938,9 +938,9 @@ export const LEDGER_BUILDS = Object.freeze([
   {
     "order": 16,
     "slug": "titledesk",
-    "title": "TitleDesk Agent (Desktop App, Predecessor & Ecosystem)",
-    "shortTitle": "TitleDesk Agent",
-    "category": "Flagship Desktop Vertical AI Product (Oil & Gas Land Title)",
+    "title": "TitleDesk Desktop (Desktop App, Predecessor & Core Engine)",
+    "shortTitle": "TitleDesk Desktop",
+    "category": "Flagship Desktop Vertical AI Product (Texas Mineral Title)",
     "eraId": "2026-summer",
     "tiers": [
       "flagship"
@@ -976,24 +976,14 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "Lineage: TractPilot Agent → HARNESS-LAB-BUILDS | THE-HARNESS-LAB/titledesk-agent · HARNESS-LAB-BUILDS",
     "liveUrl": "https://desktop.title-desk.com/",
     "liveLabel": "desktop.title-desk.com",
-    "idea": "Mac/Electron oil-and-gas land title workstation built for practicing petroleum landmen (field-tested in production with independent Texas landmen and title brokerages). Turns scanned county clerk deed books and Google Drive folders into source-linked runsheets, exact-fraction mineral/NMA ownership ledgers, and completed client Excel workbooks — running 100% offline local OCR first so landmen pay zero per-page AI fees and keep confidential deeds local, escalating to frontier LLMs only for hard chain-of-title adjudication.",
-    "architecture": "Electron + React + TypeScript desktop app (src/main, src/renderer, src/shared — growing from 4,288 LOC in tractpilot-agent on Aug 2, 2026 and 25,623 LOC at commit #1 on Aug 6, 2026 to 196,693 LOC on stable and 262,305 authored LOC across 1,184 files on the Nov 11, 2026 repair branch), featuring main-process tesseract.js + @napi-rs/canvas offline OCR, deterministic fraction arithmetic (titleEngine.ts), OOXML workbook writer, Cloudflare Worker licensing (services/licensing-worker), synthetic Escalera County Clerk demo portal (records-site), and title-desk.com marketing site (titledesk-site, 9,739 LOC).",
+    "idea": "Cross-platform Electron oil-and-gas land title workstation (Windows, macOS, and Linux; installed binary named TitleDesk Agent) built for practicing petroleum landmen examining Texas mineral title (one county per run, current mineral interest owners only). Turns scanned county clerk deed books and local folders into source-linked runsheets, exact-fraction mineral/NMA ownership ledgers, and draft four-sheet client Excel workbooks for review by a qualified landman or attorney — running zero-cost local OCR first so landmen pay zero per-page cloud OCR fees and keep confidential deeds local.",
+    "architecture": "Cross-platform Electron + React + TypeScript desktop app (src/main, src/renderer, src/shared — growing from 4,288 LOC in tractpilot-agent on Aug 2, 2026 and 25,623 LOC at commit #1 on Aug 6, 2026 to 196,693 LOC on stable and 262,305 authored LOC across 1,184 files on the Nov 11, 2026 repair branch), featuring main-process tesseract.js + @napi-rs/canvas offline OCR, exact BigInt fraction arithmetic (exact.mjs / titleEngine.ts), OOXML workbook writer with independent readback verification, Cloudflare Worker licensing (services/licensing-worker), synthetic Escalera County Clerk demo portal (records-site), and title-desk.com product site (titledesk-site, 9,739 LOC).",
     "aiLandscape": {
       "openai": "OpenAI's GPT-5.6 family (Sol flagship, Terra mid-tier, Luna fast tier, launched July 2026 with ultra parallel agent mode) received major August 2026 API price cuts (up to 80% on Luna, 20%+ on Sol/Terra) and Cerebras Ultrafast previews; legacy o3 retired in late August.",
       "anthropic": "Claude Opus 5 (launched July 24, 2026) and Claude Sonnet 5 (June 30, 2026) delivered full 5th-generation agentic coding and verification.",
       "google": "Gemini 3.6 Flash (July 2026) and Gemini 3.7 Flash (August 2026) brought substantial gains in long-document OCR/comprehension and agentic tool reliability."
     },
     "gitTrail": [
-      {
-        "date": "2026-11-13",
-        "branch": "experimental/under-1hr",
-        "message": "Allow Gemini 4 Hydrogen as a page-image reader (GOLD002TX harness)"
-      },
-      {
-        "date": "2026-11-04",
-        "branch": "claude/gte002tx-fixround",
-        "message": "A second read that quotes 'all the minerals reserved unto Grantor' back states the reservation claim"
-      },
       {
         "date": "2026-11-03",
         "branch": "codex/close-source-facts",
@@ -1030,8 +1020,8 @@ export const LEDGER_BUILDS = Object.freeze([
       "src640": "/assets/showcase/titledesk/04-workspace-runsheet-640.webp",
       "width": 1600,
       "height": 1000,
-      "alt": "TitleDesk Agent v0.2.19 Desktop — Source-linked chronological runsheet with automatic chain-of-title gap flagging",
-      "caption": "TitleDesk Agent v0.2.19 Desktop — Source-linked chronological runsheet with automatic chain-of-title gap flagging"
+      "alt": "TitleDesk Desktop v0.2.19 — Source-linked chronological runsheet with automatic chain-of-title gap flagging",
+      "caption": "TitleDesk Desktop v0.2.19 — Source-linked chronological runsheet with automatic chain-of-title gap flagging"
     }
   },
   {
@@ -1071,7 +1061,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "records-site",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Fictional county clerk public-records portal ('Escalera County Clerk') built with 100% synthetic deeds, grantors/grantees, volume/page citations, and recordings so TitleDesk Agent product demos and OAuth app-verification videos never expose real landowner or client PII.",
+    "idea": "Fictional county clerk public-records portal ('Escalera County Clerk') built with 100% synthetic deeds, grantors/grantees, volume/page citations, and recordings so TitleDesk and TitleDesk Desktop product demos and OAuth app-verification videos never expose real landowner or client PII.",
     "architecture": "Static HTML5 + CSS public-records search & instrument viewer portal (3 commits, 264 authored LOC, Aug 9, 2026).",
     "aiLandscape": {
       "openai": "OpenAI's GPT-5.6 family (Sol flagship, Terra mid-tier, Luna fast tier, launched July 2026 with ultra parallel agent mode) received major August 2026 API price cuts (up to 80% on Luna, 20%+ on Sol/Terra) and Cerebras Ultrafast previews; legacy o3 retired in late August.",
@@ -1126,7 +1116,7 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 17.8
       }
     ],
-    "lineage": "Lineage: paystub-creator | Ubuntu Omen workstation",
+    "lineage": "Lineage: paystub-creator | Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
     "idea": "Private, zero-cloud paystub generator and ledger reconciliation studio that runs 100% locally in Chrome (file:// or localhost) with automatic gross-to-net tax/deduction/YTD reconciliation checks and print-ready US Letter output — keeping sensitive payroll figures completely off third-party SaaS servers.",
@@ -1184,10 +1174,10 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 4.7
       }
     ],
-    "lineage": "Lineage: browser-bridge → ai-bridge → claude-estate | Ubuntu Omen workstation",
+    "lineage": "Lineage: browser-bridge → ai-bridge → claude-estate | Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Foundational cross-machine autonomy layer uniting Spencer's Ubuntu Omen, MacBook Air, and Hostinger VPSs: an SSRF-hardened, prompt-injection-fenced Playwright Chrome bridge (browser-bridge), a multi-turn peer-consultation bridge to Codex (ai-bridge), local push-to-talk voice (agent-voice-runtime), and the shared skills/handbook/verification repository (claude-estate).",
+    "idea": "Foundational cross-machine autonomy layer uniting Linux & macOS R&D workstations and isolated Linux cloud nodes: an SSRF-hardened, prompt-injection-fenced Playwright Chrome bridge (browser-bridge), a multi-turn peer-consultation bridge to Codex (ai-bridge), local push-to-talk voice (agent-voice-runtime), and the shared skills/handbook/verification repository (claude-estate).",
     "architecture": "Python + TypeScript + Node.js/Playwright + Bash estate infrastructure totaling 47,986 authored source LOC (39,726 LOC in claude-estate, 7,087 LOC in browser-bridge, 589 LOC in ai-bridge, 220 LOC in agent-voice-runtime).",
     "aiLandscape": {
       "openai": "OpenAI's GPT-5.6 family (Sol flagship, Terra mid-tier, Luna fast tier, launched July 2026 with ultra parallel agent mode) received major August 2026 API price cuts (up to 80% on Luna, 20%+ on Sol/Terra) and Cerebras Ultrafast previews; legacy o3 retired in late August.",
@@ -1209,7 +1199,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "slug": "rogue-agents",
     "title": "Rogue Agents",
     "shortTitle": "Rogue Agents",
-    "category": "Flagship macOS Multi-Agent Command Center",
+    "category": "Flagship macOS & Linux Multi-Agent Command Center",
     "eraId": "2026-fall",
     "tiers": [
       "harness",
@@ -1246,8 +1236,8 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "Rogue-Agents",
     "liveUrl": "#harness-vitrine",
     "liveLabel": "Rogue Agents cockpit, Chapter I",
-    "idea": "Personal macOS & Linux multi-agent command center orchestrating Claude, Codex, Antigravity, Grok, and Hermes side-by-side using existing subscription sign-ins (zero npm bloat or paid per-token API keys required for core execution), complete with leader-dispatched debates, adaptive voice personas, capability probes, and cross-machine omenctl control.",
-    "architecture": "Zero-dependency Node.js server (server.mjs + lib/, 193 JS modules) + native Swift macOS WebKit wrapper (native/, 248 Swift LOC) + Python voice/persona utilities (2,567 Python LOC) + dark glass cockpit UI (public/), growing from 1,461 LOC at commit #1 (Oct 17, 2026) to 21,153 LOC on GitHub origin/linux-mac-2026-10-26 (99 commits) and 22,582 LOC on Mac codex/rogue-tools-20261105 (103 commits).",
+    "idea": "macOS & Linux multi-agent command center orchestrating Claude, Codex, Antigravity, Grok, and Hermes side-by-side under quota-governed multi-provider routing with zero external npm runtime dependencies, complete with leader-dispatched debates, adaptive voice personas, capability probes, and cross-workstation RPC control.",
+    "architecture": "Zero-dependency Node.js server (server.mjs + lib/, 193 JS modules) + native Swift macOS WebKit wrapper (native/, 248 Swift LOC) + Python voice/persona utilities (2,567 Python LOC) + dark glass cockpit UI (public/), growing from 1,461 LOC at commit #1 (Oct 17, 2026) to 21,153 LOC at 99 commits and 22,582 LOC at commit 1d7a1cde (103 commits).",
     "aiLandscape": {
       "openai": "GPT-5.6 (Sol, Terra, Luna) operated under OpenAI's revised October 2026 Model Spec with automated misalignment monitoring across long-horizon agent runs.",
       "anthropic": "The complete Claude 5.5 suite — Opus 5.5 (Sep 22), Sonnet 5.5 (Sep 28), and newly released Claude Haiku 5.5 (Oct 7, 2026) — powered low-latency subagents and browser control.",
@@ -1314,11 +1304,11 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 2.9
       }
     ],
-    "lineage": "Lineage: hermes-guardrail-repair-20261026 | Ubuntu Omen workstation",
+    "lineage": "Lineage: hermes-guardrail-repair-20261026 | Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Production autonomous agent fleet (3 agents / 2 bots across Hostinger VPSs and macOS launchd gateways) hardened with single-consumer Telegram isolation, container netns/env_file boundaries, 128 KB UTF-8 transport guardrails, and loop-protection integration probes.",
-    "architecture": "Python + Shell multi-VPS deployment, guardrail enforcement, and live transport verification suite (6,992 authored LOC across 16 source files + 670 doc lines on Omen).",
+    "idea": "Production autonomous agent fleet (3 agents / 2 bots across isolated Linux cloud nodes and macOS launchd gateways) hardened with single-consumer Telegram isolation, container netns/env_file boundaries, 128 KB UTF-8 transport guardrails, and loop-protection integration probes.",
+    "architecture": "Python + Shell multi-node deployment, guardrail enforcement, and live transport verification suite (6,992 authored LOC across 16 source files + 670 doc lines across R&D workstations).",
     "aiLandscape": {
       "openai": "GPT-5.6 (Sol, Terra, Luna) operated under OpenAI's revised October 2026 Model Spec with automated misalignment monitoring across long-horizon agent runs.",
       "anthropic": "The complete Claude 5.5 suite — Opus 5.5 (Sep 22), Sonnet 5.5 (Sep 28), and newly released Claude Haiku 5.5 (Oct 7, 2026) — powered low-latency subagents and browser control.",
@@ -1382,8 +1372,8 @@ export const LEDGER_BUILDS = Object.freeze([
       "src640": "/assets/showcase/agent-browser-hub/02-operator-dashboard-fleet-640.webp",
       "width": 1440,
       "height": 900,
-      "alt": "Operator Dashboard coordinating six concurrent multi-agent browser sessions across Codex, Claude, Hermes, Antigravity, and Grok with PSS/RSS memory telemetry, warm pool, fenced untrusted task strings, and on-demand WebSocket frame streaming.",
-      "caption": "Operator Dashboard coordinating six concurrent multi-agent browser sessions across Codex, Claude, Hermes, Antigravity, and Grok with PSS/RSS memory telemetry, warm pool, fenced untrusted task strings, and on-demand WebSocket frame streaming."
+      "alt": "Operator Dashboard coordinating five active multi-agent browser sessions (5 / 8 pool slots) across Codex, Claude, Hermes, Antigravity, and Grok with PSS/RSS memory telemetry, warm pool, fenced untrusted task strings, and on-demand WebSocket frame streaming.",
+      "caption": "Operator Dashboard coordinating five active multi-agent browser sessions (5 / 8 pool slots) across Codex, Claude, Hermes, Antigravity, and Grok with PSS/RSS memory telemetry, warm pool, fenced untrusted task strings, and on-demand WebSocket frame streaming."
     }
   },
   {
@@ -1428,7 +1418,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "Lineage: Perihelion by The Harness Lab (klh v2.2) + hardened Apache-2.0 cloudroom.dev | karpathy-loop-harness",
     "liveUrl": "#perihelion-loop",
     "liveLabel": "Perihelion Loop, Chapter I",
-    "idea": "R&D centerpiece of theharnesslab.dev: Perihelion Loop combines Andrej Karpathy's autonomous keep-or-revert loop (measure baseline -> single-hypothesis edit -> hard programmatic check -> keep or git-revert -> institutional attempt ledger) and Loops & Graphs typed DAG orchestration with a fail-closed, zero-trust execution fabric built atop open-source Apache-2.0 cloudroom.dev and multi-provider Frontier Council routing. Built to create greenfield full-stack & native SwiftUI software (Kiln), fix & harden production systems via null_tested_regression gates (proven live with 7,070 passed / 0 failed across 431 TitleDesk test files and 730 passed / 0 failed on Rogue Agents), and perform kernel-walled lawful no-copy reverse-engineering on zero extra vendor spend.",
+    "idea": "R&D centerpiece of theharnesslab.dev: Perihelion Loop combines Andrej Karpathy's autonomous keep-or-revert loop (measure baseline -> single-hypothesis edit -> hard programmatic check -> keep or git-revert -> institutional attempt ledger) and Loops & Graphs typed DAG orchestration with a fail-closed, zero-trust execution fabric built atop open-source Apache-2.0 cloudroom.dev and multi-provider Frontier Council routing. Built to create greenfield full-stack & native SwiftUI software (Kiln), fix & harden production systems via null_tested_regression gates (proven live with 7,070 passed / 0 failed across 431 TitleDesk test files and 730 passed / 0 failed on Rogue Agents), and perform kernel-walled lawful no-copy reverse-engineering under bounded CreditLedger quota ceilings.",
     "architecture": "TypeScript + JavaScript + Swift + Python orchestration engine (klh v2.2) growing from 3,957 LOC at commit #1 (Nov 5, 2026) to 30,079 authored LOC across 183 files (62 commits): parallel isolated git worktrees, hardened cloudroom.dev Linux VM sandboxes (pre-execution SHA-256 exact-bytes manifest check, host/token isolation, quarantined output pull, independent local holdout verification), OS Seatbelt/bubblewrap kernel walls with rea-agents behaviour-only static study, Frontier Council sealed advisors (Claude Fable, Gemini Carbon, Codex GPT-6 Astra, Claude Opus, Grok), and Graphify AST knowledge graphs.",
     "aiLandscape": {
       "openai": "GPT-5.6 (Sol, Terra, Luna) ran in production alongside early GPT-6 / GPT-6 Cyber previews (gpt-6, gpt-6-astra), unified GPT-Live voice, and biometric ChatGPT Wallet delegation.",
@@ -1459,9 +1449,9 @@ export const LEDGER_BUILDS = Object.freeze([
   {
     "order": 24,
     "slug": "kiln",
-    "title": "Kiln (Native macOS Forge App)",
+    "title": "Kiln (Native macOS Forge Spec & Phase-1 SwiftUI App)",
     "shortTitle": "Kiln",
-    "category": "Native macOS SwiftUI Application",
+    "category": "Native macOS SwiftUI Forge Spec & Phase-1 Scaffold",
     "eraId": "2026-fall",
     "tiers": [
       "rapid"
@@ -1494,11 +1484,11 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 18.2
       }
     ],
-    "lineage": "macOS local build",
+    "lineage": "Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Native Apple Silicon SwiftUI desktop forge application built under Perihelion Loop (Karpathy Loop Harness, perihelion/kiln-phase1-2026-11-12), bringing The Harness Lab's black-marble and forged-gold design tokens into a native macOS Swift Package Manager workspace.",
-    "architecture": "Swift Package (Package.swift, Sources/Kiln/KilnApp.swift, Sources/KilnCore/Product.swift, Tests/) paired with protected Brand/ artwork and forge/design/ architectural specification documents (181 authored Swift/Shell/JS LOC + 1,000 lines of design/plan specs).",
+    "idea": "Native Apple Silicon SwiftUI disk and build-artifact cleaner forged under Perihelion Loop (klh forge-plan & klh integrate) — proving kernel-walled lawful no-copy reverse-engineering by producing a 29-feature behavioral specification, 15-screen dark/gold macOS interface design, 8-milestone implementation plan, and Phase-1 Swift Package Manager application scaffold with explicit hazard gates.",
+    "architecture": "Swift Package Phase-1 scaffold (Package.swift, Sources/Kiln/KilnApp.swift, Sources/KilnCore/Product.swift, Tests/ — 181 authored Swift/Shell/JS LOC at commit 85c929e8) paired with protected Brand/ artwork and 1,000 lines of kernel-isolated forge/spec and forge/design behavioral specifications (0.00% winnowed shingle/asset overlap).",
     "aiLandscape": {
       "openai": "GPT-5.6 (Sol, Terra, Luna) ran in production alongside early GPT-6 / GPT-6 Cyber previews (gpt-6, gpt-6-astra), unified GPT-Live voice, and biometric ChatGPT Wallet delegation.",
       "anthropic": "Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 anchored multi-agent verification councils and autonomous repair loops.",
@@ -1523,9 +1513,9 @@ export const LEDGER_BUILDS = Object.freeze([
   {
     "order": 25,
     "slug": "titledesk-hosted",
-    "title": "TitleDesk Hosted Service (title-desk.com Cloud Examination)",
-    "shortTitle": "TitleDesk Hosted Service",
-    "category": "Hosted Vertical AI Examination Platform",
+    "title": "TitleDesk (title-desk.com Hosted Platform)",
+    "shortTitle": "TitleDesk",
+    "category": "Flagship Hosted Texas Mineral Title Platform",
     "eraId": "2026-fall",
     "tiers": [
       "flagship",
@@ -1562,8 +1552,8 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "titledesk-hosted",
     "liveUrl": "https://title-desk.com/",
     "liveLabel": "title-desk.com",
-    "idea": "Zero-install hosted cloud edition of TitleDesk allowing oil-and-gas land teams to sign in on the web, upload county record packages, run automated pre-flight checks, pay per examination, watch live progress, and download a verified Excel title workbook without installing desktop software.",
-    "architecture": "Node.js + JavaScript full-stack hosted service (src/site/ customer portal, pre-run check, Stripe checkout, Gemini/Claude examination worker, and VPS deploy kit — growing from 61 LOC at commit #1 on Nov 12, 2026 to 22,638 authored LOC across 113 files in 53 commits by Nov 15, 2026).",
+    "idea": "Hosted Texas mineral title examination for independent landmen and abstractors at title-desk.com (one county per run, current mineral interest owners only; upload runs open to everyone, Hybrid and Full record-retrieval runs by invitation only). Examiners upload assignment records, clear deterministic pre-run scope checks, prepay before the run starts (returning a run credit if a run fails to complete; runs finishing with unresolved items remain charged), and receive a readback-verified four-sheet draft Excel ownership workbook for review by a qualified landman or attorney.",
+    "architecture": "Node.js + JavaScript hosted service (src/site/ portal, deterministic intake verifier, prepaid Stripe checkout, ClamAV Linux upload scan, two Gemini sessions + exact fraction program check + independent third-provider page-image check with one repair pass, and an independent .xlsx readback reader with >32,767-char cell splitting and >15-digit exact text fractions — growing from 61 LOC on Nov 12, 2026 to 22,638 authored LOC across 113 files in 53 commits by Nov 15, 2026, sharing ~16,732 common engine lines with Artificial Landman).",
     "aiLandscape": {
       "openai": "GPT-5.6 (Sol, Terra, Luna) ran in production alongside early GPT-6 / GPT-6 Cyber previews (gpt-6, gpt-6-astra), unified GPT-Live voice, and biometric ChatGPT Wallet delegation.",
       "anthropic": "Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 anchored multi-agent verification councils and autonomous repair loops.",
@@ -1581,8 +1571,8 @@ export const LEDGER_BUILDS = Object.freeze([
       "src640": "/assets/showcase/titledesk-hosted/04-workspace-live-examination-640.webp",
       "width": 1600,
       "height": 1000,
-      "alt": "TitleDesk Hosted — Land & Record Examination Service — Live Dual-Model Examination Console & Optical Strata Scanner in flight",
-      "caption": "TitleDesk Hosted — Land & Record Examination Service — Live Dual-Model Examination Console & Optical Strata Scanner in flight"
+      "alt": "TitleDesk (title-desk.com) — Live Dual-Session Examination Console & Optical Strata Scanner in flight",
+      "caption": "TitleDesk (title-desk.com) — Live Dual-Session Examination Console & Optical Strata Scanner in flight"
     }
   },
   {
@@ -1590,7 +1580,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "slug": "artificial-landman",
     "title": "Artificial Landman (artificiallandman.io)",
     "shortTitle": "Artificial Landman",
-    "category": "Flagship Hosted Texas Mineral & Subsurface Title Platform",
+    "category": "Flagship Hosted Texas Mineral Title Platform",
     "eraId": "2026-fall",
     "tiers": [
       "flagship",
@@ -1627,8 +1617,8 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "artificiallandman-hosted",
     "liveUrl": "https://artificiallandman.io/",
     "liveLabel": "artificiallandman.io",
-    "idea": "Dedicated hosted Texas mineral and subsurface title examination platform (artificiallandman.io), adapting the TitleDesk Hosted examination engine into a specialized self-serve product tailored for Texas county deed chains, mineral reservations, and division-order title workflows.",
-    "architecture": "JavaScript + Node.js web portal, subsurface examination worker, and deployment kit (54 commits, growing from 61 LOC on Nov 12, 2026 to 23,148 authored LOC across 113 files on Nov 15, 2026).",
+    "idea": "Hosted Texas mineral title examination for land teams, brokerages and operators who run many assignments (artificiallandman.io). Artificial Landman runs the same Texas mineral-interest engine as TitleDesk (one county per run, current mineral interest owners only; draft workbook for review by a qualified landman or attorney, never a title opinion), packaged, sold and supported on its own.",
+    "architecture": "JavaScript + Node.js web portal, Linux ClamAV & dual-Gemini + third-model examination worker, and independent .xlsx readback verifier (54 commits, growing from 61 LOC on Nov 12, 2026 to 23,148 authored LOC across 113 files on Nov 15, 2026, sharing ~16,732 common engine lines with TitleDesk that are deduplicated in the 1,031,828 studio total).",
     "aiLandscape": {
       "openai": "GPT-5.6 (Sol, Terra, Luna) ran in production alongside early GPT-6 / GPT-6 Cyber previews (gpt-6, gpt-6-astra), unified GPT-Live voice, and biometric ChatGPT Wallet delegation.",
       "anthropic": "Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 anchored multi-agent verification councils and autonomous repair loops.",
@@ -1653,8 +1643,8 @@ export const LEDGER_BUILDS = Object.freeze([
   {
     "order": 27,
     "slug": "harnesslab-inbox-watch",
-    "title": "The Harness Lab 24/7 AI Inbox Lead Watcher",
-    "shortTitle": "24/7 AI Inbox Lead Watcher",
+    "title": "The Harness Lab 24/7 AI Lead Triage Daemon",
+    "shortTitle": "24/7 AI Lead Triage Daemon",
     "category": "Hardened Operations Daemon & Prompt-Injection Red-Team Suite",
     "eraId": "2026-fall",
     "tiers": [
@@ -1689,11 +1679,11 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 0.9
       }
     ],
-    "lineage": "macOS local build",
+    "lineage": "Linux & macOS R&D workstations",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Hardened 24/7/365 lead-monitoring daemon built November 15, 2026 to watch spencer@, sales@, and licenses@theharnesslab.com across both INBOX and Spam every 3 hours while defending against untrusted email prompt-injection via an automated red-team evaluation harness.",
-    "architecture": "Hardened Python daemon (watcher.py, ctl.py), systemd service + timer units, rollback script, and test_eval_and_redteam.py adversarial suite (2 commits, 1,394 -> 1,396 authored LOC).",
+    "idea": "Hardened 24/7 inbound lead-triage daemon built November 15, 2026 to monitor studio mailboxes on a scheduled read-only cursor without mutating mailbox state, defending against untrusted email prompt-injection via tool-less envelope fencing and an automated red-team evaluation harness.",
+    "architecture": "Hardened Python service daemon and scheduled systemd units paired with cursor-state rollback tooling and an adversarial prompt-injection red-team evaluation suite (2 commits, 1,394 -> 1,396 authored LOC across 6 files).",
     "aiLandscape": {
       "openai": "GPT-5.6 (Sol, Terra, Luna) ran in production alongside early GPT-6 / GPT-6 Cyber previews (gpt-6, gpt-6-astra), unified GPT-Live voice, and biometric ChatGPT Wallet delegation.",
       "anthropic": "Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 anchored multi-agent verification councils and autonomous repair loops.",
@@ -1705,8 +1695,8 @@ export const LEDGER_BUILDS = Object.freeze([
       "src640": "/assets/showcase/harnesslab-inbox-watch/01-landing-triage-pipeline-640.webp",
       "width": 1600,
       "height": 1000,
-      "alt": "Harness Lab Inbox Watcher — 24/7 Read-Only IMAPS Zero-Miss Lead Triage & Prompt-Injection Containment",
-      "caption": "Harness Lab Inbox Watcher — 24/7 Read-Only IMAPS Zero-Miss Lead Triage & Prompt-Injection Containment"
+      "alt": "Harness Lab Lead Triage Daemon — 24/7 Read-Only Mail Cursor, Zero-Miss Triage & Prompt-Injection Containment",
+      "caption": "Harness Lab Lead Triage Daemon — 24/7 Read-Only Mail Cursor, Zero-Miss Triage & Prompt-Injection Containment"
     }
   }
 ]);
@@ -1717,11 +1707,11 @@ export const LEDGER_BUILDS = Object.freeze([
 export const TRENCH_CAMPAIGNS = Object.freeze([
   {
     id: 'titledesk',
-    tab: 'Title-Desk & Artificial Landman',
-    meta: '6 Months · 1,662 Commits · 305+ Branches',
-    headline: 'Six months refusing to let Texas courthouse title break the engine.',
+    tab: 'TitleDesk, TitleDesk Desktop & Artificial Landman',
+    meta: '4 Months (Aug–Nov 2026) · 1,662 Commits · 305+ Branches',
+    headline: 'Four months refusing to let Texas courthouse title break the engine.',
     summary:
-      'Getting an AI demo to summarize one clean PDF takes an afternoon. Getting an autonomous oil-and-gas title engine to survive crooked 1938 scans, missing clerk index rows, namesake decedents and exact net-mineral-acre math online took six months across 305+ git branches, 40 isolated agent worktrees, 64 packaged release builds and 24 GB of primary-source audit evidence.',
+      'Getting an AI demo to summarize one clean PDF takes an afternoon. Getting a Texas mineral-interest title engine to survive crooked 1938 scans, missing clerk index rows, namesake decedents and exact net-mineral-acre math took four months (August–November 2026, from the Aug 2 TractPilot prototype through TitleDesk Desktop and the hosted TitleDesk & Artificial Landman launches) across 305+ git branches, 40 isolated agent worktrees, 64 packaged release builds and 24 GB of primary-source audit evidence.',
     metrics: [
       ['1,662', 'Unique git commits'],
       ['305+', 'Branches & 40 worktrees'],
@@ -1734,7 +1724,7 @@ export const TRENCH_CAMPAIGNS = Object.freeze([
       {
         broke: 'Century-old crooked courthouse scans and runaway vision-API bills',
         solved:
-          "Built zero-cost local OCR inside Electron's main process (tesseract.js + @napi-rs/canvas), plus automatic second reads when a tract's legal description spills onto an attached exhibit.",
+          "Built zero-cost local OCR inside TitleDesk Desktop's Electron main process across Windows, macOS, and Linux (tesseract.js + @napi-rs/canvas), plus automatic second reads when a tract's legal description spills onto an attached exhibit.",
       },
       {
         broke: 'County record retrieval across three clerk platforms, and index rows that simply are not there',
@@ -1744,7 +1734,7 @@ export const TRENCH_CAMPAIGNS = Object.freeze([
       {
         broke: 'Hallucinated mineral fractions, sheriff deeds and namesake decedents',
         solved:
-          'Wrote a typed chain-of-title derivation engine where a sheriff or the State is never mistaken for a surname, an initialed decedent never corrupts an estate, and two independent examiners plus a validator must reconcile exact BigInt rational fractions before export.',
+          'Wrote a typed Texas mineral-interest derivation engine where a sheriff or the State is never mistaken for a surname, an initialed decedent never corrupts an estate, two Gemini sessions plus exact BigInt rational fraction checks are checked against page images by an independent third model from another provider (allowing one repair, keeping unresolved tracts as proposals leading curative requirements), and an independent .xlsx reader re-verifies every cell before delivery.',
       },
       {
         broke: 'Runs stalling at 16%, provider rate-limit storms and silent worker deaths',
@@ -1754,14 +1744,12 @@ export const TRENCH_CAMPAIGNS = Object.freeze([
       {
         broke: 'Moving an offline desktop tool onto hosted infrastructure',
         solved:
-          'Kept desktop Drive access to detected Drive-for-desktop mounts with company-versus-personal boundaries, then split web intake from dedicated worker servers to take title-desk.com and artificiallandman.io live.',
+          'Kept desktop Drive access to detected Drive-for-desktop mounts with company-versus-personal boundaries, then split web intake from dedicated Linux worker servers (with ClamAV intake scanning and prepaid run credits) to take title-desk.com and artificiallandman.io live.',
       },
     ],
     gitLog: [
       ['2026-11-15', 'artificiallandman/main', 'Verified live Reeves County dual-examiner run + 4-tab .xlsx export & Resend delivery'],
       ['2026-11-14', 'site/survey-redesign', 'Publish the TitleDesk survey redesign with staged workspace launch'],
-      ['2026-11-13', 'experimental/under-1hr', 'Allow Gemini 4 Hydrogen as a page-image reader (GOLD002TX harness)'],
-      ['2026-11-04', 'claude/gte002tx-fixround', "A second read that quotes 'all the minerals reserved unto Grantor' back states the reservation claim"],
       ['2026-11-03', 'codex/close-source-facts', 'Bound source correction passes to verified image evidence and persistent progress limits'],
       ['2026-10-27', 'HARNESS-LAB-BUILDS', 'Fix progress bar stalling at 16% across Round 1 reading and derivation'],
       ['2026-10-16', 'codex/courthousedirect', 'Look up a stated source deed on CourthouseDirect when the records index has no row for it'],
@@ -1781,7 +1769,7 @@ export const TRENCH_CAMPAIGNS = Object.freeze([
     meta: '14 Months · 9 Generations · 1,364 Commits',
     headline: 'Nine architectural generations, because a broken wrapper was never going to ship.',
     summary:
-      'MyAIMediaMgr took even longer than Title-Desk. Before the V8.1 repository opened in August 2025, earlier versions had already been torn down and rebuilt as real social APIs, credit ledgers and multi-tenant edge cases exposed every shortcut. Across fourteen months and 1,364 commits it became BrandStreams, finishing with a sixteen-defect production hardening pass.',
+      'MyAIMediaMgr took even longer than TitleDesk. Before the V8.1 repository opened in August 2025, earlier versions had already been torn down and rebuilt as real social APIs, credit ledgers and multi-tenant edge cases exposed every shortcut. Across fourteen months and 1,364 commits it became BrandStreams, finishing with a sixteen-defect production hardening pass.',
     metrics: [
       ['9', 'Architectural generations'],
       ['1,364', 'Commits'],
@@ -1853,12 +1841,12 @@ export const TRENCH_CAMPAIGNS = Object.freeze([
           'Forge recipes run behind OS kernel walls (sandbox-exec / bubblewrap): only the analysis unit inspects a lawfully held subject, and downstream builders work from a behaviour-only spec and must pass zero-overlap originality checks.',
       },
       {
-        broke: 'Dead background agents, rate-limit cascades and exhausted subscription windows',
+        broke: 'Dead background agents, rate-limit cascades and exhausted provider rate windows',
         solved:
-          'Engineered heartbeat dead-agent detection, backpressure queues and multi-provider Frontier Council routing across Claude, Gemini, Codex and Grok on existing studio subscriptions.',
+          'Engineered heartbeat dead-agent detection, backpressure queues and quota-governed multi-provider Frontier Council routing across Claude, Gemini, Codex and Grok.',
       },
       {
-        broke: 'Coordinating parallel builders across macOS, an Ubuntu workstation and VPS nodes',
+        broke: 'Coordinating parallel builders across Linux and macOS workstations and isolated cloud nodes',
         solved:
           'Built Mythos OS and Rogue Agents with isolated git worktrees, a shared 20,911-node knowledge graph, Agent Browser Hub and a single human approval gate at irreversible boundaries.',
       },

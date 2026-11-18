@@ -1128,6 +1128,26 @@ pre code {
   line-height: 1.68;
 }
 
+.provenance-meta {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--hair-soft);
+  border-left: 2px solid var(--gold);
+  border-radius: 3px;
+  background: rgba(9, 9, 13, 0.84);
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.provenance-meta strong {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-hi);
+}
+
 /* Interactive 5-Zoom Perihelion Cockpit Explorer */
 .cockpit-explorer {
   margin-top: 36px;
