@@ -595,12 +595,12 @@ export const LEDGER_BUILDS = Object.freeze([
     },
     "gitTrail": [],
     "shot": {
-      "src": "/assets/showcase/the-harness-lab/01-v1-landing.webp",
-      "src640": "/assets/showcase/the-harness-lab/01-v1-landing-640.webp",
+      "src": "/assets/showcase/the-harness-lab/03-theharnesslab-dev-landing.webp",
+      "src640": "/assets/showcase/the-harness-lab/03-theharnesslab-dev-landing-640.webp",
       "width": 1440,
       "height": 900,
-      "alt": "June 2026 v1 Harness Lab landing page (the-harness-lab initial studio site)",
-      "caption": "June 2026 v1 Harness Lab landing page (the-harness-lab initial studio site)"
+      "alt": "Earlier theharnesslab.dev engineering landing page: custom software for complex workflows",
+      "caption": "An earlier generation of the theharnesslab.dev engineering site, before the Nero Marquina foundry rebuild."
     }
   },
   {
