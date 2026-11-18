@@ -90,7 +90,23 @@ try {
   assert.equal(await page.locator('#contact .contact-hazard-tape').count(), 1);
   assert.doesNotMatch(await page.locator('body').innerText(), /TitleDesk|TITLEDESK/);
   assert.match(await page.locator('body').innerText(), /Title-Desk/);
-  results.push('All chapters present in order-critical ids; single H1; hyphenated Title-Desk verified; zero unnamed buttons/images/focusable code blocks; hazard tape only on #contact.');
+  const check3dHeadings = () =>
+    page.evaluate(() => {
+      const headings = [...document.querySelectorAll('h1, h2')];
+      return {
+        count: headings.length,
+        nonCinzel: headings.filter((h) => !getComputedStyle(h).fontFamily.includes('Cinzel')).length,
+        flatShadow: headings.filter((h) => {
+          const ts = getComputedStyle(h).textShadow || '';
+          return ts === 'none' || ts.split(/rgb/i).length - 1 < 5;
+        }).length,
+      };
+    });
+  const homeHeadings = await check3dHeadings();
+  assert.ok(homeHeadings.count >= 16);
+  assert.equal(homeHeadings.nonCinzel, 0, 'all h1/h2 on / use Cinzel');
+  assert.equal(homeHeadings.flatShadow, 0, 'all h1/h2 on / carry >=5-layer 3D relief text-shadow');
+  results.push('All chapters present in order-critical ids; single H1; Cinzel 3D chiselled relief on all h1/h2; hyphenated Title-Desk verified; zero unnamed buttons/images/focusable code blocks; hazard tape only on #contact.');
 
   // Hero 3D Bearing-Spin Medallion: stripped chrome + any-direction drag-and-flick physics + click/keyboard flip
   const medallion = page.locator('[data-medallion]');
@@ -332,8 +348,37 @@ try {
       assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
       assert.equal(new URL(page.url()).hash, '#build-ledger');
     }
+    if ([320, 390, 768, 1440, 1920].includes(width)) {
+      // Zero tab-height jitter across Perihelion cockpit, all 4 galleries, and dual Lab panels
+      const periHeights = new Set();
+      for (let i = 0; i < 5; i += 1) {
+        await page.locator(`#cockpit-tab-${i}`).click();
+        periHeights.add(await page.locator('[data-perihelion-explorer]').evaluate((el) => Math.round(el.getBoundingClientRect().height)));
+      }
+      assert.equal(periHeights.size, 1, `Perihelion cockpit height jitter at ${width}px: ${[...periHeights]}`);
+
+      for (const gid of ['rogue-agents', 'titledesk-web', 'titledesk-desktop', 'artificial-landman']) {
+        const gal = page.locator(`[data-gallery="${gid}"]`);
+        const gTabs = gal.locator('[data-gallery-tab]');
+        const gCount = await gTabs.count();
+        const gHeights = new Set();
+        for (let i = 0; i < gCount; i += 1) {
+          await gTabs.nth(i).click();
+          gHeights.add(await gal.evaluate((el) => Math.round(el.getBoundingClientRect().height)));
+        }
+        assert.equal(gHeights.size, 1, `Gallery ${gid} height jitter at ${width}px: ${[...gHeights]}`);
+      }
+
+      const labHeights = new Set();
+      for (const tabId of ['#tab-execution', '#tab-karpathy']) {
+        await page.locator(tabId).click();
+        labHeights.add(await page.locator('.lab-panels').evaluate((el) => Math.round(el.getBoundingClientRect().height)));
+      }
+      await page.locator('#tab-execution').click();
+      assert.equal(labHeights.size, 1, `Lab panels height jitter at ${width}px: ${[...labHeights]}`);
+    }
   }
-  results.push('No element overflows at 320..1920 px; mobile H1 preserves space in "harnesses &"; mobile navigation opens, jumps and closes.');
+  results.push('No element overflows at 320..1920 px; 0px tab-height jitter at 320/390/768/1440/1920 px; mobile H1 preserves space in "harnesses &"; mobile navigation opens, jumps and closes.');
 
   // Save desktop (1440x900) and mobile (390x844) hero + section screenshots
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -365,6 +410,13 @@ try {
       const res = await page.goto(url, { waitUntil: 'networkidle' });
       assert.equal(res?.status(), 200, `${sub} HTTP 200`);
       assert.equal(await page.locator('h1').count(), 1, `${sub} single H1`);
+      const monoHeadings = await check3dHeadings();
+      assert.ok(monoHeadings.count >= 5, `${sub} h1+h2 count`);
+      assert.equal(monoHeadings.nonCinzel, 0, `${sub} Cinzel h1/h2`);
+      assert.equal(monoHeadings.flatShadow, 0, `${sub} 3D relief text-shadow`);
+      if (sub === 'landman-title-systems/' && vp.name === 'desktop') {
+        await page.screenshot({ path: `${out}/desktop-monograph-landman.png` });
+      }
       assert.doesNotMatch(await page.locator('body').innerText(), /TitleDesk|TITLEDESK/, `${sub} banned TitleDesk`);
       assert.match(await page.locator('body').innerText(), /Title-Desk/, `${sub} hyphenated Title-Desk`);
       assert.deepEqual(await checkA11yNames(page), { buttonsNoName: 0, imgsNoAlt: 0, focusablePreNoLabel: 0 }, `${sub} a11y names`);

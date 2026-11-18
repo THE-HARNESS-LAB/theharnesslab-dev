@@ -206,6 +206,7 @@ test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay va
   for (const [name, doc] of pages) {
     assert.match(doc, /rel="manifest"\s+href="\/manifest\.webmanifest"/, name);
     assert.match(doc, /rel="alternate"\s+type="text\/plain"\s+href="\/llms\.txt"/, name);
+    assert.match(doc, /family=Cinzel:wght@600;700;800;900[^"]*display=swap/, `${name} Cinzel 600-900 display=swap`);
     assert.match(doc, /max-snippet:-1,max-video-preview:-1/, name);
     assert.match(doc, /property="og:image:width"\s+content="1200"/, name);
     assert.match(doc, /property="og:image:height"\s+content="630"/, name);

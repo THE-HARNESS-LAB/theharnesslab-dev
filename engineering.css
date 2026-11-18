@@ -59,23 +59,47 @@
 
   /* Typography */
   --inscription: "Cinzel", Georgia, serif;
-  --display: "Fraunces", Georgia, serif;
+  --display: "Cinzel", Georgia, serif;
+  --serif: "Fraunces", Georgia, serif;
   --body: "Spline Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: "JetBrains Mono", "Spline Sans Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Sculpted 3D relief shadows */
+  /* Sculpted 3D chiselled metallic & carved-ivory relief stacks */
   --extrude-stone:
-    0 -1px 0 rgba(255, 252, 244, 0.36),
-    0 1px 0 #9d927e,
-    1px 2px 0 #685f50,
-    2px 3px 0 #3a352c,
-    3px 4px 0 #181511,
-    0 14px 30px rgba(0, 0, 0, 0.92);
+    0 -1px 0 rgba(255, 253, 245, 0.54),
+    0 1px 0 #c9b082,
+    0 2px 0 #967744,
+    1px 3px 0 #664d25,
+    1px 4px 0 #3d2c12,
+    2px 5px 0 #1c1306,
+    0 8px 18px rgba(0, 0, 0, 0.92),
+    0 16px 34px rgba(0, 0, 0, 0.88);
+
+  --extrude-section:
+    0 -1px 0 rgba(255, 252, 242, 0.48),
+    0 1px 0 #bda06d,
+    1px 2px 0 #856634,
+    1px 3px 0 #4e3918,
+    2px 4px 0 #241909,
+    0 7px 16px rgba(0, 0, 0, 0.9),
+    0 14px 28px rgba(0, 0, 0, 0.85);
+
+  --extrude-subhead:
+    0 -1px 0 rgba(255, 251, 240, 0.4),
+    0 1px 0 #a88c5c,
+    1px 2px 0 #675029,
+    1px 3px 0 #2b200d,
+    0 8px 20px rgba(0, 0, 0, 0.88);
 
   --extrude-gold:
-    0 -1px 0 rgba(255, 248, 220, 0.34),
-    0 1px 0 #5b3e11,
-    0 10px 26px rgba(0, 0, 0, 0.92);
+    0 -1px 0 rgba(255, 251, 228, 0.72),
+    0 1px 0 #d9a443,
+    0 2px 0 #a97822,
+    1px 3px 0 #785112,
+    1px 4px 0 #4a3008,
+    2px 5px 0 #211402,
+    0 8px 18px rgba(0, 0, 0, 0.94),
+    0 16px 32px rgba(217, 168, 78, 0.2);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-ui: 240ms;
@@ -168,30 +192,33 @@ blockquote {
 h1,
 h2 {
   font-family: var(--display);
-  font-weight: 600;
   text-wrap: balance;
-  color: var(--ivory);
+  color: #fcf7ec;
+  overflow-wrap: break-word;
 }
 
 h1 {
-  font-size: clamp(2.25rem, 4.4vw, 4.35rem);
-  line-height: 1.06;
-  letter-spacing: -0.03em;
-  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.9);
+  font-weight: 800;
+  font-size: clamp(1.78rem, 2.95vw, 2.82rem);
+  line-height: 1.15;
+  letter-spacing: 0.024em;
+  text-shadow: var(--extrude-stone);
 }
 
 h1 em,
 h2 em,
 .gold-3d {
   font-style: normal;
-  color: var(--gold);
+  color: #fbe09c;
   text-shadow: var(--extrude-gold);
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3.1vw, 2.95rem);
-  line-height: 1.13;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  font-size: clamp(1.32rem, 2.15vw, 2.12rem);
+  line-height: 1.2;
+  letter-spacing: 0.022em;
+  text-shadow: var(--extrude-section);
 }
 
 h3 {
@@ -1976,8 +2003,13 @@ select {
 }
 
 .chapter h2 {
-  font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+  font-size: clamp(1.25rem, 1.85vw, 1.78rem);
+  line-height: 1.22;
   margin-bottom: 20px;
+}
+
+.subpage-shell h2 {
+  margin-top: clamp(28px, 3.6vw, 42px);
 }
 
 .chapter > p:not(.chapter-number):not(.eyebrow) {
@@ -2610,8 +2642,9 @@ tr:last-child td {
   }
   .hero-copy h1 {
     order: 2;
-    font-size: clamp(1.68rem, 7.2vw, 2.15rem);
-    line-height: 1.08;
+    font-size: clamp(1.34rem, 5.2vw, 1.82rem);
+    line-height: 1.18;
+    letter-spacing: 0.018em;
   }
   .hero-copy h1 br {
     display: none;
@@ -2671,8 +2704,8 @@ tr:last-child td {
     order: initial;
   }
   .hero-copy h1 {
-    font-size: clamp(1.5rem, 3.3vw, 2.05rem);
-    line-height: 1.08;
+    font-size: clamp(1.28rem, 2.6vw, 1.78rem);
+    line-height: 1.16;
   }
   .hero-copy h1 br {
     display: inline;
@@ -2769,10 +2802,13 @@ tr:last-child td {
     height: 38px;
   }
   h1 {
-    font-size: clamp(1.85rem, 8.4vw, 2.5rem);
+    font-size: clamp(1.32rem, 5.4vw, 1.78rem);
+    line-height: 1.18;
   }
-  h2 {
-    font-size: clamp(1.48rem, 6.8vw, 2rem);
+  h2,
+  .chapter h2 {
+    font-size: clamp(1.12rem, 4.5vw, 1.44rem);
+    line-height: 1.24;
   }
   .button,
   .lab-switch-btn {
@@ -2822,6 +2858,14 @@ tr:last-child td {
   .medallion-vitrine,
   .site-footer {
     display: none;
+  }
+  h1,
+  h2,
+  h1 em,
+  h2 em,
+  .gold-3d {
+    color: #000;
+    text-shadow: none;
   }
   .wrap {
     width: 100%;
@@ -2890,8 +2934,10 @@ tr:last-child td {
   margin-bottom: 28px;
 }
 .vitrine-head h3 {
-  font: 600 clamp(1.4rem, 1.1rem + 1.2vw, 2.1rem) / 1.2 var(--display);
-  color: var(--ivory);
+  font: 700 clamp(1.22rem, 1rem + 0.95vw, 1.72rem) / 1.24 var(--display);
+  letter-spacing: 0.02em;
+  color: #fcf7ec;
+  text-shadow: var(--extrude-subhead);
 }
 .rogue-agents-card {
   padding: clamp(20px, 2.5vw, 30px);
@@ -2907,8 +2953,17 @@ tr:last-child td {
 .rogue-head h3,
 .engine-head h3 {
   margin: 6px 0 10px;
-  font: 600 clamp(1.5rem, 1.2rem + 1.1vw, 2.2rem) / 1.15 var(--display);
-  color: var(--ivory);
+  font: 700 clamp(1.28rem, 1.05rem + 0.95vw, 1.82rem) / 1.2 var(--display);
+  letter-spacing: 0.022em;
+  color: #fcf7ec;
+  text-shadow: var(--extrude-subhead);
+}
+.system-heading h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fcf7ec;
+  text-shadow: var(--extrude-subhead);
 }
 .rogue-head p:not(.eyebrow) {
   color: var(--muted);
@@ -2937,7 +2992,7 @@ tr:last-child td {
   justify-content: space-between;
 }
 .harness-card h4 {
-  font: 600 1.15rem/1.3 var(--display);
+  font: 600 1.15rem/1.3 var(--serif);
   color: var(--ivory);
 }
 .harness-card p {
@@ -3011,7 +3066,7 @@ tr:last-child td {
   min-height: 290px;
 }
 .gallery-stage .cockpit-meta h4 {
-  font: 600 1.12rem/1.35 var(--display);
+  font: 600 1.12rem/1.35 var(--serif);
   color: var(--ivory);
 }
 
@@ -3102,7 +3157,7 @@ tr:last-child td {
   border-left: 0;
 }
 .ledger-monument .telemetry-value {
-  font: 600 clamp(1.15rem, 0.95rem + 0.8vw, 1.6rem) / 1.2 var(--display);
+  font: 600 clamp(1.15rem, 0.95rem + 0.8vw, 1.6rem) / 1.2 var(--serif);
 }
 
 /* --- War-Ledger campaigns ------------------------------------------------ */
@@ -3136,8 +3191,10 @@ tr:last-child td {
 }
 .trench-headline {
   margin-bottom: 10px;
-  font: 600 clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem) / 1.25 var(--display);
-  color: var(--ivory);
+  font: 700 clamp(1.15rem, 0.98rem + 0.65vw, 1.52rem) / 1.26 var(--display);
+  letter-spacing: 0.02em;
+  color: #fcf7ec;
+  text-shadow: var(--extrude-subhead);
 }
 .trench-metrics {
   display: grid;
@@ -3352,7 +3409,7 @@ tr:last-child td {
   color: var(--gold);
 }
 .build-card h4 {
-  font: 600 1.15rem/1.3 var(--display);
+  font: 600 1.15rem/1.3 var(--serif);
   color: var(--ivory);
 }
 .build-category {
@@ -3562,7 +3619,7 @@ summary::-webkit-details-marker {
     min-height: 520px;
   }
   .gallery-stage .cockpit-meta {
-    min-height: 392px;
+    min-height: 420px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
