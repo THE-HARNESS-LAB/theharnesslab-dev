@@ -59,7 +59,7 @@ Inspired by Andrej Karpathy's `autoresearch` discipline, every unit executes a p
 - Kernel-sealed, tool-less Advisor Council reviews syntax-aware AST diffs (`Difftastic`). Caught and blocked a live builder worker monkey-patching `node:assert` `assert.equal` to fake a green test suite.
 
 ### 3.5 Three Live Execution Modes
-- **`klh run` (Targeted Repair):** Automated `git bisect`, fault localization, and unit-scoped repair. Verified live on **TitleDesk Agent** (`7,070 / 7,070 PASS` across 431 test files at `8a2cc971` on attempt 1) and **Rogue Agents** (`730 / 730 PASS` at `1d7a1cde` on attempt 1).
+- **`klh run` (Targeted Repair):** Automated `git bisect`, fault localization, and unit-scoped repair. Verified live on **Title-Desk Agent** (`7,070 / 7,070 PASS` across 431 test files at `8a2cc971` on attempt 1) and **Rogue Agents** (`730 / 730 PASS` at `1d7a1cde` on attempt 1).
 - **`klh harden` (Null-Tested Regression):** Enforces `null_tested_regression`: every candidate bug fix is rejected unless its `regress/` witness test **fails on unchanged `BASE` and passes on `HEAD`**.
 - **`klh forge` & `klh forge-plan` (Lawful No-Copy Reverse-Engineering):** OS kernel wall (`sandbox-exec` on macOS / `bubblewrap` on Linux) restricting static artifact inspection strictly to the `ANALYSE` unit (`forge/spec/**`). Downstream `DESIGN`, `PLAN`, `TESTS`, and `BUILD` workers cannot read the subject binary or bundle and must pass `0.00%` winnowed token/shingle/asset overlap and double-blind `TEST_DISPUTE` arbitration. Proven live on **Kiln** (29-feature behavioral spec, 15-screen dark/gold macOS design, 8-milestone native SwiftUI implementation plan across `1,000` spec lines, plus verified Phase-1 Swift Package scaffold of `181` authored LOC at `85c929e8`). Legal/EULA clearance and product taste remain explicit human sign-off responsibilities.
 
@@ -86,17 +86,17 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 - **Validation (`2ac23b2` / `f9e8dcf`, deployed 2026-11-18):** Two Gemini sessions examine the records separately, and a program checks every fraction exactly. A third model, from a different provider, then checks the final answer against the page images. If it finds a problem, the examiner gets one repair and the third model checks the repaired answer again. Anything still unresolved stays a proposal, not a verified ownership, and the finding is listed first among the curative requirements. If the third model cannot run, the workbook says so.
 - **Workbook Readback (`1fcd538` / `9c8af3e`, deployed 2026-11-18):** After the `.xlsx` workbook is written, a separate reader reopens the file and compares every owner, mineral interest fraction, net mineral acres figure, and curative requirement against the examination result (stopping delivery and handling the run as failed on any mismatch, splitting cells over Excel's `32,767`-character limit rather than truncating, and writing fractions whose numerator or denominator exceeds `15` digits as exact text rather than rounded numbers).
 
-### 5.1 TitleDesk (`https://title-desk.com/`)
+### 5.1 Title-Desk (`https://title-desk.com/`)
 - **Scale:** 22,638 hosted LOC, 53 hosted commits, acceptance suite at commit `4bbb3e2`.
 - **Audience & Pipeline:** Hosted Texas mineral title examination for independent landmen and abstractors. Survey landing -> Passwordless email sign-in -> Deterministic pre-run intake verifier + ClamAV Linux worker scan -> Prepaid run execution -> Readback-verified four-sheet draft Excel workbook.
 
-### 5.2 TitleDesk Agent (`https://desktop.title-desk.com/`)
+### 5.2 Title-Desk Agent (`https://desktop.title-desk.com/`)
 - **Scale:** 262,305 authored LOC, 1,084 main-branch commits, `7,070 / 7,070 PASS` across 431 test files. Public issue/release coordination: `https://github.com/THE-HARNESS-LAB/titledesk`.
-- **Capabilities:** The TitleDesk desktop app across Windows, macOS, and Linux (sold and licensed at `desktop.title-desk.com`) operating through landman-authenticated sessions on CountyRecords.com, CourthouseDirect, and TexasFile; clerk index merging (where sheriffs and the State are never mistaken for grantor surnames, and ambiguous initialed decedents never corrupt estates); stated-source-deed direct book/page retrieval when clerk index rows are missing; zero-cost local `tesseract.js` + `@napi-rs/canvas` main-process OCR with automatic exhibit spillover re-reads; human-approved conveyance queue; heirship family graphs; and `exact.mjs` reduced `BigInt` numerator/denominator mineral fraction & net-mineral-acre arithmetic.
+- **Capabilities:** The Title-Desk desktop app across Windows, macOS, and Linux (sold and licensed at `desktop.title-desk.com`) operating through landman-authenticated sessions on CountyRecords.com, CourthouseDirect, and TexasFile; clerk index merging (where sheriffs and the State are never mistaken for grantor surnames, and ambiguous initialed decedents never corrupt estates); stated-source-deed direct book/page retrieval when clerk index rows are missing; zero-cost local `tesseract.js` + `@napi-rs/canvas` main-process OCR with automatic exhibit spillover re-reads; human-approved conveyance queue; heirship family graphs; and `exact.mjs` reduced `BigInt` numerator/denominator mineral fraction & net-mineral-acre arithmetic.
 
 ### 5.3 Artificial Landman (`https://artificiallandman.io/`)
 - **Scale:** 23,148 hosted LOC, 54 commits, acceptance suite at commit `520f777`.
-- **Positioning:** Hosted Texas mineral title examination for land teams, brokerages and operators who run many assignments. Artificial Landman runs the same Texas mineral-interest engine as TitleDesk, packaged, sold and supported on its own.
+- **Positioning:** Hosted Texas mineral title examination for land teams, brokerages and operators who run many assignments. Artificial Landman runs the same Texas mineral-interest engine as Title-Desk, packaged, sold and supported on its own.
 
 ---
 
@@ -139,7 +139,7 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 | 13 | Settings Sentinel & Security Broker | Linux Workstation Security & Capability Broker | 1 Month (Rapid Sprint) | 1 | 2,519 -> 2,519 | In-house security |
 | 14 | TractPilot Agent | Vertical AI Desktop Prototype (Land Title) | 1 Month (Rapid Sprint) | 1 | 4,288 -> 4,288 | Lineage prototype |
 | 15 | CRG / Boundary-Star Instability | Mathematical Physics Simulation | 1 Month (Rapid Sprint) | 1 | 8,283 -> 8,283 | Research |
-| 16 | TitleDesk Agent | Flagship Desktop Vertical AI (Texas Mineral Title) | 4 Months | 1,084 | 25,623 -> 262,305 | https://desktop.title-desk.com/ |
+| 16 | Title-Desk Agent | Flagship Desktop Vertical AI (Texas Mineral Title) | 4 Months | 1,084 | 25,623 -> 262,305 | https://desktop.title-desk.com/ |
 | 17 | Escalera County Clerk | Synthetic Public-Records Demo Portal | 1 Month (Rapid Sprint) | 3 | 264 -> 264 | Demo fixture |
 | 18 | Paystub Studio | Local-First Financial Document Tool | 1 Month (Rapid Sprint) | 1 | 3,366 -> 3,366 | Utility |
 | 19 | Claude-Estate Autonomy Bridges | Cross-Machine Agent Infrastructure & Security | 2 Months | 66 | 1,378 -> 39,726 | In-house infra |
@@ -148,7 +148,7 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 | 22 | Agent Browser Hub | Multi-Agent Browser Coordination & MCP Fleet | 1 Month (Rapid Sprint) | 6 | 11,374 -> 23,406 | https://theharnesslab.dev/#harness-vitrine |
 | 23 | Perihelion Loop | Autonomous Create, Fix & No-Copy Forge Harness | 1 Month (Rapid Sprint) | 62 | 3,957 -> 30,079 | https://theharnesslab.dev/#perihelion-loop |
 | 24 | Kiln | Native macOS SwiftUI Forge Spec & Phase-1 Scaffold | 1 Month (Rapid Sprint) | 4 | 181 -> 181 | Forged macOS spec & scaffold |
-| 25 | TitleDesk | Flagship Hosted Texas Mineral Title Platform | 1 Month (Rapid Sprint) | 53 | 61 -> 22,638 | https://title-desk.com/ |
+| 25 | Title-Desk | Flagship Hosted Texas Mineral Title Platform | 1 Month (Rapid Sprint) | 53 | 61 -> 22,638 | https://title-desk.com/ |
 | 26 | Artificial Landman | Flagship Hosted Texas Mineral Title Platform | 1 Month (Rapid Sprint) | 54 | 61 -> 23,148 | https://artificiallandman.io/ |
 | 27 | 24/7 AI Lead Triage Daemon | Hardened Daemon & Prompt-Injection Red-Team | 1 Month (Rapid Sprint) | 2 | 1,394 -> 1,396 | In-house daemon |
 

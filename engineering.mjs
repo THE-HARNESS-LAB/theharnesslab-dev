@@ -584,6 +584,248 @@ export const PERIHELION_PLATES = Object.freeze([
 ]);
 
 // ============================================================================
+// 3D Quaternion & Heavy Steel-Bearing Medallion Physics
+// ============================================================================
+
+export const QUAT_DEV = Object.freeze([1, 0, 0, 0]);
+export const QUAT_COM = Object.freeze([0, 0, 1, 0]);
+export const BEARING_TAU_SEC = 3.2;
+export const MAX_SPIN_RAD_S = 32;
+export const SETTLE_SPEED_RAD_S = 1.1;
+
+export function quatNormalize(q) {
+  const len = Math.hypot(q[0], q[1], q[2], q[3]);
+  if (len < 1e-12) return [1, 0, 0, 0];
+  return [q[0] / len, q[1] / len, q[2] / len, q[3] / len];
+}
+
+export function quatMultiply(a, b) {
+  return [
+    a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3],
+    a[0] * b[1] + a[1] * b[0] + a[2] * b[3] - a[3] * b[2],
+    a[0] * b[2] - a[1] * b[3] + a[2] * b[0] + a[3] * b[1],
+    a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0],
+  ];
+}
+
+export function quatFromAngularDelta(rx, ry, rz = 0) {
+  const angle = Math.hypot(rx, ry, rz);
+  if (angle < 1e-12) return [1, 0, 0, 0];
+  const half = angle * 0.5;
+  const s = Math.sin(half) / angle;
+  return [Math.cos(half), rx * s, ry * s, rz * s];
+}
+
+export function quatSlerpShortest(a, b, t) {
+  const clamped = Math.min(1, Math.max(0, t));
+  let bw = b[0];
+  let bx = b[1];
+  let by = b[2];
+  let bz = b[3];
+  let dot = a[0] * bw + a[1] * bx + a[2] * by + a[3] * bz;
+  if (dot < 0) {
+    dot = -dot;
+    bw = -bw;
+    bx = -bx;
+    by = -by;
+    bz = -bz;
+  }
+  if (dot > 0.9995) {
+    return quatNormalize([
+      a[0] + (bw - a[0]) * clamped,
+      a[1] + (bx - a[1]) * clamped,
+      a[2] + (by - a[2]) * clamped,
+      a[3] + (bz - a[3]) * clamped,
+    ]);
+  }
+  const omega = Math.acos(Math.min(1, dot));
+  const sinOmega = Math.sin(omega);
+  const s0 = Math.sin((1 - clamped) * omega) / sinOmega;
+  const s1 = Math.sin(clamped * omega) / sinOmega;
+  return quatNormalize([
+    a[0] * s0 + bw * s1,
+    a[1] * s0 + bx * s1,
+    a[2] * s0 + by * s1,
+    a[3] * s0 + bz * s1,
+  ]);
+}
+
+export function quatVisibleFace(q) {
+  const r33 = 1 - 2 * (q[1] * q[1] + q[2] * q[2]);
+  return r33 >= 0 ? 'dev' : 'com';
+}
+
+export function quatToMatrix3d(q) {
+  const [w, x, y, z] = quatNormalize(q);
+  const xx = x * x;
+  const yy = y * y;
+  const zz = z * z;
+  const xy = x * y;
+  const xz = x * z;
+  const yz = y * z;
+  const wx = w * x;
+  const wy = w * y;
+  const wz = w * z;
+
+  const r11 = 1 - 2 * (yy + zz);
+  const r21 = 2 * (xy + wz);
+  const r31 = 2 * (xz - wy);
+
+  const r12 = 2 * (xy - wz);
+  const r22 = 1 - 2 * (xx + zz);
+  const r32 = 2 * (yz + wx);
+
+  const r13 = 2 * (xz + wy);
+  const r23 = 2 * (yz - wx);
+  const r33 = 1 - 2 * (xx + yy);
+
+  const fmt = (n) => (Math.abs(n) < 1e-7 ? '0' : String(Number(n.toFixed(6))));
+  return `matrix3d(${fmt(r11)},${fmt(r21)},${fmt(r31)},0,${fmt(r12)},${fmt(r22)},${fmt(r32)},0,${fmt(r13)},${fmt(r23)},${fmt(r33)},0,0,0,0,1)`;
+}
+
+export function createBearingState(initialFace = 'dev') {
+  const q = initialFace === 'com' ? [...QUAT_COM] : [...QUAT_DEV];
+  return {
+    mode: 'idle',
+    q,
+    omega: [0, 0, 0],
+    face: initialFace === 'com' ? 'com' : 'dev',
+    active: false,
+    flipElapsed: 0,
+    flipDuration: 0.68,
+    flipStartQ: [...q],
+    flipTargetFace: initialFace === 'com' ? 'com' : 'dev',
+  };
+}
+
+export function computeReleaseVelocity(samples, nowMs, windowMs = 85) {
+  if (!Array.isArray(samples) || samples.length < 2) return [0, 0, 0];
+  const last = samples[samples.length - 1];
+  if (nowMs - last.t > 90) return [0, 0, 0];
+
+  const cutoff = nowMs - windowMs;
+  let startIdx = samples.length - 2;
+  while (startIdx > 0 && samples[startIdx].t >= cutoff) {
+    startIdx -= 1;
+  }
+  let sumRx = 0;
+  let sumRy = 0;
+  let sumRz = 0;
+  for (let i = startIdx + 1; i < samples.length; i += 1) {
+    sumRx += samples[i].drx || 0;
+    sumRy += samples[i].dry || 0;
+    sumRz += samples[i].drz || 0;
+  }
+  const spanSec = Math.max(0.01, (last.t - samples[startIdx].t) / 1000);
+  const wx0 = sumRx / spanSec;
+  const wy0 = sumRy / spanSec;
+  const wz0 = sumRz / spanSec;
+  const rawSpeed = Math.hypot(wx0, wy0, wz0);
+  if (rawSpeed < 0.08) return [0, 0, 0];
+
+  const aggression = 1 + 0.68 * Math.min(1, rawSpeed / 16);
+  let wx = wx0 * aggression;
+  let wy = wy0 * aggression;
+  let wz = wz0 * aggression;
+  const speed = Math.hypot(wx, wy, wz);
+  if (speed > MAX_SPIN_RAD_S) {
+    const scale = MAX_SPIN_RAD_S / speed;
+    wx *= scale;
+    wy *= scale;
+    wz *= scale;
+  }
+  return [wx, wy, wz];
+}
+
+export function stepBearingPhysics(state, dtSec) {
+  const dt = Math.min(0.05, Math.max(0, dtSec));
+  if (dt <= 0 || !state.active) return state;
+
+  if (state.mode === 'flip') {
+    const flipElapsed = state.flipElapsed + dt;
+    const duration = state.flipDuration || 0.68;
+    const t = Math.min(1, flipElapsed / duration);
+    const ease = 1 - Math.pow(1 - t, 3.6);
+    const targetQ = state.flipTargetFace === 'com' ? QUAT_COM : QUAT_DEV;
+    if (t >= 1) {
+      return {
+        ...state,
+        mode: 'idle',
+        q: [...targetQ],
+        omega: [0, 0, 0],
+        face: state.flipTargetFace,
+        flipElapsed: duration,
+        active: false,
+      };
+    }
+    const arcY = Math.PI * ease;
+    const tiltX = -0.11 * Math.sin(Math.PI * ease);
+    const swept = quatNormalize(
+      quatMultiply(quatFromAngularDelta(tiltX, arcY, 0), state.flipStartQ),
+    );
+    const q = quatSlerpShortest(swept, targetQ, t * t * 0.25);
+    return {
+      ...state,
+      q,
+      face: quatVisibleFace(q),
+      flipElapsed,
+      active: true,
+    };
+  }
+
+  let q = state.q;
+  const [wx, wy, wz] = state.omega;
+  const speed = Math.hypot(wx, wy, wz);
+  if (speed > 1e-6) {
+    const dq = quatFromAngularDelta(wx * dt, wy * dt, wz * dt);
+    q = quatNormalize(quatMultiply(dq, q));
+  }
+
+  const viscous = Math.exp(-dt / BEARING_TAU_SEC);
+  let nextSpeed = Math.max(0, speed * viscous - 0.52 * dt);
+  const face = quatVisibleFace(q);
+  const targetQ = face === 'com' ? QUAT_COM : QUAT_DEV;
+
+  if (nextSpeed < SETTLE_SPEED_RAD_S) {
+    const blend = 1 - nextSpeed / SETTLE_SPEED_RAD_S;
+    nextSpeed *= Math.exp(-dt * 3.0 * blend);
+    const settleRate = 2.6 * blend + 6.4 * blend * blend;
+    q = quatSlerpShortest(q, targetQ, 1 - Math.exp(-settleRate * dt));
+  }
+
+  const scale = speed > 1e-8 ? nextSpeed / speed : 0;
+  const nextOmega = [wx * scale, wy * scale, wz * scale];
+  const finalFace = quatVisibleFace(q);
+  const finalTarget = finalFace === 'com' ? QUAT_COM : QUAT_DEV;
+  const dotAbs = Math.abs(
+    q[0] * finalTarget[0] +
+      q[1] * finalTarget[1] +
+      q[2] * finalTarget[2] +
+      q[3] * finalTarget[3],
+  );
+
+  if (nextSpeed < 0.006 && 1 - dotAbs < 1e-6) {
+    return {
+      ...state,
+      mode: 'idle',
+      q: [...finalTarget],
+      omega: [0, 0, 0],
+      face: finalFace,
+      active: false,
+    };
+  }
+
+  return {
+    ...state,
+    mode: 'spin',
+    q,
+    omega: nextOmega,
+    face: finalFace,
+    active: true,
+  };
+}
+
+// ============================================================================
 // Site-wide Horological & Interactive Instrument Wiring
 // ============================================================================
 
@@ -661,83 +903,242 @@ export function mountSiteUI(doc = document) {
     });
   }
 
-  // 2. Dual-Face .dev / .com Medallion Vitrine & Motion Gate
+  // 2. 3D Quaternion Bearing-Spin Medallion & Reduced-Motion Gate
   const reducedQuery = win.matchMedia?.('(prefers-reduced-motion: reduce)');
-  let motionPaused = Boolean(reducedQuery?.matches);
-  const syncMotion = () => {
-    doc.documentElement.classList.toggle('motion-paused', motionPaused);
-    doc.querySelectorAll('[data-motion-toggle]').forEach((btn) => {
-      btn.setAttribute('aria-pressed', String(motionPaused));
-      btn.textContent = motionPaused ? 'Resume motion' : 'Pause motion';
-    });
+  const syncReducedMotion = () => {
+    doc.documentElement.classList.toggle('motion-paused', Boolean(reducedQuery?.matches));
   };
+  syncReducedMotion();
+  reducedQuery?.addEventListener?.('change', syncReducedMotion);
 
   const medallion = doc.querySelector('[data-medallion]');
   if (medallion) {
-    const flipButtons = doc.querySelectorAll('[data-medallion-flip]');
-    const faceStatus = medallion.querySelector('[data-medallion-status]');
     const stage = medallion.querySelector('[data-medallion-stage]');
-    const comJump = medallion.querySelector('[data-medallion-com-link]');
-    const finePointerQuery = win.matchMedia?.('(hover: hover) and (pointer: fine)');
+    const rotor =
+      medallion.querySelector('[data-medallion-rotor]') ||
+      medallion.querySelector('.medallion-rotor');
+    const now = () => win.performance?.now?.() ?? Date.now();
 
-    const setFace = (face) => {
-      medallion.dataset.face = face;
-      const isCom = face === 'com';
-      flipButtons.forEach((btn) => {
-        btn.setAttribute('aria-pressed', String(isCom));
-      });
-      if (faceStatus) {
-        faceStatus.textContent = isCom
-          ? 'COMMERCIAL STUDIO · THEHARNESSLAB.COM · CLIENT SOFTWARE & AUTOMATION'
-          : 'ENGINEERING SEAL · THEHARNESSLAB.DEV · SYSTEMS R&D FOUNDRY';
-      }
-      if (comJump) {
-        comJump.dataset.highlighted = String(isCom);
-      }
-    };
+    if (stage && rotor) {
+      let state = createBearingState(medallion.dataset.face === 'com' ? 'com' : 'dev');
+      let dragging = false;
+      let activePointerId = null;
+      let downX = 0;
+      let downY = 0;
+      let lastX = 0;
+      let lastY = 0;
+      let downTime = 0;
+      let maxTravel = 0;
+      let samples = [];
+      let rafId = null;
+      let lastFrameTs = null;
 
-    flipButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        setFace(medallion.dataset.face === 'com' ? 'dev' : 'com');
-      });
-    });
+      medallion.dataset.medallionReady = 'true';
 
-    if (stage) {
-      const clampTilt = (deg) => Math.max(-3.5, Math.min(3.5, deg));
-      stage.addEventListener('pointermove', (e) => {
-        if (motionPaused || reducedQuery?.matches || !finePointerQuery?.matches) return;
-        if (e.pointerType && e.pointerType !== 'mouse') return;
-        const rect = stage.getBoundingClientRect();
-        if (!rect.width || !rect.height) return;
-        const nx = (e.clientX - rect.left) / rect.width - 0.5;
-        const ny = (e.clientY - rect.top) / rect.height - 0.5;
-        stage.style.setProperty('--tilt-y', `${clampTilt(nx * 7).toFixed(2)}deg`);
-        stage.style.setProperty('--tilt-x', `${clampTilt(-ny * 7).toFixed(2)}deg`);
-      });
-      stage.addEventListener('pointerleave', () => {
-        stage.style.setProperty('--tilt-y', '0deg');
-        stage.style.setProperty('--tilt-x', '0deg');
-      });
-    }
+      const renderRotor = () => {
+        rotor.style.transform = quatToMatrix3d(state.q);
+        medallion.dataset.face = state.face;
+        medallion.dataset.spinning = String(Boolean(state.active || dragging));
+      };
 
-    doc.querySelectorAll('[data-motion-toggle]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        motionPaused = !motionPaused;
-        if (motionPaused && stage) {
-          stage.style.setProperty('--tilt-y', '0deg');
-          stage.style.setProperty('--tilt-x', '0deg');
+      const stopLoop = () => {
+        if (rafId !== null) {
+          win.cancelAnimationFrame?.(rafId);
+          rafId = null;
         }
-        syncMotion();
+        lastFrameTs = null;
+      };
+
+      const tick = (ts) => {
+        if (dragging || !state.active) {
+          rafId = null;
+          lastFrameTs = null;
+          renderRotor();
+          return;
+        }
+        const frameNow = typeof ts === 'number' ? ts : now();
+        const dt =
+          lastFrameTs === null
+            ? 1 / 60
+            : Math.min(0.05, Math.max(0.001, (frameNow - lastFrameTs) / 1000));
+        lastFrameTs = frameNow;
+        state = stepBearingPhysics(state, dt);
+        renderRotor();
+        if (state.active) {
+          rafId = win.requestAnimationFrame(tick);
+        } else {
+          rafId = null;
+          lastFrameTs = null;
+        }
+      };
+
+      const ensureLoop = () => {
+        if (rafId === null && state.active && typeof win.requestAnimationFrame === 'function') {
+          lastFrameTs = null;
+          rafId = win.requestAnimationFrame(tick);
+        }
+      };
+
+      const triggerFlip = () => {
+        const nextFace = state.face === 'com' ? 'dev' : 'com';
+        state = {
+          ...state,
+          mode: 'flip',
+          omega: [0, 0, 0],
+          flipElapsed: 0,
+          flipDuration: 0.68,
+          flipStartQ: [...state.q],
+          flipTargetFace: nextFace,
+          active: true,
+        };
+        renderRotor();
+        ensureLoop();
+      };
+
+      const applySpinImpulse = (dwx, dwy, dwz = 0) => {
+        let wx = (state.mode === 'spin' ? state.omega[0] : 0) + dwx;
+        let wy = (state.mode === 'spin' ? state.omega[1] : 0) + dwy;
+        let wz = (state.mode === 'spin' ? state.omega[2] : 0) + dwz;
+        const speed = Math.hypot(wx, wy, wz);
+        if (speed > MAX_SPIN_RAD_S) {
+          const scale = MAX_SPIN_RAD_S / speed;
+          wx *= scale;
+          wy *= scale;
+          wz *= scale;
+        }
+        state = {
+          ...state,
+          mode: 'spin',
+          omega: [wx, wy, wz],
+          active: true,
+        };
+        renderRotor();
+        ensureLoop();
+      };
+
+      stage.addEventListener('dragstart', (e) => {
+        e.preventDefault();
       });
-    });
 
-    reducedQuery?.addEventListener?.('change', (e) => {
-      motionPaused = e.matches;
-      syncMotion();
-    });
+      stage.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        stage.classList.add('is-pointer-mode');
+        stopLoop();
+        activePointerId = e.pointerId;
+        dragging = true;
+        stage.classList.add('is-dragging');
+        try {
+          stage.setPointerCapture?.(e.pointerId);
+        } catch {
+          // Synthetic events without an active hardware pointerId continue cleanly.
+        }
+        downX = e.clientX;
+        downY = e.clientY;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        downTime = now();
+        maxTravel = 0;
+        samples = [{ t: downTime, drx: 0, dry: 0, drz: 0 }];
+        state = {
+          ...state,
+          mode: 'idle',
+          omega: [0, 0, 0],
+          active: false,
+        };
+        renderRotor();
+      });
 
-    setFace('dev');
-    syncMotion();
+      stage.addEventListener('pointermove', (e) => {
+        if (!dragging || e.pointerId !== activePointerId) return;
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        maxTravel = Math.max(maxTravel, Math.hypot(e.clientX - downX, e.clientY - downY));
+
+        const rect = stage.getBoundingClientRect();
+        const diameter = Math.max(180, rect.width || 320);
+        const nx = rect.width ? ((e.clientX - rect.left) / rect.width) * 2 - 1 : 0;
+        const ny = rect.height ? ((e.clientY - rect.top) / rect.height) * 2 - 1 : 0;
+        const gain = 3.4 / diameter;
+        const drx = -dy * gain;
+        const dry = dx * gain;
+        const drz = (nx * dy - ny * dx) * (0.42 / diameter);
+
+        if (Math.hypot(drx, dry, drz) > 1e-8) {
+          const dq = quatFromAngularDelta(drx, dry, drz);
+          const nextQ = quatNormalize(quatMultiply(dq, state.q));
+          state = {
+            ...state,
+            q: nextQ,
+            face: quatVisibleFace(nextQ),
+          };
+        }
+
+        const sampleNow = now();
+        samples.push({ t: sampleNow, drx, dry, drz });
+        const pruneBefore = sampleNow - 130;
+        while (samples.length > 2 && samples[0].t < pruneBefore) {
+          samples.shift();
+        }
+        renderRotor();
+      });
+
+      const finishPointer = (e) => {
+        if (!dragging || e.pointerId !== activePointerId) return;
+        try {
+          if (stage.hasPointerCapture?.(e.pointerId)) {
+            stage.releasePointerCapture(e.pointerId);
+          }
+        } catch {
+          // Ignore synthetic pointer capture release errors.
+        }
+        dragging = false;
+        activePointerId = null;
+        stage.classList.remove('is-dragging');
+        const upTime = now();
+
+        if (e.type === 'pointerup' && maxTravel < 5 && upTime - downTime < 320) {
+          triggerFlip();
+          return;
+        }
+
+        const omega = computeReleaseVelocity(samples, upTime);
+        state = {
+          ...state,
+          mode: 'spin',
+          omega,
+          active: true,
+        };
+        renderRotor();
+        ensureLoop();
+      };
+
+      stage.addEventListener('pointerup', finishPointer);
+      stage.addEventListener('pointercancel', finishPointer);
+
+      stage.addEventListener('keydown', (e) => {
+        stage.classList.remove('is-pointer-mode');
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          triggerFlip();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          applySpinImpulse(0, 7.5, 0);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          applySpinImpulse(0, -7.5, 0);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          applySpinImpulse(7.5, 0, 0);
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          applySpinImpulse(-7.5, 0, 0);
+        }
+      });
+
+      renderRotor();
+    }
   }
 
   // 3. Execution Lab / Karpathy Loop Switcher (stacked 0px-jump grid panels)

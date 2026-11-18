@@ -237,8 +237,18 @@ test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay va
     assert.match(doc, /https:\/\/artificiallandman\.io\//, name);
   }
 
-  const stageTag = html.match(/<div class="medallion-stage"[^>]*>/)?.[0] || '';
-  assert.doesNotMatch(stageTag, /\brole=|\btabindex=/);
+  const vitrineTag = html.match(/<div class="medallion-vitrine"[^>]*>/)?.[0] || '';
+  assert.ok(vitrineTag, 'medallion-vitrine wrapper present');
+  assert.doesNotMatch(vitrineTag, /marquina-card/, 'medallion must not be wrapped in marquina-card');
+  for (const removed of ['medallion-bezel', 'medallion-status', 'medallion-controls', 'medallion-com-jump', 'data-medallion-flip', 'data-motion-toggle', 'data-medallion-com-link']) {
+    assert.equal(html.includes(removed), false, `removed medallion chrome still present: ${removed}`);
+  }
+  const stageTag = html.match(/<div\s+class="medallion-stage"[\s\S]*?>/)?.[0] || '';
+  assert.match(stageTag, /\bdata-medallion-stage\b/);
+  assert.match(stageTag, /\brole="button"/);
+  assert.match(stageTag, /\btabindex="0"/);
+  assert.match(stageTag, /\baria-label="[^"]{20,}"/);
+  assert.match(html, /\bdata-medallion-rotor\b/);
 
   const robots = readFileSync(join(root, 'robots.txt'), 'utf8');
   for (const bot of ['Googlebot', 'Bingbot', 'OAI-SearchBot', 'ChatGPT-User', 'GPTBot', 'Claude-SearchBot', 'Claude-User', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']) {
@@ -270,6 +280,7 @@ test('SHARED-FACTS naming, legal entity, OPSEC scrub, security.txt, and accessib
     'engineering.mjs': readFileSync(join(root, 'engineering.mjs'), 'utf8'),
     'ledger-data.mjs': sources['ledger-data.mjs'],
     'showcase-data.mjs': sources['showcase-data.mjs'],
+    'scripts/render-showcase.mjs': readFileSync(join(root, 'scripts/render-showcase.mjs'), 'utf8'),
     'llms.txt': readFileSync(join(root, 'llms.txt'), 'utf8'),
     'llms-full.txt': readFileSync(join(root, 'llms-full.txt'), 'utf8'),
     'landman-title-systems/index.html': readFileSync(join(root, 'landman-title-systems/index.html'), 'utf8'),
@@ -279,14 +290,14 @@ test('SHARED-FACTS naming, legal entity, OPSEC scrub, security.txt, and accessib
 
   const bannedPatterns = [
     /28-build/i,
-    /Title-Desk/,
-    /TITLE-DESK/,
-    /(?<!https:\/\/)(?<!https:\/\/desktop\.)\btitle-desk\b(?!\.com)/i,
+    /TitleDesk/,
+    /TITLEDESK/,
+    /(?<!https:\/\/)(?<!https:\/\/desktop\.)\btitle-desk\b(?!\.com)/,
     /\bTitle Desk\b/i,
     /Title-?Desk Web/i,
-    /TitleDesk Desktop/,
-    /TitleDesk Desktop Agent/i,
-    /TitleDesk Agent Desktop/i,
+    /Title-?Desk Desktop(?!\s+app\b)/,
+    /Title-?Desk Desktop Agent/i,
+    /Title-?Desk Agent Desktop/i,
     /spencer@theharnesslab\.com/i,
     /New Mexico/i,
     /written only when all three agree/i,
@@ -346,6 +357,31 @@ test('SHARED-FACTS naming, legal entity, OPSEC scrub, security.txt, and accessib
     for (const re of bannedPatterns) {
       assert.doesNotMatch(content, re, `${name} matched banned pattern ${re}`);
     }
+  }
+
+  for (const hyphenRequired of [
+    'index.html',
+    'ledger-data.mjs',
+    'showcase-data.mjs',
+    'scripts/render-showcase.mjs',
+    'llms.txt',
+    'llms-full.txt',
+    'landman-title-systems/index.html',
+    'workflow-automation-engineering/index.html',
+    'business-software-engineering/index.html',
+  ]) {
+    assert.match(checkedFiles[hyphenRequired], /\bTitle-Desk\b/, `${hyphenRequired} must use hyphenated Title-Desk`);
+  }
+  for (const agentRequired of [
+    'index.html',
+    'ledger-data.mjs',
+    'showcase-data.mjs',
+    'llms.txt',
+    'llms-full.txt',
+    'landman-title-systems/index.html',
+    'business-software-engineering/index.html',
+  ]) {
+    assert.match(checkedFiles[agentRequired], /\bTitle-Desk Agent\b/, `${agentRequired} must use hyphenated Title-Desk Agent`);
   }
 
   // Legal entity & 27-Build footer parity across HTML pages

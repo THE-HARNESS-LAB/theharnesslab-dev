@@ -16,6 +16,20 @@ import {
   karpathyState,
   formatResultsTsv,
   PERIHELION_PLATES,
+  QUAT_DEV,
+  QUAT_COM,
+  BEARING_TAU_SEC,
+  MAX_SPIN_RAD_S,
+  SETTLE_SPEED_RAD_S,
+  quatNormalize,
+  quatMultiply,
+  quatFromAngularDelta,
+  quatSlerpShortest,
+  quatVisibleFace,
+  quatToMatrix3d,
+  createBearingState,
+  computeReleaseVelocity,
+  stepBearingPhysics,
 } from '../engineering.mjs';
 
 const advance = (run, count) => {
@@ -225,4 +239,113 @@ test('Karpathy state machine is pure, exposes structured view, and rejects unkno
     creditSpendUsd: 0,
   });
   assert.throws(() => createKarpathyRun('invalid_mode'), RangeError);
+});
+
+// ============================================================================
+// 3D Quaternion & Heavy Steel-Bearing Medallion Physics tests
+// ============================================================================
+
+test('quaternion basis, matrix3d column-major output, and visible face match canonical seals', () => {
+  assert.equal(quatVisibleFace(QUAT_DEV), 'dev');
+  assert.equal(quatVisibleFace(QUAT_COM), 'com');
+  assert.equal(quatToMatrix3d(QUAT_DEV), 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)');
+  assert.equal(quatToMatrix3d(QUAT_COM), 'matrix3d(-1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1)');
+
+  // Multi-axis composition stays unit-norm with zero gimbal singularity at 90deg pitch
+  let q = [...QUAT_DEV];
+  q = quatNormalize(quatMultiply(quatFromAngularDelta(Math.PI / 2, 0, 0), q));
+  q = quatNormalize(quatMultiply(quatFromAngularDelta(0, Math.PI / 3, 0.25), q));
+  assert.ok(Math.abs(Math.hypot(...q) - 1) < 1e-9);
+  assert.match(quatToMatrix3d(q), /^matrix3d\(/);
+});
+
+test('release velocity scales with drag aggression, caps at MAX_SPIN_RAD_S, and zeroes after pointer hold', () => {
+  const gentle = computeReleaseVelocity(
+    [
+      { t: 0, drx: 0, dry: 0, drz: 0 },
+      { t: 40, drx: 0.04, dry: 0.06, drz: 0 },
+      { t: 80, drx: 0.04, dry: 0.06, drz: 0 },
+    ],
+    82,
+  );
+  const aggressive = computeReleaseVelocity(
+    [
+      { t: 0, drx: 0, dry: 0, drz: 0 },
+      { t: 25, drx: -0.55, dry: 0.72, drz: 0.03 },
+      { t: 50, drx: -0.62, dry: 0.84, drz: 0.04 },
+    ],
+    52,
+  );
+  const gentleSpeed = Math.hypot(...gentle);
+  const aggressiveSpeed = Math.hypot(...aggressive);
+  assert.ok(gentleSpeed > 1 && gentleSpeed < 4, `gentle speed ${gentleSpeed}`);
+  assert.ok(aggressiveSpeed > 25 && aggressiveSpeed <= MAX_SPIN_RAD_S + 1e-9, `aggressive speed ${aggressiveSpeed}`);
+  assert.ok(aggressive[0] < 0 && aggressive[1] > 0, 'preserves diagonal 3D spin direction');
+
+  const heldStill = computeReleaseVelocity(
+    [
+      { t: 0, drx: 0, dry: 0, drz: 0 },
+      { t: 30, drx: 0.5, dry: 0.5, drz: 0 },
+    ],
+    160,
+  );
+  assert.deepEqual(heldStill, [0, 0, 0]);
+});
+
+test('fast flick coasts smoothly for 6-9 seconds on bearings and settles upright without upside-down parking', () => {
+  assert.equal(BEARING_TAU_SEC, 3.2);
+  assert.equal(SETTLE_SPEED_RAD_S, 1.1);
+
+  let state = {
+    ...createBearingState('dev'),
+    mode: 'spin',
+    omega: [-14, 22, 1.5], // ~26.1 rad/s diagonal fast flick
+    active: true,
+  };
+  let elapsed = 0;
+  const dt = 1 / 60;
+  while (state.active && elapsed < 15) {
+    state = stepBearingPhysics(state, dt);
+    elapsed += dt;
+  }
+  assert.equal(state.active, false, 'bearing spin eventually comes to rest');
+  assert.ok(elapsed >= 6.0 && elapsed <= 9.6, `expected 6-9s heavy bearing spin, got ${elapsed.toFixed(2)}s`);
+  const target = state.face === 'com' ? QUAT_COM : QUAT_DEV;
+  const dot = Math.abs(
+    state.q[0] * target[0] + state.q[1] * target[1] + state.q[2] * target[2] + state.q[3] * target[3],
+  );
+  assert.ok(1 - dot < 1e-5, 'settled cleanly to canonical upright seal orientation');
+
+  // Upside-down reverse face [0, 1, 0, 0] rights smoothly to upright QUAT_COM [0, 0, 1, 0]
+  let inverted = {
+    ...createBearingState('com'),
+    mode: 'spin',
+    q: [0, 1, 0, 0],
+    omega: [0.2, 0, 0],
+    face: 'com',
+    active: true,
+  };
+  for (let i = 0; i < 240 && inverted.active; i += 1) {
+    inverted = stepBearingPhysics(inverted, 1 / 60);
+  }
+  assert.equal(inverted.active, false);
+  assert.equal(inverted.face, 'com');
+  assert.equal(quatToMatrix3d(inverted.q), quatToMatrix3d(QUAT_COM));
+
+  // Quick-click flip transitions cleanly to opposite face
+  let flip = {
+    ...createBearingState('dev'),
+    mode: 'flip',
+    flipElapsed: 0,
+    flipDuration: 0.68,
+    flipStartQ: [...QUAT_DEV],
+    flipTargetFace: 'com',
+    active: true,
+  };
+  for (let i = 0; i < 60 && flip.active; i += 1) {
+    flip = stepBearingPhysics(flip, 1 / 60);
+  }
+  assert.equal(flip.active, false);
+  assert.equal(flip.face, 'com');
+  assert.equal(quatToMatrix3d(flip.q), quatToMatrix3d(QUAT_COM));
 });

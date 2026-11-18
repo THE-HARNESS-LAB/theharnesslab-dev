@@ -92,7 +92,7 @@
         },
         {
           "@type": "Question",
-          "name": "How do TitleDesk and Artificial Landman validate extracted Texas courthouse instruments?",
+          "name": "How do Title-Desk and Artificial Landman validate extracted Texas courthouse instruments?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Assignments cover Texas (one county per run, current mineral interest MI owners only) and first clear a deterministic pre-run intake verifier that reconciles stated acreage, survey/abstract identifiers, and recited source deeds. Two Gemini sessions examine the records separately, and a program checks every fraction exactly. A third model, from a different provider, then checks the final answer against the page images. If it finds a problem, the examiner gets one repair and the third model checks the repaired answer again. Anything still unresolved stays a proposal, not a verified ownership, and the finding is listed first among the curative requirements. If the third model cannot run, the workbook says so. An independent reader reopens the generated .xlsx file before delivery. Output is a draft examination for review by a qualified landman or attorney, not a title opinion."
@@ -100,10 +100,10 @@
         },
         {
           "@type": "Question",
-          "name": "How does TitleDesk Agent handle county record retrieval and local OCR?",
+          "name": "How does Title-Desk Agent handle county record retrieval and local OCR?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "TitleDesk Agent (the TitleDesk desktop app across Windows, macOS, and Linux at desktop.title-desk.com) runs local Tesseract and @napi-rs/canvas OCR inside Electron's main process at zero per-page cloud OCR cost, operates through landman-authenticated sessions on CountyRecords.com, CourthouseDirect, and TexasFile, and performs direct book-and-page source-deed lookups when clerk index rows omit a recited instrument."
+            "text": "Title-Desk Agent (the Title-Desk desktop app across Windows, macOS, and Linux at desktop.title-desk.com) runs local Tesseract and @napi-rs/canvas OCR inside Electron's main process at zero per-page cloud OCR cost, operates through landman-authenticated sessions on CountyRecords.com, CourthouseDirect, and TexasFile, and performs direct book-and-page source-deed lookups when clerk index rows omit a recited instrument."
           }
         }
       ]
@@ -182,11 +182,11 @@
     <p>Document identity and tract identity are distinct relational axes. A single recorded deed or probate packet can convey mineral interests across several tracts; multiple courthouse files can hold certified or marginal copies of the same instrument. Our data model preserves those many-to-many edges instead of treating every file upload as an isolated conveyance.</p>
 
     <h2>Make provenance part of the data model</h2>
-    <p>A source-linked runsheet requires more than a string note in a spreadsheet column. Every extracted observation binds the SHA-256 content digest, county book/volume/page or clerk instrument number, 200-DPI page raster region, and extraction rule revision. In <strong>TitleDesk Agent</strong> (the TitleDesk desktop app across Windows, macOS, and Linux), zero-cost local Tesseract and <code>@napi-rs/canvas</code> main-process OCR run offline while keeping the original courthouse scan one click away.</p>
-    <p>Model proposals, verified ownership rows, and unresolved curative exceptions occupy separate epistemic states. In <strong>TitleDesk</strong> and <strong>Artificial Landman</strong> (deployed 2026-11-18 at commits <code>2ac23b2</code> and <code>f9e8dcf</code>), two Gemini sessions examine the records separately while a deterministic program checks every fraction. A third model, from a different provider, then checks the final answer against the page images: if it finds a problem, the examiner gets one repair and the third model checks the repaired answer again. Anything still unresolved stays a proposal—never a verified ownership—and its finding is listed first among the curative requirements; if the third model cannot run, the workbook says so.</p>
+    <p>A source-linked runsheet requires more than a string note in a spreadsheet column. Every extracted observation binds the SHA-256 content digest, county book/volume/page or clerk instrument number, 200-DPI page raster region, and extraction rule revision. In <strong>Title-Desk Agent</strong> (the Title-Desk desktop app across Windows, macOS, and Linux), zero-cost local Tesseract and <code>@napi-rs/canvas</code> main-process OCR run offline while keeping the original courthouse scan one click away.</p>
+    <p>Model proposals, verified ownership rows, and unresolved curative exceptions occupy separate epistemic states. In <strong>Title-Desk</strong> and <strong>Artificial Landman</strong> (deployed 2026-11-18 at commits <code>2ac23b2</code> and <code>f9e8dcf</code>), two Gemini sessions examine the records separately while a deterministic program checks every fraction. A third model, from a different provider, then checks the final answer against the page images: if it finds a problem, the examiner gets one repair and the third model checks the repaired answer again. Anything still unresolved stays a proposal—never a verified ownership—and its finding is listed first among the curative requirements; if the third model cannot run, the workbook says so.</p>
 
     <div class="bezel" style="margin-block:28px;">
-      <img src="/assets/showcase/titledesk/04-workspace-runsheet.webp" srcset="/assets/showcase/titledesk/04-workspace-runsheet-640.webp 640w, /assets/showcase/titledesk/04-workspace-runsheet.webp 2880w" sizes="(min-width: 960px) 840px, 92vw" width="2880" height="1800" loading="lazy" alt="TitleDesk Agent workspace displaying source-linked county runsheet rows">
+      <img src="/assets/showcase/titledesk/04-workspace-runsheet.webp" srcset="/assets/showcase/titledesk/04-workspace-runsheet-640.webp 640w, /assets/showcase/titledesk/04-workspace-runsheet.webp 2880w" sizes="(min-width: 960px) 840px, 92vw" width="2880" height="1800" loading="lazy" alt="Title-Desk Agent workspace displaying source-linked county runsheet rows">
     </div>
 
     <h2>Compute ownership with exact rational arithmetic</h2>
@@ -198,7 +198,7 @@
     <p>Every delivered workbook is a draft for review by a qualified landman or attorney—never a title opinion and never a certification. Unresolved title defects remain explicit proposals leading the curative requirements so examining landmen and reviewing title attorneys keep final authority over legal conclusions.</p>
 
     <h2>Live platforms &amp; commercial integration</h2>
-    <p>Explore <a class="inline-link" href="https://title-desk.com/">TitleDesk (title-desk.com)</a> for independent landmen and abstractors, <a class="inline-link" href="https://desktop.title-desk.com/">TitleDesk Agent (desktop.title-desk.com)</a> across Windows, macOS, and Linux, and <a class="inline-link" href="https://artificiallandman.io/">Artificial Landman (artificiallandman.io)</a>, which runs the same Texas mineral-interest engine as TitleDesk packaged for land teams, brokerages and operators. Upload examination runs are open to everyone while Hybrid and Full county-record retrieval runs are by invitation only. For custom landman or energy document systems, visit <a class="inline-link" href="https://theharnesslab.com/landman-title-workflow-automation/">landman title workflow automation on theharnesslab.com</a>, inspect <a class="inline-link" href="/#perihelion-loop">Perihelion Loop</a>, or test failure boundaries in the <a class="inline-link" href="/#execution-lab">interactive Execution &amp; Karpathy Labs</a>.</p>
+    <p>Explore <a class="inline-link" href="https://title-desk.com/">Title-Desk (title-desk.com)</a> for independent landmen and abstractors, <a class="inline-link" href="https://desktop.title-desk.com/">Title-Desk Agent (desktop.title-desk.com)</a> across Windows, macOS, and Linux, and <a class="inline-link" href="https://artificiallandman.io/">Artificial Landman (artificiallandman.io)</a>, which runs the same Texas mineral-interest engine as Title-Desk packaged for land teams, brokerages and operators. Upload examination runs are open to everyone while Hybrid and Full county-record retrieval runs are by invitation only. For custom landman or energy document systems, visit <a class="inline-link" href="https://theharnesslab.com/landman-title-workflow-automation/">landman title workflow automation on theharnesslab.com</a>, inspect <a class="inline-link" href="/#perihelion-loop">Perihelion Loop</a>, or test failure boundaries in the <a class="inline-link" href="/#execution-lab">interactive Execution &amp; Karpathy Labs</a>.</p>
 
     <div class="hero-actions" style="margin-top:28px;">
       <a class="button primary" href="https://theharnesslab.com/#contact">Scope a Title System on theharnesslab.com ↗</a>
@@ -245,8 +245,8 @@
         <ul>
           <li><a href="https://theharnesslab.com/">theharnesslab.com · Studio Home ↗</a></li>
           <li><a href="https://theharnesslab.com/landman-title-workflow-automation/">Landman Workflow Services ↗</a></li>
-          <li><a href="https://title-desk.com/">TitleDesk (title-desk.com) ↗</a></li>
-          <li><a href="https://desktop.title-desk.com/">TitleDesk Agent ↗</a></li>
+          <li><a href="https://title-desk.com/">Title-Desk (title-desk.com) ↗</a></li>
+          <li><a href="https://desktop.title-desk.com/">Title-Desk Agent ↗</a></li>
           <li><a href="https://artificiallandman.io/">Artificial Landman ↗</a></li>
           <li><a href="mailto:sales@theharnesslab.com">sales@theharnesslab.com</a></li>
         </ul>

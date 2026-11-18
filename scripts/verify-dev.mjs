@@ -88,7 +88,123 @@ try {
   }
   assert.equal(await page.locator('.contact-hazard-tape').count(), 1);
   assert.equal(await page.locator('#contact .contact-hazard-tape').count(), 1);
-  results.push('All chapters present in order-critical ids; single H1; zero unnamed buttons/images/focusable code blocks; hazard tape only on #contact.');
+  assert.doesNotMatch(await page.locator('body').innerText(), /TitleDesk|TITLEDESK/);
+  assert.match(await page.locator('body').innerText(), /Title-Desk/);
+  results.push('All chapters present in order-critical ids; single H1; hyphenated Title-Desk verified; zero unnamed buttons/images/focusable code blocks; hazard tape only on #contact.');
+
+  // Hero 3D Bearing-Spin Medallion: stripped chrome + any-direction drag-and-flick physics + click/keyboard flip
+  const medallion = page.locator('[data-medallion]');
+  const medStage = page.locator('[data-medallion-stage]');
+  const medRotor = page.locator('[data-medallion-rotor]');
+  assert.equal(await medallion.count(), 1);
+  assert.equal(await medallion.evaluate((el) => el.classList.contains('marquina-card')), false, 'marquina-card removed');
+  for (const gone of ['.medallion-bezel', '.medallion-status', '.medallion-controls', '.medallion-com-jump']) {
+    assert.equal(await page.locator(gone).count(), 0, `${gone} removed`);
+  }
+  const medStyles = await medStage.evaluate((el) => {
+    const cs = getComputedStyle(el);
+    return {
+      role: el.getAttribute('role'),
+      tabIndex: el.tabIndex,
+      ariaLabel: el.getAttribute('aria-label') || '',
+      cursor: cs.cursor,
+      touchAction: cs.touchAction,
+      perspective: cs.perspective,
+    };
+  });
+  assert.equal(medStyles.role, 'button');
+  assert.equal(medStyles.tabIndex, 0);
+  assert.ok(medStyles.ariaLabel.length >= 20);
+  assert.equal(medStyles.cursor, 'grab');
+  assert.equal(medStyles.touchAction, 'none');
+  assert.equal(medStyles.perspective, '1100px');
+  assert.equal(await medRotor.evaluate((el) => getComputedStyle(el).transformStyle), 'preserve-3d');
+
+  // Quick click (<5px) performs 180deg flip (.dev -> .com)
+  assert.equal(await medallion.getAttribute('data-face'), 'dev');
+  const box = await medStage.boundingBox();
+  assert.ok(box && box.width > 150);
+  const cx = box.x + box.width / 2;
+  const cy = box.y + box.height / 2;
+  await page.mouse.click(cx, cy);
+  await page.waitForTimeout(760);
+  assert.equal(await medallion.getAttribute('data-face'), 'com', 'quick click flips dev -> com');
+
+  // Keyboard Enter flips back (.com -> .dev)
+  await medStage.focus();
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(760);
+  assert.equal(await medallion.getAttribute('data-face'), 'dev', 'Enter key flips com -> dev');
+
+  // Aggressive diagonal drag + release launches multi-second 3D bearing spin in both X and Y
+  const initialMatrix = await medRotor.evaluate((el) => getComputedStyle(el).transform);
+  await page.mouse.move(cx - 78, cy + 62);
+  await page.mouse.down();
+  assert.equal(await medStage.evaluate((el) => getComputedStyle(el).cursor), 'grabbing');
+  for (let step = 1; step <= 6; step += 1) {
+    await page.waitForTimeout(10);
+    await page.mouse.move(cx - 78 + step * 32, cy + 62 - step * 24);
+  }
+  const flickStartMs = Date.now();
+  await page.mouse.up();
+  const matrixAtRelease = await medRotor.evaluate((el) => getComputedStyle(el).transform);
+  await page.waitForTimeout(180);
+  await page.screenshot({ path: `${out}/desktop-medallion-midspin.png` });
+  const matrix180ms = await medRotor.evaluate((el) => getComputedStyle(el).transform);
+  await page.waitForTimeout(1000);
+  const matrix1180ms = await medRotor.evaluate((el) => getComputedStyle(el).transform);
+  await page.waitForTimeout(1500);
+  const matrix2680ms = await medRotor.evaluate((el) => getComputedStyle(el).transform);
+  const stillSpinningAt2680ms = await medallion.getAttribute('data-spinning');
+  await page.waitForTimeout(2500);
+  const matrix5180ms = await medRotor.evaluate((el) => getComputedStyle(el).transform);
+  const stillSpinningAt5180ms = await medallion.getAttribute('data-spinning');
+
+  for (const m of [matrixAtRelease, matrix180ms, matrix1180ms, matrix2680ms, matrix5180ms]) {
+    assert.match(m, /^matrix3d\(/, `expected 3D matrix3d transform, got ${m}`);
+  }
+  assert.notEqual(matrixAtRelease, initialMatrix);
+  assert.notEqual(matrix180ms, matrixAtRelease);
+  assert.notEqual(matrix1180ms, matrix180ms);
+  assert.notEqual(matrix2680ms, matrix1180ms);
+  assert.notEqual(matrix5180ms, matrix2680ms);
+  assert.equal(stillSpinningAt2680ms, 'true', 'bearing spin still coasting smoothly past 2.68s');
+  assert.equal(stillSpinningAt5180ms, 'true', 'bearing spin still coasting smoothly past 5.18s');
+
+  // Verify off-axis 3D components (both X and Y rotation entries in matrix3d are non-zero)
+  const parseM3d = (s) => s.slice(9, -1).split(',').map((v) => Number(v.trim()));
+  const nums180 = parseM3d(matrix180ms);
+  assert.ok(Math.abs(nums180[2]) > 0.02 || Math.abs(nums180[8]) > 0.02, 'Y-axis 3D rotation active');
+  assert.ok(Math.abs(nums180[6]) > 0.02 || Math.abs(nums180[9]) > 0.02, 'X-axis 3D rotation active');
+
+  // Wait for heavy bearing spin to settle upright and measure real browser coast duration
+  await page.waitForFunction(
+    () => document.querySelector('[data-medallion]')?.getAttribute('data-spinning') === 'false',
+    null,
+    { timeout: 8000 },
+  );
+  const totalSpinSec = +((Date.now() - flickStartMs) / 1000).toFixed(2);
+  assert.ok(totalSpinSec >= 5.8 && totalSpinSec <= 10.2, `expected ~6-9s real browser bearing spin, got ${totalSpinSec}s`);
+  const settledFace = await medallion.getAttribute('data-face');
+  const settledMatrix = await medRotor.evaluate((el) => {
+    const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return { m11: m.m11, m22: m.m22, m33: m.m33 };
+  });
+  assert.ok(Math.abs(settledMatrix.m22 - 1) < 1e-3, `settled upright (m22 === +1, got ${settledMatrix.m22})`);
+  assert.ok(Math.abs(Math.abs(settledMatrix.m33) - 1) < 1e-3, `settled flat to canonical seal plane (m33=${settledMatrix.m33})`);
+
+  // Keyboard ArrowRight + ArrowUp directional bearing spin impulse (then reset cleanly to dev for layout screenshots)
+  await medStage.focus();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowUp');
+  await page.waitForTimeout(120);
+  assert.equal(await medallion.getAttribute('data-spinning'), 'true', 'arrow keys launch bearing spin');
+  const arrowSpinMatrix = await medRotor.evaluate((el) => getComputedStyle(el).transform);
+  assert.match(arrowSpinMatrix, /^matrix3d\(/, 'ArrowRight + ArrowUp produces 3D matrix3d spin');
+
+  results.push(
+    `3D bearing medallion verified: stripped chrome, click/Enter 180deg flip, ArrowRight+ArrowUp 3D spin, and diagonal flick sustained ${totalSpinSec}s bearing spin settling upright on data-face="${settledFace}" (m11=${settledMatrix.m11}, m22=${settledMatrix.m22}, m33=${settledMatrix.m33}).`,
+  );
 
   // Perihelion cockpit tabs + interactive button wrapper + ArrowLeft/ArrowRight lightbox keyboard navigation
   await page.locator('#cockpit-tab-1').click();
@@ -137,7 +253,7 @@ try {
     assert.equal(await dialog.evaluate((d) => d.open), false);
     assert.ok(await zoom.evaluate((el) => el === document.activeElement), `${id}: focus restored`);
   }
-  results.push('Rogue Agents (4), TitleDesk (5), TitleDesk Agent (8) and Artificial Landman (5) galleries switch, zoom, page and close with focus restored.');
+  results.push('Rogue Agents (4), Title-Desk (5), Title-Desk Agent (8) and Artificial Landman (5) galleries switch, zoom, page and close with focus restored.');
 
   // Single screenshot buttons (harness card + every build card that has one).
   const shots = page.locator('[data-lightbox-src]');
@@ -249,6 +365,8 @@ try {
       const res = await page.goto(url, { waitUntil: 'networkidle' });
       assert.equal(res?.status(), 200, `${sub} HTTP 200`);
       assert.equal(await page.locator('h1').count(), 1, `${sub} single H1`);
+      assert.doesNotMatch(await page.locator('body').innerText(), /TitleDesk|TITLEDESK/, `${sub} banned TitleDesk`);
+      assert.match(await page.locator('body').innerText(), /Title-Desk/, `${sub} hyphenated Title-Desk`);
       assert.deepEqual(await checkA11yNames(page), { buttonsNoName: 0, imgsNoAlt: 0, focusablePreNoLabel: 0 }, `${sub} a11y names`);
       for (const img of await page.locator('main img').all()) {
         if (!(await img.isVisible())) continue;
