@@ -44,7 +44,6 @@ export const DEV_LINK_HOSTS = Object.freeze([
   'title-desk.com',
   'desktop.title-desk.com',
   'artificiallandman.io',
-  'brandstream.my',
   'apex-build.dev',
   'www.cloudroom.dev',
   'the-harness-lab.github.io',

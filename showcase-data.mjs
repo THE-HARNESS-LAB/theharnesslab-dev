@@ -84,7 +84,7 @@ export const GALLERIES = Object.freeze({
     label: 'Artificial Landman screens',
     items: [
       s('artificial-landman', '01-landing', 2880, 1800, 'BRASS & TOPOGRAPHY', '01 Landing', 'Brass & topographic landing',
-        'artificiallandman.io runs the same engine under its own brass-and-topographic identity — the platform that is expanding into New Mexico.',
+        'artificiallandman.io runs the same engine under its own brass-and-topographic identity — live in Texas today, with New Mexico planned next.',
         'Artificial Landman landing page'),
       s('artificial-landman', '02-login', 2880, 1800, 'ACCOUNT', '02 Sign-In', 'Passwordless examiner sign-in',
         'The same passwordless email sign-in link, under the Artificial Landman identity.',

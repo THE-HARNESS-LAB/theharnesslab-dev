@@ -678,6 +678,7 @@ export function mountSiteUI(doc = document) {
     const faceStatus = medallion.querySelector('[data-medallion-status]');
     const stage = medallion.querySelector('[data-medallion-stage]');
     const comJump = medallion.querySelector('[data-medallion-com-link]');
+    const finePointerQuery = win.matchMedia?.('(hover: hover) and (pointer: fine)');
 
     const setFace = (face) => {
       medallion.dataset.face = face;
@@ -685,9 +686,6 @@ export function mountSiteUI(doc = document) {
       flipButtons.forEach((btn) => {
         btn.setAttribute('aria-pressed', String(isCom));
       });
-      if (stage) {
-        stage.setAttribute('aria-pressed', String(isCom));
-      }
       if (faceStatus) {
         faceStatus.textContent = isCom
           ? 'REVERSE FACE · THEHARNESSLAB.COM · COPPER & CARRARA COMMERCIAL FORGE'
@@ -705,24 +703,16 @@ export function mountSiteUI(doc = document) {
     });
 
     if (stage) {
-      stage.addEventListener('click', (e) => {
-        if (e.target?.closest?.('a')) return;
-        setFace(medallion.dataset.face === 'com' ? 'dev' : 'com');
-      });
-      stage.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-          e.preventDefault();
-          setFace(medallion.dataset.face === 'com' ? 'dev' : 'com');
-        }
-      });
+      const clampTilt = (deg) => Math.max(-3.5, Math.min(3.5, deg));
       stage.addEventListener('pointermove', (e) => {
-        if (motionPaused || reducedQuery?.matches) return;
+        if (motionPaused || reducedQuery?.matches || !finePointerQuery?.matches) return;
+        if (e.pointerType && e.pointerType !== 'mouse') return;
         const rect = stage.getBoundingClientRect();
         if (!rect.width || !rect.height) return;
         const nx = (e.clientX - rect.left) / rect.width - 0.5;
         const ny = (e.clientY - rect.top) / rect.height - 0.5;
-        stage.style.setProperty('--tilt-y', `${(nx * 14).toFixed(2)}deg`);
-        stage.style.setProperty('--tilt-x', `${(-ny * 12).toFixed(2)}deg`);
+        stage.style.setProperty('--tilt-y', `${clampTilt(nx * 7).toFixed(2)}deg`);
+        stage.style.setProperty('--tilt-x', `${clampTilt(-ny * 7).toFixed(2)}deg`);
       });
       stage.addEventListener('pointerleave', () => {
         stage.style.setProperty('--tilt-y', '0deg');
@@ -750,7 +740,7 @@ export function mountSiteUI(doc = document) {
     syncMotion();
   }
 
-  // 3. Execution Lab / Karpathy Loop Switcher
+  // 3. Execution Lab / Karpathy Loop Switcher (stacked 0px-jump grid panels)
   const labTabs = [...doc.querySelectorAll('[data-lab-tab]')];
   const labPanels = [...doc.querySelectorAll('[data-lab-panel]')];
   if (labTabs.length && labPanels.length) {
@@ -762,7 +752,11 @@ export function mountSiteUI(doc = document) {
         if (active && focusTab) tab.focus();
       });
       labPanels.forEach((panel) => {
-        panel.hidden = panel.dataset.labPanel !== targetName;
+        const active = panel.dataset.labPanel === targetName;
+        panel.hidden = false;
+        panel.classList.toggle('is-inactive', !active);
+        panel.setAttribute('aria-hidden', String(!active));
+        if ('inert' in panel) panel.inert = !active;
       });
     };
     labTabs.forEach((tab, idx) => {
@@ -775,6 +769,7 @@ export function mountSiteUI(doc = document) {
         selectLab(next.dataset.labTab, true);
       });
     });
+    selectLab('execution');
   }
 
   // 4. Perihelion 5-Zoom Cockpit Explorer + Native <dialog> Lightbox

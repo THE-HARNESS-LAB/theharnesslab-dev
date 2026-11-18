@@ -77,8 +77,8 @@ export const LEDGER_BUILDS = Object.freeze([
       }
     ],
     "lineage": "Lineage: MyAiMediaMgr → MAIMM → MYAIMEDIAMANAGER-V8.1 → MAIMM_FINAL_PROD | BrandStreams · Final_MyAiMediaMgr_website",
-    "liveUrl": "https://brandstream.my/",
-    "liveLabel": "brandstream.my",
+    "liveUrl": null,
+    "liveLabel": null,
     "idea": "Spencer's first major AI SaaS platform — built to give small and medium-sized businesses an autonomous AI social-media agency capable of multi-slot campaign planning, brand-consistent image/video generation, approval workflows, and multi-platform scheduling across Instagram, Facebook, X, LinkedIn, and TikTok. Born in July 2025 when early cloud sandboxes (Replit) repeatedly corrupted environments and forced full rebuilds (v1 -> v6 -> v8.1 -> v10 -> MAIMM_FINAL_PROD -> BrandStreams), directly inspiring Spencer to build Apex-Build.",
     "architecture": "TypeScript full-stack monorepo: React + Vite + Tailwind + Framer Motion client (client/src, 155+ components/views including 14-slot Campaign Board V2, Multi-Model AI Brainstorm Studio, Grok Imagine Studio, Content Calendar, and Approval Queue) paired with an Express + Drizzle ORM + PostgreSQL + BullMQ/Redis worker backend (server/), Stripe billing, Ayrshare default-deny tenant-isolated publishing, and Docker/Traefik production deployment on brandstream.my.",
     "aiLandscape": {
@@ -386,8 +386,8 @@ export const LEDGER_BUILDS = Object.freeze([
   {
     "order": 6,
     "slug": "spectre",
-    "title": "Spectre / Specter Darknet Explorer",
-    "shortTitle": "Spectre Darknet Explorer",
+    "title": "Spectre Threat Monitor",
+    "shortTitle": "Spectre Threat Monitor",
     "category": "Cybersecurity & Threat Intelligence UI",
     "eraId": "2026-winter",
     "tiers": [
@@ -422,7 +422,7 @@ export const LEDGER_BUILDS = Object.freeze([
         "pct": 18.2
       }
     ],
-    "lineage": "Lineage: specter_Darknet_explorer → specter-frontend | specter_Darknet_explorer",
+    "lineage": "Lineage: specter-threat-monitor → specter-frontend",
     "liveUrl": null,
     "liveLabel": null,
     "idea": "Dark-web threat intelligence and network-monitoring command dashboard built the same week Apex-Build kicked off (Jan 23, 2026) to visualize onion/mesh node topology, heuristic payload alerts, tracked identities, and live AES-256-GCM Tor circuit relay telemetry in a zero-clutter operator console.",
@@ -1878,7 +1878,7 @@ export const TRENCH_CAMPAIGNS = Object.freeze([
       ['2025-11-08', 'MAIMM_FINAL_PROD', '14fda2de · Register TikTok and LinkedIn OAuth routes & Meta compliance webhooks'],
       ['2025-08-31', 'MAIMM_FINAL_PROD', 'Initial commit of MYAIMEDIAMANAGER-V8.1 (following 8 prior full rebuilds)'],
     ],
-    links: [['https://brandstream.my/', 'brandstream.my']],
+    links: [['#build-brandstreams', 'Inspect BrandStreams build card']],
   },
   {
     id: 'foundry',

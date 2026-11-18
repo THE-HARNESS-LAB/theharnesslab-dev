@@ -4,17 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Custom Business Software Engineering | The Harness Lab (.dev)</title>
-<meta name="description" content="How The Harness Lab engineers business websites, internal operator tools, and idempotent API integrations: data models, tenant isolation, recovery, and release verification.">
+<meta name="description" content="How The Harness Lab engineers business websites, operator tools &amp; idempotent API integrations: canonical data models, tenant isolation &amp; release verification.">
 <link rel="canonical" href="https://theharnesslab.dev/business-software-engineering/">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Engineering Reference">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#000000">
+<meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="The Harness Lab Engineering Foundry">
 <meta property="og:title" content="Custom Business Software Engineering | The Harness Lab (.dev)">
 <meta property="og:description" content="Data models, default-deny tenant boundaries, idempotent API integrations, and end-to-end artifact verification.">
 <meta property="og:url" content="https://theharnesslab.dev/business-software-engineering/">
 <meta property="og:image" content="https://theharnesslab.dev/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Harness Lab Engineering Foundry (.dev) — Custom Business Software Engineering">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Custom Business Software Engineering | The Harness Lab (.dev)">
+<meta name="twitter:description" content="Data models, default-deny tenant boundaries, idempotent API integrations, and end-to-end artifact verification.">
+<meta name="twitter:image" content="https://theharnesslab.dev/social-card.png">
+<meta name="twitter:image:alt" content="The Harness Lab Engineering Foundry (.dev) — Custom Business Software Engineering">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/hermes-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,16 +41,19 @@
       "@id": "https://theharnesslab.dev/business-software-engineering/#article",
       "url": "https://theharnesslab.dev/business-software-engineering/",
       "headline": "Custom business software engineering from the interface to the final handoff.",
-      "description": "How The Harness Lab engineers business websites, internal tools and API integrations: data models, access boundaries, recovery and verification.",
+      "description": "How The Harness Lab engineers business websites, internal operator tools, and idempotent API integrations: canonical data models, tenant isolation, recovery, and release verification.",
       "datePublished": "2026-10-26",
-      "dateModified": "2026-11-17",
+      "dateModified": "2026-11-18",
+      "inLanguage": "en-US",
+      "image": "https://theharnesslab.dev/social-card.png",
       "author": {
-        "@type": "Organization",
-        "name": "The Harness Lab",
-        "url": "https://theharnesslab.com/"
+        "@type": "Person",
+        "name": "Spencer Teague",
+        "url": "https://theharnesslab.dev/"
       },
       "publisher": {
         "@type": "Organization",
+        "@id": "https://theharnesslab.com/#organization",
         "name": "The Harness Lab",
         "url": "https://theharnesslab.com/"
       },
@@ -62,6 +75,36 @@
           "position": 2,
           "name": "Custom Business Software Engineering",
           "item": "https://theharnesslab.dev/business-software-engineering/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://theharnesslab.dev/business-software-engineering/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does The Harness Lab enforce multi-tenant isolation in SaaS and internal business software?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Authenticated tenant identity is bound directly into SQL queries, cache keys, worker job payloads, and outbound third-party provider profiles before any data is retrieved or disclosed, enforcing default-deny authorization across every route and background queue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are Stripe payments, webhooks, and external API integrations made idempotent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every consequential write binds to a deterministic intent key, persists ATTEMPTING prior to crossing the network boundary, verifies webhook signatures fail-closed, and reconciles ambiguous timeouts against provider transaction receipts before allowing retries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where should business software use frontier LLMs versus deterministic code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Frontier models handle unstructured document intake, classification, and bounded draft proposals, whereas fee math, ledger balances, access control, inventory reservations, and exact ownership fractions execute in deterministic, mutation-tested code."
+          }
         }
       ]
     }
@@ -91,9 +134,10 @@
     <div class="main-nav" id="main-nav">
       <nav aria-label="Primary engineering chapters">
         <ul class="nav-list">
-          <li><a href="/#perihelion-loop"><span class="nav-num">I</span> Perihelion Loop</a></li>
-          <li><a href="/#architecture"><span class="nav-num">II</span> Architecture</a></li>
-          <li><a href="/#execution-lab"><span class="nav-num">III</span> Execution Lab</a></li>
+          <li><a href="/#perihelion-loop"><span class="nav-num">I</span> Harnesses</a></li>
+          <li><a href="/#title-engines"><span class="nav-num">II</span> Title Engines</a></li>
+          <li><a href="/#architecture"><span class="nav-num">III</span> Architecture</a></li>
+          <li><a href="/#execution-lab"><span class="nav-num">IV</span> Labs</a></li>
           <li><a href="/landman-title-systems/">Landman Systems</a></li>
           <li><a href="/workflow-automation-engineering/">Workflow Guide</a></li>
           <li><a href="/business-software-engineering/" aria-current="page">Business Systems</a></li>
@@ -115,7 +159,7 @@
       <span>Monograph C · Custom Business Software Engineering</span>
     </nav>
 
-    <p class="eyebrow">Engineering Monograph · Updated November 17, 2026</p>
+    <p class="eyebrow">Engineering Monograph · Updated November 18, 2026</p>
     <h1>Custom business software engineering from the interface to the <em>final handoff.</em></h1>
     <p class="lead">A public marketing site, an internal operator cockpit, and an API integration expose three surfaces of the same operating ledger. Designing the canonical record, tenant boundary, and recovery protocol alongside the UI keeps fast software trustworthy under real load.</p>
 
@@ -138,14 +182,14 @@
 
     <h2>Define the canonical record before wiring integrations</h2>
     <p>Identify the authoritative store, immutable entity IDs, monetary minor-unit types, attachment digests, and audit trail before writing glue code. Specify field-level ownership explicitly: bidirectional sync requires a domain conflict rule because wall-clock timestamps drift across SaaS providers.</p>
-    <p>Keep credentials strictly server-side inside narrow capability adapters. As proven in our BrandStreams and Wealth &amp; Powers OS hardening passes (<a class="inline-link" href="/#systems">Chapter IV · Production Systems</a>), provider API keys that route by header rather than body must default-deny unless bound to a verified tenant profile.</p>
+    <p>Keep credentials strictly server-side inside narrow capability adapters. As proven in our BrandStreams and Wealth &amp; Powers OS hardening passes (<a class="inline-link" href="/#systems">Chapter V · Production Systems</a>), provider API keys that route by header rather than body must default-deny unless bound to a verified tenant profile.</p>
 
     <h2>Make integration outcomes inspectable</h2>
     <p>Webhooks deliver at-least-once; outbound calls fail mid-commit. Bind every consequential operation to a deterministic intent key, persist <code>ATTEMPTING</code> prior to dispatch, and reconcile timeouts against provider receipts before permitting retries.</p>
     <p>The <a class="inline-link" href="https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2">HTTP specification's idempotency semantics (RFC 9110)</a> cover transport methods; business-level safety depends on the receiving API's idempotency window and our <a class="inline-link" href="/workflow-automation-engineering/">workflow automation reconciliation model</a>.</p>
 
     <h2>Use AI for bounded interpretation, deterministic code for truth</h2>
-    <p>Classification, messy document intake, and draft generation benefit from frontier models; fee calculations, permission checks, inventory reservations, and ledger balances belong in deterministic, mutation-tested code. See our <a class="inline-link" href="/landman-title-systems/">landman title systems architecture</a> for how model interpretation and exact arithmetic coexist cleanly.</p>
+    <p>Classification, messy document intake, and draft generation benefit from frontier models; fee calculations, permission checks, inventory reservations, and ledger balances belong in deterministic, mutation-tested code. Inspect how these boundaries run in production across <a class="inline-link" href="https://title-desk.com/">Title-Desk</a>, <a class="inline-link" href="https://artificiallandman.io/">Artificial Landman</a>, and <a class="inline-link" href="https://apex-build.dev/">APEX.BUILD</a>, and read our <a class="inline-link" href="/landman-title-systems/">landman title systems architecture</a> for how model interpretation and exact arithmetic coexist cleanly.</p>
 
     <h2>Scope a custom build with 100% client-owned handover</h2>
     <p>On our commercial studio flagship, The Harness Lab delivers <a class="inline-link" href="https://theharnesslab.com/website-design-development/">business websites</a>, <a class="inline-link" href="https://theharnesslab.com/custom-software-development/">custom software applications</a>, <a class="inline-link" href="https://theharnesslab.com/internal-tools-development/">internal operator tools</a>, <a class="inline-link" href="https://theharnesslab.com/api-integrations/">API integrations</a>, and <a class="inline-link" href="https://theharnesslab.com/ai-workflow-automation/">AI workflow harnesses</a>.</p>
@@ -174,9 +218,11 @@
         <h3>Foundry (.dev)</h3>
         <ul>
           <li><a href="/">Engineering Foundry Home</a></li>
-          <li><a href="/#perihelion-loop">I · Perihelion Loop</a></li>
-          <li><a href="/#systems">IV · Production Systems</a></li>
-          <li><a href="/#verification-kit">V · 12-Tool Verification Bench</a></li>
+          <li><a href="/#perihelion-loop">I · Perihelion Loop &amp; Harnesses</a></li>
+          <li><a href="/#title-engines">II · Title Engines</a></li>
+          <li><a href="/#systems">V · Production Systems</a></li>
+          <li><a href="/#verification-kit">VI · 12-Tool Verification Bench</a></li>
+          <li><a href="/#build-ledger">VII · 28-Build Ledger</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -185,15 +231,18 @@
           <li><a href="/landman-title-systems/">Landman Title Research Systems</a></li>
           <li><a href="/workflow-automation-engineering/">AI Workflow Automation Engineering</a></li>
           <li><a href="/business-software-engineering/">Custom Business Software Engineering</a></li>
+          <li><a href="/llms.txt">LLM Reference (llms.txt)</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>Commercial Forge (.com)</h3>
+        <h3>Commercial Forge &amp; Live Platforms</h3>
         <ul>
           <li><a href="https://theharnesslab.com/">theharnesslab.com · Studio Home ↗</a></li>
           <li><a href="https://theharnesslab.com/custom-software-development/">Custom Software Development ↗</a></li>
           <li><a href="https://theharnesslab.com/internal-tools-development/">Internal Tools Development ↗</a></li>
-          <li><a href="https://theharnesslab.com/api-integrations/">API Integration Services ↗</a></li>
+          <li><a href="https://title-desk.com/">Title-Desk Web Platform ↗</a></li>
+          <li><a href="https://artificiallandman.io/">Artificial Landman ↗</a></li>
+          <li><a href="https://apex-build.dev/">APEX.BUILD ↗</a></li>
         </ul>
       </div>
     </div>

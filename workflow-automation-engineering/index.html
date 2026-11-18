@@ -4,17 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Workflow Automation Engineering | The Harness Lab (.dev)</title>
-<meta name="description" content="Design reliable AI workflow automation with Perihelion Loop patterns: explicit state, constrained tools, effect reconciliation, evidence provenance, and holdout-level verification.">
+<meta name="description" content="Design reliable AI workflow automation with Perihelion Loop patterns: explicit state, zero-trust tools, receipt reconciliation &amp; holdout verification.">
 <link rel="canonical" href="https://theharnesslab.dev/workflow-automation-engineering/">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Engineering Reference">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#000000">
+<meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="The Harness Lab Engineering Foundry">
 <meta property="og:title" content="AI Workflow Automation Engineering | The Harness Lab (.dev)">
 <meta property="og:description" content="Explicit state transitions, zero-trust tool boundaries, post-dispatch receipt reconciliation, and transactional Karpathy holdout gates.">
 <meta property="og:url" content="https://theharnesslab.dev/workflow-automation-engineering/">
 <meta property="og:image" content="https://theharnesslab.dev/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Harness Lab Engineering Foundry (.dev) — AI Workflow Automation Engineering">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Workflow Automation Engineering | The Harness Lab (.dev)">
+<meta name="twitter:description" content="Explicit state transitions, zero-trust tool boundaries, post-dispatch receipt reconciliation, and transactional Karpathy holdout gates.">
+<meta name="twitter:image" content="https://theharnesslab.dev/social-card.png">
+<meta name="twitter:image:alt" content="The Harness Lab Engineering Foundry (.dev) — AI Workflow Automation Engineering">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/hermes-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,16 +41,19 @@
       "@id": "https://theharnesslab.dev/workflow-automation-engineering/#article",
       "url": "https://theharnesslab.dev/workflow-automation-engineering/",
       "headline": "Workflow automation engineering beyond the model response.",
-      "description": "Design reliable AI workflow automation with explicit state, constrained tools, effect reconciliation, evidence provenance and artifact-level verification.",
+      "description": "Design reliable AI workflow automation with explicit state, constrained tools, effect reconciliation, evidence provenance, and holdout-level artifact verification.",
       "datePublished": "2026-10-26",
-      "dateModified": "2026-11-17",
+      "dateModified": "2026-11-18",
+      "inLanguage": "en-US",
+      "image": "https://theharnesslab.dev/social-card.png",
       "author": {
-        "@type": "Organization",
-        "name": "The Harness Lab",
-        "url": "https://theharnesslab.com/"
+        "@type": "Person",
+        "name": "Spencer Teague",
+        "url": "https://theharnesslab.dev/"
       },
       "publisher": {
         "@type": "Organization",
+        "@id": "https://theharnesslab.com/#organization",
         "name": "The Harness Lab",
         "url": "https://theharnesslab.com/"
       },
@@ -62,6 +75,36 @@
           "position": 2,
           "name": "AI Workflow Automation Engineering",
           "item": "https://theharnesslab.dev/workflow-automation-engineering/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://theharnesslab.dev/workflow-automation-engineering/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do typed DAG contracts make multi-agent AI workflows deterministic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every node in a Perihelion Loop work graph compiles to ONE JOB · ONE INPUT · ONE OUTPUT · FAILS AS, with schema-validated artifact edges, a hard cap of max 3 retries, a 2-dry-round stop rule, and deterministic code joins rather than LLM-controlled branch merges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should a workflow enter UNCERTAIN instead of retrying after a network timeout?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A socket timeout after dispatch means the caller lost the response, not that the remote API failed. Retrying blindly risks double-charging, duplicate webhooks, or duplicate deliveries. Recording ATTEMPTING prior to dispatch and reconciling provider receipts from UNCERTAIN confirms completion without re-executing the external effect."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are untrusted documents and web pages fenced against prompt injection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Retrieved documents, web pages, emails, and model outputs are treated strictly as untrusted data. Tool adapters derive authority solely from authenticated workflow scope, while cloudroom.dev VM execution enforces macAccessLevel === 'off', disconnected cloud GitHub, SHA-256 byte manifests, and local quarantine."
+          }
         }
       ]
     }
@@ -91,9 +134,10 @@
     <div class="main-nav" id="main-nav">
       <nav aria-label="Primary engineering chapters">
         <ul class="nav-list">
-          <li><a href="/#perihelion-loop"><span class="nav-num">I</span> Perihelion Loop</a></li>
-          <li><a href="/#architecture"><span class="nav-num">II</span> Architecture</a></li>
-          <li><a href="/#execution-lab"><span class="nav-num">III</span> Execution Lab</a></li>
+          <li><a href="/#perihelion-loop"><span class="nav-num">I</span> Harnesses</a></li>
+          <li><a href="/#title-engines"><span class="nav-num">II</span> Title Engines</a></li>
+          <li><a href="/#architecture"><span class="nav-num">III</span> Architecture</a></li>
+          <li><a href="/#execution-lab"><span class="nav-num">IV</span> Labs</a></li>
           <li><a href="/landman-title-systems/">Landman Systems</a></li>
           <li><a href="/workflow-automation-engineering/" aria-current="page">Workflow Guide</a></li>
           <li><a href="/business-software-engineering/">Business Systems</a></li>
@@ -115,7 +159,7 @@
       <span>Monograph B · AI Workflow Automation Engineering</span>
     </nav>
 
-    <p class="eyebrow">Engineering Monograph · Updated November 17, 2026</p>
+    <p class="eyebrow">Engineering Monograph · Updated November 18, 2026</p>
     <h1>Workflow automation engineering beyond the <em>model response.</em></h1>
     <p class="lead">A production workflow begins—not ends—when a language model returns tokens. Reliable automation requires a formal definition of valid state, a zero-trust boundary around permitted effects, and independent proof that the intended output survived every transformation.</p>
 
@@ -146,7 +190,7 @@
 
     <h2>Verify at the out-of-band artifact boundary</h2>
     <p>Evaluate the exact bytes the downstream operator or customer will consume, using an independent local runner the proposing agent cannot touch. Combine null-tested regressions (must fail on unchanged <code>BASE</code>, pass on <code>HEAD</code>), hidden holdout suites, and tool-less advisor diff audits.</p>
-    <p>See our <a class="inline-link" href="/landman-title-systems/">landman title systems monograph</a> and <a class="inline-link" href="/business-software-engineering/">custom business software monograph</a> for how these boundaries govern financial, legal-support, and multi-tenant SaaS builds.</p>
+    <p>These exact orchestration invariants power our live dual-examiner title workflows on <a class="inline-link" href="https://title-desk.com/">Title-Desk</a> and <a class="inline-link" href="https://artificiallandman.io/">Artificial Landman</a>. See our <a class="inline-link" href="/landman-title-systems/">landman title systems monograph</a> and <a class="inline-link" href="/business-software-engineering/">custom business software monograph</a> for how these boundaries govern financial, legal-support, and multi-tenant SaaS builds.</p>
 
     <h2>Operate the simulation or scope a production harness</h2>
     <p>Step through post-dispatch timeouts and Karpathy Loop holdout rejections in our <a class="inline-link" href="/#execution-lab">interactive Execution &amp; Karpathy Labs</a>, review the <a class="inline-link" href="/#verification-kit">12-tool verification bench</a>, or engage The Harness Lab commercially via <a class="inline-link" href="https://theharnesslab.com/ai-workflow-automation/">AI workflow automation services on theharnesslab.com</a>.</p>
@@ -175,9 +219,11 @@
         <h3>Foundry (.dev)</h3>
         <ul>
           <li><a href="/">Engineering Foundry Home</a></li>
-          <li><a href="/#perihelion-loop">I · Perihelion Loop</a></li>
-          <li><a href="/#architecture">II · Three-Plane Architecture</a></li>
-          <li><a href="/#verification-kit">V · 12-Tool Verification Bench</a></li>
+          <li><a href="/#perihelion-loop">I · Perihelion Loop &amp; Harnesses</a></li>
+          <li><a href="/#title-engines">II · Title Engines</a></li>
+          <li><a href="/#architecture">III · Three-Plane Architecture</a></li>
+          <li><a href="/#execution-lab">IV · Execution &amp; Karpathy Labs</a></li>
+          <li><a href="/#verification-kit">VI · 12-Tool Verification Bench</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -186,13 +232,16 @@
           <li><a href="/landman-title-systems/">Landman Title Research Systems</a></li>
           <li><a href="/workflow-automation-engineering/">AI Workflow Automation Engineering</a></li>
           <li><a href="/business-software-engineering/">Custom Business Software Engineering</a></li>
+          <li><a href="/llms.txt">LLM Reference (llms.txt)</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>Commercial Forge (.com)</h3>
+        <h3>Commercial Forge &amp; Live Engines</h3>
         <ul>
           <li><a href="https://theharnesslab.com/">theharnesslab.com · Studio Home ↗</a></li>
           <li><a href="https://theharnesslab.com/ai-workflow-automation/">AI Workflow Automation Services ↗</a></li>
+          <li><a href="https://title-desk.com/">Title-Desk Web Platform ↗</a></li>
+          <li><a href="https://artificiallandman.io/">Artificial Landman ↗</a></li>
           <li><a href="mailto:spencer@theharnesslab.com">spencer@theharnesslab.com</a></li>
         </ul>
       </div>

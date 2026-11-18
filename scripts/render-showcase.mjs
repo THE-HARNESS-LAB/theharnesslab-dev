@@ -67,7 +67,7 @@ export function renderLightbox() {
       </div>
     </div>
     <div class="dialog-well">
-      <img data-lightbox-img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+      <img data-lightbox-img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="1440" height="900" alt="">
     </div>
     <p class="dialog-caption" data-lightbox-caption></p>
   </dialog>`;

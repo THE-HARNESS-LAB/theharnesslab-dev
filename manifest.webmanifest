@@ -1,0 +1,40 @@
+{
+  "name": "The Harness Lab — Engineering Foundry (.dev)",
+  "short_name": "Harness Lab .dev",
+  "description": "The Harness Lab Engineering Foundry (.dev): Perihelion Loop, Rogue Agents, deterministic state machines, 12-tool verification bench & 28-build ledger.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/hermes-mark.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/harness-lab-emblem-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/brand/harness-lab-black-marble-512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/brand/harness-lab-black-marble.webp",
+      "sizes": "1024x1024",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}

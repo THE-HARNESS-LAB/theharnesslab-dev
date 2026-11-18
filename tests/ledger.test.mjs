@@ -130,9 +130,11 @@ test('outbound links stay on the .dev allowlist and the private repos are never 
   const bad = hrefs.filter((h) => !isAllowedDevLink(h) && !(citations.has(new URL(h).hostname) && fieldNotes.includes(h)));
   assert.deepEqual(bad, []);
   assert.doesNotMatch(html, /github\.com\/spencerandtheteagues/);
-  for (const live of ['https://title-desk.com/', 'https://desktop.title-desk.com/', 'https://artificiallandman.io/', 'https://brandstream.my/', 'https://apex-build.dev/', 'https://theharnesslab.com/']) {
+  assert.doesNotMatch(html, /https?:\/\/(?:www\.)?brandstream\.my/i);
+  for (const live of ['https://title-desk.com/', 'https://desktop.title-desk.com/', 'https://artificiallandman.io/', 'https://apex-build.dev/', 'https://theharnesslab.com/']) {
     assert.ok(hrefs.includes(live), live);
   }
+  assert.equal(isAllowedDevLink('https://brandstream.my/'), false);
   assert.equal(isAllowedDevLink('https://github.com/spencerandtheteagues/apex-build-platform'), false);
   assert.equal(isAllowedDevLink('https://github.com/THE-HARNESS-LAB/titledesk'), true);
   assert.equal(isAllowedDevLink('https://example.com/'), false);
@@ -192,4 +194,72 @@ test('filters partition the ledger and the timeline geometry stays inside the ch
 
 test('index.html is in sync with the data modules (run scripts/render-showcase.mjs)', () => {
   assert.equal(renderIndex(html), html);
+});
+
+test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay valid', () => {
+  const pages = [
+    ['index.html', html],
+    ['landman-title-systems/index.html', readFileSync(join(root, 'landman-title-systems/index.html'), 'utf8')],
+    ['workflow-automation-engineering/index.html', readFileSync(join(root, 'workflow-automation-engineering/index.html'), 'utf8')],
+    ['business-software-engineering/index.html', readFileSync(join(root, 'business-software-engineering/index.html'), 'utf8')],
+  ];
+  for (const [name, doc] of pages) {
+    assert.match(doc, /rel="manifest"\s+href="\/manifest\.webmanifest"/, name);
+    assert.match(doc, /rel="alternate"\s+type="text\/plain"\s+href="\/llms\.txt"/, name);
+    assert.match(doc, /max-snippet:-1,max-video-preview:-1/, name);
+    assert.match(doc, /property="og:image:width"\s+content="1200"/, name);
+    assert.match(doc, /property="og:image:height"\s+content="630"/, name);
+    assert.doesNotMatch(doc, /https?:\/\/(?:www\.)?brandstream\.my/i, `${name} must not link brandstream.my while DNS is locked`);
+    assert.doesNotMatch(doc, /happy[\s-]?homes|charlie/i, name);
+
+    const imgs = [...doc.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
+    assert.ok(imgs.length >= 2, name);
+    for (const tag of imgs) {
+      assert.match(tag, /\bwidth="\d+"/, `${name} img missing width: ${tag}`);
+      assert.match(tag, /\bheight="\d+"/, `${name} img missing height: ${tag}`);
+    }
+
+    const ldMatch = doc.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/);
+    assert.ok(ldMatch, `${name} JSON-LD`);
+    const ld = JSON.parse(ldMatch[1]);
+    assert.ok(Array.isArray(ld['@graph']), name);
+    const types = ld['@graph'].map((node) => node['@type']);
+    assert.ok(types.includes('FAQPage'), `${name} FAQPage`);
+    assert.match(JSON.stringify(ld), /"dateModified":"2026-11-18"/, `${name} dateModified`);
+  }
+
+  for (const [name, doc] of pages.slice(1)) {
+    assert.match(doc, /href="\/#perihelion-loop"><span class="nav-num">I<\/span> Harnesses/, name);
+    assert.match(doc, /href="\/#title-engines"><span class="nav-num">II<\/span> Title Engines/, name);
+    assert.match(doc, /href="\/#architecture"><span class="nav-num">III<\/span> Architecture/, name);
+    assert.match(doc, /href="\/#execution-lab"><span class="nav-num">IV<\/span> Labs/, name);
+    assert.match(doc, /https:\/\/title-desk\.com\//, name);
+    assert.match(doc, /https:\/\/artificiallandman\.io\//, name);
+  }
+
+  const stageTag = html.match(/<div class="medallion-stage"[^>]*>/)?.[0] || '';
+  assert.doesNotMatch(stageTag, /\brole=|\btabindex=/);
+
+  const robots = readFileSync(join(root, 'robots.txt'), 'utf8');
+  for (const bot of ['Googlebot', 'Bingbot', 'OAI-SearchBot', 'ChatGPT-User', 'GPTBot', 'Claude-SearchBot', 'Claude-User', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']) {
+    assert.match(robots, new RegExp(`User-agent:\\s*${bot}`), bot);
+  }
+  const sitemap = readFileSync(join(root, 'sitemap.xml'), 'utf8');
+  assert.equal((sitemap.match(/<lastmod>2026-11-18<\/lastmod>/g) || []).length, 4);
+
+  const manifest = JSON.parse(readFileSync(join(root, 'manifest.webmanifest'), 'utf8'));
+  assert.equal(manifest.start_url, '/');
+  assert.ok(manifest.icons.length >= 4);
+
+  assert.equal(readFileSync(join(root, 'd379420ff0a7ca5d7bada98549699bc2.txt'), 'utf8').trim(), 'd379420ff0a7ca5d7bada98549699bc2');
+
+  for (const llmFile of ['llms.txt', 'llms-full.txt']) {
+    const content = readFileSync(join(root, llmFile), 'utf8');
+    assert.match(content, /Perihelion Loop/);
+    assert.match(content, /1,031,987/);
+    assert.match(content, /3,923/);
+    assert.match(content, /New Mexico/);
+    assert.doesNotMatch(content, /brandstream\.my/i, llmFile);
+    assert.doesNotMatch(content, /happy[\s-]?homes|charlie/i, llmFile);
+  }
 });
