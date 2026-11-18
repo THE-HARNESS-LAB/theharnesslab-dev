@@ -87,7 +87,7 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 - **Workbook Readback (`1fcd538` / `9c8af3e`, deployed 2026-11-18):** After the `.xlsx` workbook is written, a separate reader reopens the file and compares every owner, mineral interest fraction, net mineral acres figure, and curative requirement against the examination result (stopping delivery and handling the run as failed on any mismatch, splitting cells over Excel's `32,767`-character limit rather than truncating, and writing fractions whose numerator or denominator exceeds `15` digits as exact text rather than rounded numbers).
 
 ### 5.1 TitleDesk (`https://title-desk.com/`)
-- **Scale:** 22,638 hosted LOC, 53 hosted commits, `7,070 / 7,070 PASS` shared engine tests.
+- **Scale:** 22,638 hosted LOC, 53 hosted commits, acceptance suite at commit `4bbb3e2`.
 - **Audience & Pipeline:** Hosted Texas mineral title examination for independent landmen and abstractors. Survey landing -> Passwordless email sign-in -> Deterministic pre-run intake verifier + ClamAV Linux worker scan -> Prepaid run execution -> Readback-verified four-sheet draft Excel workbook.
 
 ### 5.2 TitleDesk Agent (`https://desktop.title-desk.com/`)
@@ -95,7 +95,7 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 - **Capabilities:** The TitleDesk desktop app across Windows, macOS, and Linux (sold and licensed at `desktop.title-desk.com`) operating through landman-authenticated sessions on CountyRecords.com, CourthouseDirect, and TexasFile; clerk index merging (where sheriffs and the State are never mistaken for grantor surnames, and ambiguous initialed decedents never corrupt estates); stated-source-deed direct book/page retrieval when clerk index rows are missing; zero-cost local `tesseract.js` + `@napi-rs/canvas` main-process OCR with automatic exhibit spillover re-reads; human-approved conveyance queue; heirship family graphs; and `exact.mjs` reduced `BigInt` numerator/denominator mineral fraction & net-mineral-acre arithmetic.
 
 ### 5.3 Artificial Landman (`https://artificiallandman.io/`)
-- **Scale:** 23,148 hosted LOC, 54 commits, `7,070 / 7,070 PASS` shared engine tests.
+- **Scale:** 23,148 hosted LOC, 54 commits, acceptance suite at commit `520f777`.
 - **Positioning:** Hosted Texas mineral title examination for land teams, brokerages and operators who run many assignments. Artificial Landman runs the same Texas mineral-interest engine as TitleDesk, packaged, sold and supported on its own.
 
 ---
@@ -157,6 +157,6 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 ## 8. Legal Entity, Contact & Security Disclosure
 
 - **Legal Entity:** `The Harness Lab LLC, a Texas limited liability company (Texas SOS File No. 806765129)` · Venue: `Tom Green County, Texas` · `© 2026 The Harness Lab LLC`
-- **Principal Systems Engineer:** Spencer Teague — `spencer@theharnesslab.com`
+- **Principal Systems Engineer:** Spencer Teague — `sales@theharnesslab.com`
 - **Commercial Work Orders & Public Contact:** `https://theharnesslab.com/#contact` (`sales@theharnesslab.com`)
 - **Security Policy:** `https://theharnesslab.dev/.well-known/security.txt` (`mailto:sales@theharnesslab.com`)

@@ -287,6 +287,7 @@ test('SHARED-FACTS naming, legal entity, OPSEC scrub, security.txt, and accessib
     /TitleDesk Desktop/,
     /TitleDesk Desktop Agent/i,
     /TitleDesk Agent Desktop/i,
+    /spencer@theharnesslab\.com/i,
     /New Mexico/i,
     /written only when all three agree/i,
     /three-way consensus/i,
