@@ -938,8 +938,8 @@ export const LEDGER_BUILDS = Object.freeze([
   {
     "order": 16,
     "slug": "titledesk",
-    "title": "TitleDesk Desktop (Desktop App, Predecessor & Core Engine)",
-    "shortTitle": "TitleDesk Desktop",
+    "title": "TitleDesk Agent (Desktop App, Predecessor & Core Engine)",
+    "shortTitle": "TitleDesk Agent",
     "category": "Flagship Desktop Vertical AI Product (Texas Mineral Title)",
     "eraId": "2026-summer",
     "tiers": [
@@ -976,7 +976,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "Lineage: TractPilot Agent → HARNESS-LAB-BUILDS | THE-HARNESS-LAB/titledesk-agent · HARNESS-LAB-BUILDS",
     "liveUrl": "https://desktop.title-desk.com/",
     "liveLabel": "desktop.title-desk.com",
-    "idea": "Cross-platform Electron oil-and-gas land title workstation (Windows, macOS, and Linux; installed binary named TitleDesk Agent) built for practicing petroleum landmen examining Texas mineral title (one county per run, current mineral interest owners only). Turns scanned county clerk deed books and local folders into source-linked runsheets, exact-fraction mineral/NMA ownership ledgers, and draft four-sheet client Excel workbooks for review by a qualified landman or attorney — running zero-cost local OCR first so landmen pay zero per-page cloud OCR fees and keep confidential deeds local.",
+    "idea": "The TitleDesk desktop app (TitleDesk Agent across Windows, macOS, and Linux) built for practicing petroleum landmen examining Texas mineral title (one county per run, current mineral interest owners only). Turns scanned county clerk deed books and local folders into source-linked runsheets, exact-fraction mineral/NMA ownership ledgers, and draft four-sheet client Excel workbooks for review by a qualified landman or attorney — running zero-cost local OCR first so landmen pay zero per-page cloud OCR fees and keep confidential deeds local.",
     "architecture": "Cross-platform Electron + React + TypeScript desktop app (src/main, src/renderer, src/shared — growing from 4,288 LOC in tractpilot-agent on Aug 2, 2026 and 25,623 LOC at commit #1 on Aug 6, 2026 to 196,693 LOC on stable and 262,305 authored LOC across 1,184 files on the Nov 11, 2026 repair branch), featuring main-process tesseract.js + @napi-rs/canvas offline OCR, exact BigInt fraction arithmetic (exact.mjs / titleEngine.ts), OOXML workbook writer with independent readback verification, Cloudflare Worker licensing (services/licensing-worker), synthetic Escalera County Clerk demo portal (records-site), and title-desk.com product site (titledesk-site, 9,739 LOC).",
     "aiLandscape": {
       "openai": "OpenAI's GPT-5.6 family (Sol flagship, Terra mid-tier, Luna fast tier, launched July 2026 with ultra parallel agent mode) received major August 2026 API price cuts (up to 80% on Luna, 20%+ on Sol/Terra) and Cerebras Ultrafast previews; legacy o3 retired in late August.",
@@ -1020,8 +1020,8 @@ export const LEDGER_BUILDS = Object.freeze([
       "src640": "/assets/showcase/titledesk/04-workspace-runsheet-640.webp",
       "width": 1600,
       "height": 1000,
-      "alt": "TitleDesk Desktop v0.2.19 — Source-linked chronological runsheet with automatic chain-of-title gap flagging",
-      "caption": "TitleDesk Desktop v0.2.19 — Source-linked chronological runsheet with automatic chain-of-title gap flagging"
+      "alt": "TitleDesk Agent v0.2.19 — Source-linked chronological runsheet with automatic chain-of-title gap flagging",
+      "caption": "TitleDesk Agent v0.2.19 — Source-linked chronological runsheet with automatic chain-of-title gap flagging"
     }
   },
   {
@@ -1061,7 +1061,7 @@ export const LEDGER_BUILDS = Object.freeze([
     "lineage": "records-site",
     "liveUrl": null,
     "liveLabel": null,
-    "idea": "Fictional county clerk public-records portal ('Escalera County Clerk') built with 100% synthetic deeds, grantors/grantees, volume/page citations, and recordings so TitleDesk and TitleDesk Desktop product demos and OAuth app-verification videos never expose real landowner or client PII.",
+    "idea": "Fictional county clerk public-records portal ('Escalera County Clerk') built with 100% synthetic deeds, grantors/grantees, volume/page citations, and recordings so TitleDesk and TitleDesk Agent product demos and OAuth app-verification videos never expose real landowner or client PII.",
     "architecture": "Static HTML5 + CSS public-records search & instrument viewer portal (3 commits, 264 authored LOC, Aug 9, 2026).",
     "aiLandscape": {
       "openai": "OpenAI's GPT-5.6 family (Sol flagship, Terra mid-tier, Luna fast tier, launched July 2026 with ultra parallel agent mode) received major August 2026 API price cuts (up to 80% on Luna, 20%+ on Sol/Terra) and Cerebras Ultrafast previews; legacy o3 retired in late August.",
@@ -1707,11 +1707,11 @@ export const LEDGER_BUILDS = Object.freeze([
 export const TRENCH_CAMPAIGNS = Object.freeze([
   {
     id: 'titledesk',
-    tab: 'TitleDesk, TitleDesk Desktop & Artificial Landman',
+    tab: 'TitleDesk, TitleDesk Agent & Artificial Landman',
     meta: '4 Months (Aug–Nov 2026) · 1,662 Commits · 305+ Branches',
     headline: 'Four months refusing to let Texas courthouse title break the engine.',
     summary:
-      'Getting an AI demo to summarize one clean PDF takes an afternoon. Getting a Texas mineral-interest title engine to survive crooked 1938 scans, missing clerk index rows, namesake decedents and exact net-mineral-acre math took four months (August–November 2026, from the Aug 2 TractPilot prototype through TitleDesk Desktop and the hosted TitleDesk & Artificial Landman launches) across 305+ git branches, 40 isolated agent worktrees, 64 packaged release builds and 24 GB of primary-source audit evidence.',
+      'Getting an AI demo to summarize one clean PDF takes an afternoon. Getting a Texas mineral-interest title engine to survive crooked 1938 scans, missing clerk index rows, namesake decedents and exact net-mineral-acre math took four months (August–November 2026, from the Aug 2 TractPilot prototype through TitleDesk Agent and the hosted TitleDesk & Artificial Landman launches) across 305+ git branches, 40 isolated agent worktrees, 64 packaged release builds and 24 GB of primary-source audit evidence.',
     metrics: [
       ['1,662', 'Unique git commits'],
       ['305+', 'Branches & 40 worktrees'],
@@ -1724,7 +1724,7 @@ export const TRENCH_CAMPAIGNS = Object.freeze([
       {
         broke: 'Century-old crooked courthouse scans and runaway vision-API bills',
         solved:
-          "Built zero-cost local OCR inside TitleDesk Desktop's Electron main process across Windows, macOS, and Linux (tesseract.js + @napi-rs/canvas), plus automatic second reads when a tract's legal description spills onto an attached exhibit.",
+          "Built zero-cost local OCR inside TitleDesk Agent's Electron main process across Windows, macOS, and Linux (tesseract.js + @napi-rs/canvas), plus automatic second reads when a tract's legal description spills onto an attached exhibit.",
       },
       {
         broke: 'County record retrieval across three clerk platforms, and index rows that simply are not there',

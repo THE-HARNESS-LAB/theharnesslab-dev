@@ -137,7 +137,7 @@ try {
     assert.equal(await dialog.evaluate((d) => d.open), false);
     assert.ok(await zoom.evaluate((el) => el === document.activeElement), `${id}: focus restored`);
   }
-  results.push('Rogue Agents (4), TitleDesk (5), TitleDesk Desktop (8) and Artificial Landman (5) galleries switch, zoom, page and close with focus restored.');
+  results.push('Rogue Agents (4), TitleDesk (5), TitleDesk Agent (8) and Artificial Landman (5) galleries switch, zoom, page and close with focus restored.');
 
   // Single screenshot buttons (harness card + every build card that has one).
   const shots = page.locator('[data-lightbox-src]');
