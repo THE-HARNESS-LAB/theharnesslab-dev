@@ -7,7 +7,7 @@
 ## 1. Operating Philosophy & Dual-Site Topology
 
 The Harness Lab operates across two paired properties:
-1. **`https://theharnesslab.dev/` (Black Nero Marquina Engineering Foundry):** Systems R&D, autonomous verification harnesses, pure deterministic state-machine laboratories, architectural monographs, the 12-tool pinned verification bench, and the commit-verified 28-build evolution ledger.
+1. **`https://theharnesslab.dev/` (Black Nero Marquina Engineering Foundry):** Systems R&D, autonomous verification harnesses, pure deterministic state-machine laboratories, architectural monographs, the 12-tool pinned verification bench, and the commit-verified 27-build evolution ledger.
 2. **`https://theharnesslab.com/` (Copper & White Carrara Commercial Forge):** Commercial studio flagship for custom software engineering, AI workflow automation, internal operator tools, API integrations, teardowns, and 100% client-owned software delivery.
 
 **Foundry Invariant:** Models participate in bounded interpretation; deterministic harness code owns state, authority, isolation, exact domain arithmetic, and release proof. An untrusted candidate never mutates authoritative state until an immutable out-of-worktree evaluator, null-tested regression witness, and cryptographic manifest receipt establish exact byte identity.
@@ -106,10 +106,10 @@ Engineered across a 6-month campaign (305+ branches, 40 isolated worktrees, 64 p
 
 ---
 
-## 7. Complete 28-Build Evolution Ledger (July 2025 – November 2026)
+## 7. Complete 27-Build Evolution Ledger (July 2025 – November 2026)
 
 - **Methodology:** Authored source lines counted reproducibly at first and latest git commits excluding `node_modules`, lockfiles, build outputs, vendored SDKs, and binary assets; deduplicated across shared trees. Durations rounded UP to whole months; under 1 month labeled `1 Month (Rapid Sprint)`.
-- **Totals:** **28 Verified Builds** · **1,031,987 Deduplicated Authored LOC** · **3,923 Verified Commits** · **Peak Parallelism: 9 concurrent builds in flight (November 2026)**.
+- **Totals:** **27 Verified Builds** · **1,031,828 Deduplicated Authored LOC** · **3,922 Verified Commits** · **Peak Parallelism: 9 concurrent builds in flight (August 2026)**.
 
 | # | Build | Category | Duration | Commits | Initial -> Latest LOC | Live Surface |
 |---|---|---|---|---:|---:|---|
@@ -139,8 +139,7 @@ Engineered across a 6-month campaign (305+ branches, 40 isolated worktrees, 64 p
 | 24 | Kiln | Native macOS SwiftUI Application | 1 Month (Rapid Sprint) | 4 | 181 -> 181 | Forged macOS app |
 | 25 | TitleDesk Hosted Service | Hosted Vertical AI Examination Platform | 1 Month (Rapid Sprint) | 53 | 61 -> 22,638 | https://title-desk.com/ |
 | 26 | Artificial Landman | Hosted Mineral & Subsurface Title Platform | 1 Month (Rapid Sprint) | 54 | 61 -> 23,148 | https://artificiallandman.io/ |
-| 27 | Harness Lab macOS Screen Saver | Native macOS Objective-C Screen Saver | 1 Month (Rapid Sprint) | 1 | 159 -> 159 | Studio utility |
-| 28 | 24/7 AI Inbox Lead Watcher | Hardened Daemon & Prompt-Injection Red-Team | 1 Month (Rapid Sprint) | 2 | 1,394 -> 1,396 | In-house daemon |
+| 27 | 24/7 AI Inbox Lead Watcher | Hardened Daemon & Prompt-Injection Red-Team | 1 Month (Rapid Sprint) | 2 | 1,394 -> 1,396 | In-house daemon |
 
 ---
 

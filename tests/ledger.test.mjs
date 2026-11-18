@@ -24,25 +24,25 @@ const sources = {
   'ledger.mjs': readFileSync(join(root, 'ledger.mjs'), 'utf8'),
 };
 
-test('ledger holds exactly 28 builds with unique slugs and retired builds removed', () => {
-  assert.equal(LEDGER_BUILDS.length, 28);
-  assert.equal(LEDGER_SUMMARY.builds, 28);
-  assert.equal(new Set(LEDGER_BUILDS.map((b) => b.slug)).size, 28);
+test('ledger holds exactly 27 builds with unique slugs and retired builds removed', () => {
+  assert.equal(LEDGER_BUILDS.length, 27);
+  assert.equal(LEDGER_SUMMARY.builds, 27);
+  assert.equal(new Set(LEDGER_BUILDS.map((b) => b.slug)).size, 27);
   for (const b of LEDGER_BUILDS) assert.doesNotMatch(b.shortTitle, /…|\.\.\./, `${b.slug} title is truncated`);
   for (const [name, text] of Object.entries(sources)) {
-    assert.doesNotMatch(text, /happy[\s-]?homes|charlie/i, `${name} still references a retired build`);
+    assert.doesNotMatch(text, /happy[\s-]?homes|charlie|screen[\s-]?saver|HarnessLabSaver/i, `${name} still references a retired build`);
   }
-  for (const dir of ['happy-homes-texas', 'charlie-computer']) {
+  for (const dir of ['happy-homes-texas', 'charlie-computer', 'harnesslab-screensaver']) {
     assert.equal(existsSync(join(root, 'assets/showcase', dir)), false);
   }
 });
 
 test('ledger monuments use the deduplicated totals', () => {
-  assert.equal(LEDGER_SUMMARY.authoredLoc, 1031987);
-  assert.equal(LEDGER_SUMMARY.commits, 3923);
-  assert.match(html, /1,031,987/);
-  assert.match(html, /3,923/);
-  assert.match(html, /28 Verified Builds/);
+  assert.equal(LEDGER_SUMMARY.authoredLoc, 1031828);
+  assert.equal(LEDGER_SUMMARY.commits, 3922);
+  assert.match(html, /1,031,828/);
+  assert.match(html, /3,922/);
+  assert.match(html, /27 Verified Builds/);
   assert.match(html, /Parallel Multi-Harness Execution/);
 });
 
@@ -177,7 +177,7 @@ test('galleries ship the required screens and copy every image into assets/', ()
 });
 
 test('filters partition the ledger and the timeline geometry stays inside the chart', () => {
-  assert.equal(filterBuilds(LEDGER_BUILDS, 'all').length, 28);
+  assert.equal(filterBuilds(LEDGER_BUILDS, 'all').length, 27);
   const flagship = filterBuilds(LEDGER_BUILDS, 'flagship');
   const harness = filterBuilds(LEDGER_BUILDS, 'harness');
   const rapid = filterBuilds(LEDGER_BUILDS, 'rapid');
@@ -185,7 +185,7 @@ test('filters partition the ledger and the timeline geometry stays inside the ch
   assert.ok(rapid.every((b) => b.monthsLabel === RAPID_SPRINT));
   assert.throws(() => filterBuilds(LEDGER_BUILDS, 'nope'), RangeError);
   const geo = timelineGeometry(LEDGER_BUILDS);
-  assert.equal(geo.rows.length, 28);
+  assert.equal(geo.rows.length, 27);
   for (const r of geo.rows) {
     assert.ok(r.x >= geo.labelWidth && r.x + r.w <= geo.width, r.slug);
   }
@@ -210,7 +210,7 @@ test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay va
     assert.match(doc, /property="og:image:width"\s+content="1200"/, name);
     assert.match(doc, /property="og:image:height"\s+content="630"/, name);
     assert.doesNotMatch(doc, /https?:\/\/(?:www\.)?brandstream\.my/i, `${name} must not link brandstream.my while DNS is locked`);
-    assert.doesNotMatch(doc, /happy[\s-]?homes|charlie/i, name);
+    assert.doesNotMatch(doc, /happy[\s-]?homes|charlie|screen[\s-]?saver|HarnessLabSaver/i, name);
 
     const imgs = [...doc.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
     assert.ok(imgs.length >= 2, name);
@@ -256,10 +256,10 @@ test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay va
   for (const llmFile of ['llms.txt', 'llms-full.txt']) {
     const content = readFileSync(join(root, llmFile), 'utf8');
     assert.match(content, /Perihelion Loop/);
-    assert.match(content, /1,031,987/);
-    assert.match(content, /3,923/);
+    assert.match(content, /1,031,828/);
+    assert.match(content, /3,922/);
     assert.match(content, /New Mexico/);
     assert.doesNotMatch(content, /brandstream\.my/i, llmFile);
-    assert.doesNotMatch(content, /happy[\s-]?homes|charlie/i, llmFile);
+    assert.doesNotMatch(content, /happy[\s-]?homes|charlie|screen[\s-]?saver|HarnessLabSaver/i, llmFile);
   }
 });

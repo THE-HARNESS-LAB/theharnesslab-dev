@@ -1,15 +1,15 @@
-// The Harness Lab — 28-build evolution ledger (theharnesslab.dev Chapter VII).
+// The Harness Lab — 27-build evolution ledger (theharnesslab.dev Chapter VII).
 // Ported 2026-11-17 from the theharnesslab.com chronological timeline forensics
 // (per-repo first/latest commit SHAs, authored-source LOC excluding
-// node_modules, lockfiles, dist and vendor SDKs). Two builds were retired from
+// node_modules, lockfiles, dist and vendor SDKs). Personal experiments and retired builds are excluded from
 // the public record. Months are rounded UP to whole months from first to latest
 // commit; anything under one month is a Rapid Sprint.
 // Generated data — edit by hand only with care; tests/ledger.test.mjs guards it.
 
 export const LEDGER_SUMMARY = Object.freeze({
-  "builds": 28,
-  "authoredLoc": 1031987,
-  "commits": 3923,
+  "builds": 27,
+  "authoredLoc": 1031828,
+  "commits": 3922,
   "windowStart": "2025-07",
   "windowEnd": "2026-11"
 });
@@ -1652,60 +1652,6 @@ export const LEDGER_BUILDS = Object.freeze([
   },
   {
     "order": 27,
-    "slug": "harnesslab-screensaver",
-    "title": "The Harness Lab Native macOS Screen Saver",
-    "shortTitle": "Harness Lab macOS Screen Saver",
-    "category": "macOS Native Objective-C Screen Saver",
-    "eraId": "2026-fall",
-    "tiers": [
-      "rapid"
-    ],
-    "firstCommitIso": "2026-11-14T11:14:26",
-    "latestCommitIso": "2026-11-14T11:17:10",
-    "firstCommitDisplay": "Nov 14, 2026, 11:14 AM CST",
-    "latestCommitDisplay": "Nov 14, 2026, 11:17 AM CST",
-    "firstCommitSha": "local",
-    "latestCommitSha": "local",
-    "startMonthLabel": "November 2026",
-    "endMonthLabel": "November 2026",
-    "monthsLabel": "1 Month (Rapid Sprint)",
-    "commits": 1,
-    "initialLoc": 159,
-    "latestLoc": 159,
-    "initialFiles": 3,
-    "latestFiles": 3,
-    "languages": [
-      {
-        "name": "Objective-C",
-        "pct": 90.6
-      },
-      {
-        "name": "Config",
-        "pct": 9.4
-      }
-    ],
-    "lineage": "Lineage: harnesslab-screensaver-clean | macOS local build",
-    "liveUrl": null,
-    "liveLabel": null,
-    "idea": "Custom native macOS ScreenSaver.framework bundle rendering The Harness Lab's true-black and gold marble emblem with hardware-accelerated animation and smoke-test harness (Smoke.m).",
-    "architecture": "Native macOS Objective-C ScreenSaverView implementation (HarnessLabSaver.m, Smoke.m, Info.plist — 159 authored LOC).",
-    "aiLandscape": {
-      "openai": "GPT-5.6 (Sol, Terra, Luna) ran in production alongside early GPT-6 / GPT-6 Cyber previews (gpt-6, gpt-6-astra), unified GPT-Live voice, and biometric ChatGPT Wallet delegation.",
-      "anthropic": "Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 anchored multi-agent verification councils and autonomous repair loops.",
-      "google": "Gemini 4 Carbon (gemini-4-carbon, GA Nov 2026), Gemini 4 Hydrogen (gemini-4-hydrogen, released Nov 12, 2026 with xhigh thinking replacing 3.8 Flash as default), Gemini 4 Argon, and Gemini Omni 1.2 Flash defined the frontier ahead of Dec 1 legacy Gemini 2.5 auto-routing."
-    },
-    "gitTrail": [],
-    "shot": {
-      "src": "/assets/showcase/harnesslab-screensaver/01-landing-scenekit-medallion.webp",
-      "src640": "/assets/showcase/harnesslab-screensaver/01-landing-scenekit-medallion-640.webp",
-      "width": 1600,
-      "height": 1000,
-      "alt": "HarnessLabSaver — Native macOS SceneKit 3D revolving copper-and-marble medallion with volumetric smoke",
-      "caption": "HarnessLabSaver — Native macOS SceneKit 3D revolving copper-and-marble medallion with volumetric smoke"
-    }
-  },
-  {
-    "order": 28,
     "slug": "harnesslab-inbox-watch",
     "title": "The Harness Lab 24/7 AI Inbox Lead Watcher",
     "shortTitle": "24/7 AI Inbox Lead Watcher",

@@ -125,17 +125,17 @@ try {
   // Ledger filters + details toggles.
   const count = page.locator('[data-ledger-count]');
   const visibleCards = () => page.locator('[data-build-tiers]:visible').count();
-  assert.equal(await visibleCards(), 28);
+  assert.equal(await visibleCards(), 27);
   for (const [label, check] of [
-    ['Flagship Platforms', (n) => n >= 6 && n < 28],
-    ['Harnesses & Security', (n) => n >= 6 && n < 28],
-    ['Rapid Sprints', (n) => n >= 10 && n < 28],
-    ['All 28 Builds', (n) => n === 28],
+    ['Flagship Platforms', (n) => n >= 6 && n < 27],
+    ['Harnesses & Security', (n) => n >= 6 && n < 27],
+    ['Rapid Sprints', (n) => n >= 10 && n < 27],
+    ['All 27 Builds', (n) => n === 27],
   ]) {
     await page.getByRole('button', { name: label, exact: true }).click();
     const n = await visibleCards();
     assert.ok(check(n), `${label}: ${n}`);
-    assert.equal(await count.textContent(), `${n} of 28 builds shown`);
+    assert.equal(await count.textContent(), `${n} of 27 builds shown`);
   }
   const firstCard = page.locator('#build-titledesk');
   for (const summary of ['Architecture & stack', 'AI Model Landscape at the Time', 'Verbatim Git Trail']) {
@@ -145,7 +145,7 @@ try {
   assert.match(await firstCard.innerText(), /exact|instrument/i);
   await page.locator('a.tl-row[href="#build-rogue-agents"]').click();
   assert.equal(new URL(page.url()).hash, '#build-rogue-agents');
-  results.push('Tier filters partition the 28 builds with a live count; dossier toggles open; timeline bars jump to their build cards.');
+  results.push('Tier filters partition the 27 builds with a live count; dossier toggles open; timeline bars jump to their build cards.');
 
   // Every rendered image decodes (lazy ones are scrolled into view first).
   await page.goto(base, { waitUntil: 'networkidle' });

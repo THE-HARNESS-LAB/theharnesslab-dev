@@ -1,7 +1,7 @@
 {
   "name": "The Harness Lab — Engineering Foundry (.dev)",
   "short_name": "Harness Lab .dev",
-  "description": "The Harness Lab Engineering Foundry (.dev): Perihelion Loop, Rogue Agents, deterministic state machines, 12-tool verification bench & 28-build ledger.",
+  "description": "The Harness Lab Engineering Foundry (.dev): Perihelion Loop, Rogue Agents, deterministic state machines, 12-tool verification bench & 27-build ledger.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

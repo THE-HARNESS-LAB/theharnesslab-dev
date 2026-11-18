@@ -1,5 +1,5 @@
 // The Harness Lab (.dev) — showcase galleries, shared lightbox, War-Ledger tabs
-// and the 28-build evolution ledger. Pure helpers are exported for
+// and the 27-build evolution ledger. Pure helpers are exported for
 // tests/ledger.test.mjs; DOM wiring runs only in a browser.
 // engineering.mjs (state machines + Perihelion cockpit) is intentionally untouched.
 
