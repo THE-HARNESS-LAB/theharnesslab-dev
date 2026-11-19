@@ -842,8 +842,9 @@ pre code {
 }
 
 .medallion-stage {
+  --coin-half-t: 17px;
   position: relative;
-  width: min(100%, 428px);
+  width: min(100%, 458px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -902,12 +903,34 @@ pre code {
 
 .medallion-rotor {
   position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
   will-change: transform;
+  transition: opacity 220ms ease;
+}
+
+.medallion-webgl {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.medallion-vitrine[data-medallion-renderer="webgl2"] .medallion-webgl {
+  opacity: 1;
+}
+
+.medallion-vitrine[data-medallion-renderer="webgl2"] .medallion-rotor {
+  opacity: 0;
 }
 
 .medallion-vitrine[data-face="com"]:not([data-medallion-ready]) .medallion-rotor {
@@ -916,10 +939,10 @@ pre code {
 
 .medallion-rim {
   position: absolute;
-  top: 2.9%;
-  right: 3.3%;
-  bottom: 3.9%;
-  left: 3.6%;
+  top: 6.7%;
+  right: 7.0%;
+  bottom: 7.5%;
+  left: 7.3%;
   border-radius: 50%;
   pointer-events: none;
   background: conic-gradient(
@@ -934,41 +957,98 @@ pre code {
     #e5be73 322deg,
     #4c3313 360deg
   );
-  box-shadow: inset 0 0 0 1.5px rgba(255, 232, 178, 0.28);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 232, 178, 0.32);
 }
 
-.medallion-rim[data-rim="1"] {
-  transform: translateZ(-2.4px);
+.medallion-rim.is-collar {
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255, 232, 174, 0.24) 0deg 1.25deg,
+      rgba(38, 22, 8, 0.34) 1.25deg 2.5deg
+    ),
+    conic-gradient(
+      from 28deg,
+      #593914 0deg,
+      #d9a854 44deg,
+      #714b1c 92deg,
+      #f6d997 138deg,
+      #523412 186deg,
+      #d19c48 232deg,
+      #634219 280deg,
+      #ebc67a 324deg,
+      #593914 360deg
+    );
 }
 
-.medallion-rim[data-rim="2"] {
-  transform: translateZ(-1.2px);
+.medallion-rim.is-guard {
+  background: conic-gradient(
+    from 18deg,
+    #8c6222 0deg,
+    #ffe6a6 52deg,
+    #9f7129 104deg,
+    #ffefbe 164deg,
+    #7e561c 220deg,
+    #f7d78b 286deg,
+    #8c6222 360deg
+  );
+  box-shadow: inset 0 0 0 2px rgba(255, 242, 198, 0.55);
 }
 
-.medallion-rim[data-rim="3"] {
-  transform: translateZ(0px);
+.medallion-rim.is-band {
+  top: 6.95%;
+  right: 7.25%;
+  bottom: 7.75%;
+  left: 7.55%;
+  background: conic-gradient(
+    from 28deg,
+    #2e1a09 0deg,
+    #7b501e 42deg,
+    #3d240c 88deg,
+    #a8742f 134deg,
+    #2a1808 182deg,
+    #865822 228deg,
+    #38210b 276deg,
+    #99682a 322deg,
+    #2e1a09 360deg
+  );
+  box-shadow: inset 0 0 0 1px rgba(246, 206, 126, 0.2);
 }
 
-.medallion-rim[data-rim="4"] {
-  transform: translateZ(1.2px);
-}
-
-.medallion-rim[data-rim="5"] {
-  transform: translateZ(2.4px);
-}
+.medallion-rim[data-rim="1"]  { transform: translateZ(calc(var(--coin-half-t) * -1.00)); }
+.medallion-rim[data-rim="2"]  { transform: translateZ(calc(var(--coin-half-t) * -0.90)); }
+.medallion-rim[data-rim="3"]  { transform: translateZ(calc(var(--coin-half-t) * -0.80)); }
+.medallion-rim[data-rim="4"]  { transform: translateZ(calc(var(--coin-half-t) * -0.70)); }
+.medallion-rim[data-rim="5"]  { transform: translateZ(calc(var(--coin-half-t) * -0.60)); }
+.medallion-rim[data-rim="6"]  { transform: translateZ(calc(var(--coin-half-t) * -0.50)); }
+.medallion-rim[data-rim="7"]  { transform: translateZ(calc(var(--coin-half-t) * -0.40)); }
+.medallion-rim[data-rim="8"]  { transform: translateZ(calc(var(--coin-half-t) * -0.30)); }
+.medallion-rim[data-rim="9"]  { transform: translateZ(calc(var(--coin-half-t) * -0.20)); }
+.medallion-rim[data-rim="10"] { transform: translateZ(calc(var(--coin-half-t) * -0.10)); }
+.medallion-rim[data-rim="11"] { transform: translateZ(0px); }
+.medallion-rim[data-rim="12"] { transform: translateZ(calc(var(--coin-half-t) * 0.10)); }
+.medallion-rim[data-rim="13"] { transform: translateZ(calc(var(--coin-half-t) * 0.20)); }
+.medallion-rim[data-rim="14"] { transform: translateZ(calc(var(--coin-half-t) * 0.30)); }
+.medallion-rim[data-rim="15"] { transform: translateZ(calc(var(--coin-half-t) * 0.40)); }
+.medallion-rim[data-rim="16"] { transform: translateZ(calc(var(--coin-half-t) * 0.50)); }
+.medallion-rim[data-rim="17"] { transform: translateZ(calc(var(--coin-half-t) * 0.60)); }
+.medallion-rim[data-rim="18"] { transform: translateZ(calc(var(--coin-half-t) * 0.70)); }
+.medallion-rim[data-rim="19"] { transform: translateZ(calc(var(--coin-half-t) * 0.80)); }
+.medallion-rim[data-rim="20"] { transform: translateZ(calc(var(--coin-half-t) * 0.90)); }
+.medallion-rim[data-rim="21"] { transform: translateZ(calc(var(--coin-half-t) * 1.00)); }
 
 .medallion-coin-face {
   position: absolute;
-  inset: 0;
+  inset: 4%;
   border-radius: 50%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform: translateZ(3px);
+  transform: translateZ(calc(var(--coin-half-t) + 0.6px));
   pointer-events: none;
 }
 
 .medallion-coin-face.is-reverse {
-  transform: rotateY(180deg) translateZ(3px);
+  transform: rotateY(180deg) translateZ(calc(var(--coin-half-t) + 0.6px));
 }
 
 .medallion-coin-face img {
@@ -2557,7 +2637,8 @@ tr:last-child td {
     gap: 28px;
   }
   .medallion-stage {
-    width: min(100%, 272px);
+    --coin-half-t: 11px;
+    width: min(100%, 286px);
   }
 }
 
@@ -2659,8 +2740,9 @@ tr:last-child td {
     padding-block: 8px;
   }
   .medallion-stage {
-    width: min(100%, 248px);
-    max-width: min(68vw, 248px);
+    --coin-half-t: 10px;
+    width: min(100%, 260px);
+    max-width: min(70vw, 260px);
   }
   .hero-actions {
     order: 5;
@@ -2718,8 +2800,9 @@ tr:last-child td {
     padding-block: 4px;
   }
   .medallion-stage {
-    width: min(100%, 184px);
-    max-width: 184px;
+    --coin-half-t: 8px;
+    width: min(100%, 192px);
+    max-width: 192px;
   }
 }
 

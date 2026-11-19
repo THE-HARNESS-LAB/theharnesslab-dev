@@ -345,7 +345,7 @@
         </div>
 
         <!-- Interactive 3D Bearing-Mounted Dual-Face Medallion -->
-        <div class="medallion-vitrine" data-medallion data-face="dev">
+        <div class="medallion-vitrine" data-medallion data-face="dev" data-medallion-renderer="css3d">
           <div
             class="medallion-stage"
             data-medallion-stage
@@ -355,16 +355,32 @@
           >
             <div class="medallion-pool" aria-hidden="true"></div>
             <div class="medallion-rotor" data-medallion-rotor>
-              <div class="medallion-rim" data-rim="1" aria-hidden="true"></div>
-              <div class="medallion-rim" data-rim="2" aria-hidden="true"></div>
-              <div class="medallion-rim" data-rim="3" aria-hidden="true"></div>
-              <div class="medallion-rim" data-rim="4" aria-hidden="true"></div>
-              <div class="medallion-rim" data-rim="5" aria-hidden="true"></div>
+              <div class="medallion-rim is-collar" data-rim="1" aria-hidden="true"></div>
+              <div class="medallion-rim is-collar" data-rim="2" aria-hidden="true"></div>
+              <div class="medallion-rim is-collar" data-rim="3" aria-hidden="true"></div>
+              <div class="medallion-rim is-guard" data-rim="4" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="5" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="6" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="7" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="8" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="9" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="10" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="11" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="12" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="13" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="14" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="15" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="16" aria-hidden="true"></div>
+              <div class="medallion-rim is-band" data-rim="17" aria-hidden="true"></div>
+              <div class="medallion-rim is-guard" data-rim="18" aria-hidden="true"></div>
+              <div class="medallion-rim is-collar" data-rim="19" aria-hidden="true"></div>
+              <div class="medallion-rim is-collar" data-rim="20" aria-hidden="true"></div>
+              <div class="medallion-rim is-collar" data-rim="21" aria-hidden="true"></div>
               <div class="medallion-coin-face is-obverse">
                 <img
                   src="/assets/brand/harness-lab-black-marble.webp"
                   srcset="/assets/brand/harness-lab-black-marble-512.webp 512w, /assets/brand/harness-lab-black-marble.webp 1024w"
-                  sizes="(min-width: 960px) 388px, 78vw"
+                  sizes="(min-width: 960px) 416px, 78vw"
                   width="1024"
                   height="1024"
                   draggable="false"
@@ -376,7 +392,7 @@
                 <img
                   src="/assets/brand/harness-lab-copper-marble.webp"
                   srcset="/assets/brand/harness-lab-copper-marble-512.webp 512w, /assets/brand/harness-lab-copper-marble.webp 1024w"
-                  sizes="(min-width: 960px) 388px, 78vw"
+                  sizes="(min-width: 960px) 416px, 78vw"
                   width="1024"
                   height="1024"
                   draggable="false"
@@ -385,6 +401,7 @@
                 >
               </div>
             </div>
+            <canvas class="medallion-webgl" data-medallion-canvas aria-hidden="true"></canvas>
           </div>
         </div>
       </div>

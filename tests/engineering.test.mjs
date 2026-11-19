@@ -27,6 +27,7 @@ import {
   quatSlerpShortest,
   quatVisibleFace,
   quatToMatrix3d,
+  quatToGlMat3,
   createBearingState,
   computeReleaseVelocity,
   stepBearingPhysics,
@@ -348,4 +349,39 @@ test('fast flick coasts smoothly for 6-9 seconds on bearings and settles upright
   assert.equal(flip.active, false);
   assert.equal(flip.face, 'com');
   assert.equal(quatToMatrix3d(flip.q), quatToMatrix3d(QUAT_COM));
+});
+
+test('quatToGlMat3 maps CSS 3D bearing orientation cleanly into orthonormal WebGL SO(3) space', () => {
+  const mDev = quatToGlMat3(QUAT_DEV);
+  assert.equal(mDev.length, 9);
+  assert.deepEqual([...mDev], [1, 0, 0, 0, 1, 0, 0, 0, 1]);
+
+  const mCom = quatToGlMat3(QUAT_COM);
+  assert.deepEqual([...mCom].map((n) => (Math.abs(n) < 1e-6 ? 0 : n)), [-1, 0, 0, 0, 1, 0, 0, 0, -1]);
+
+  // Drag right (positive dry): front normal (0,0,+1) tilts toward +X in WebGL
+  const qRight = quatFromAngularDelta(0, 0.7, 0);
+  const mRight = quatToGlMat3(qRight);
+  assert.ok(mRight[6] > 0.6, `expected front normal +X > 0.6, got ${mRight[6]}`);
+  assert.ok(Math.abs(mRight[7]) < 1e-6);
+
+  // Drag down (negative drx): front normal (0,0,+1) tilts toward -Y (down) in WebGL (+Y up)
+  const qDown = quatFromAngularDelta(-0.7, 0, 0);
+  const mDown = quatToGlMat3(qDown);
+  assert.ok(mDown[7] < -0.6, `expected front normal -Y < -0.6, got ${mDown[7]}`);
+
+  // Arbitrary 3D diagonal orientation stays proper SO(3): R^T R = I and det(R) = +1
+  const qDiag = quatNormalize(
+    quatMultiply(quatFromAngularDelta(-0.55, 0.82, 0.31), quatFromAngularDelta(0.2, -0.4, 0.15)),
+  );
+  const m = quatToGlMat3(qDiag);
+  const det =
+    m[0] * (m[4] * m[8] - m[7] * m[5]) -
+    m[3] * (m[1] * m[8] - m[7] * m[2]) +
+    m[6] * (m[1] * m[5] - m[4] * m[2]);
+  assert.ok(Math.abs(det - 1) < 1e-5, `expected det=+1, got ${det}`);
+  for (let col = 0; col < 3; col += 1) {
+    const lenSq = m[col * 3] ** 2 + m[col * 3 + 1] ** 2 + m[col * 3 + 2] ** 2;
+    assert.ok(Math.abs(lenSq - 1) < 1e-5, `column ${col} unit length`);
+  }
 });

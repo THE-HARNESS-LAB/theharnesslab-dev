@@ -683,6 +683,39 @@ export function quatToMatrix3d(q) {
   return `matrix3d(${fmt(r11)},${fmt(r21)},${fmt(r31)},0,${fmt(r12)},${fmt(r22)},${fmt(r32)},0,${fmt(r13)},${fmt(r23)},${fmt(r33)},0,0,0,0,1)`;
 }
 
+export function quatToGlMat3(q) {
+  const [w, x, y, z] = quatNormalize(q);
+  const xx = x * x;
+  const yy = y * y;
+  const zz = z * z;
+  const xy = x * y;
+  const xz = x * z;
+  const yz = y * z;
+  const wx = w * x;
+  const wy = w * y;
+  const wz = w * z;
+
+  const r11 = 1 - 2 * (yy + zz);
+  const r21 = 2 * (xy + wz);
+  const r31 = 2 * (xz - wy);
+
+  const r12 = 2 * (xy - wz);
+  const r22 = 1 - 2 * (xx + zz);
+  const r32 = 2 * (yz + wx);
+
+  const r13 = 2 * (xz + wy);
+  const r23 = 2 * (yz - wx);
+  const r33 = 1 - 2 * (xx + yy);
+
+  // Convert CSS 3D (+Y down) into WebGL world space (+Y up) via S * R_css * S,
+  // returned in GLSL column-major order for gl.uniformMatrix3fv(..., false, m).
+  return new Float32Array([
+    r11 + 0, -r21 + 0, r31 + 0,
+    -r12 + 0, r22 + 0, -r32 + 0,
+    r13 + 0, -r23 + 0, r33 + 0,
+  ]);
+}
+
 export function createBearingState(initialFace = 'dev') {
   const q = initialFace === 'com' ? [...QUAT_COM] : [...QUAT_DEV];
   return {
@@ -917,6 +950,7 @@ export function mountSiteUI(doc = document) {
     const rotor =
       medallion.querySelector('[data-medallion-rotor]') ||
       medallion.querySelector('.medallion-rotor');
+    const canvas = medallion.querySelector('[data-medallion-canvas]');
     const now = () => win.performance?.now?.() ?? Date.now();
 
     if (stage && rotor) {
@@ -932,14 +966,45 @@ export function mountSiteUI(doc = document) {
       let samples = [];
       let rafId = null;
       let lastFrameTs = null;
+      let webglRenderer = null;
 
       medallion.dataset.medallionReady = 'true';
 
       const renderRotor = () => {
         rotor.style.transform = quatToMatrix3d(state.q);
         medallion.dataset.face = state.face;
-        medallion.dataset.spinning = String(Boolean(state.active || dragging));
+        const activeNow = Boolean(state.active || dragging);
+        medallion.dataset.spinning = String(activeNow);
+        webglRenderer?.setOrientation(quatToGlMat3(state.q), activeNow);
       };
+
+      if (canvas && typeof canvas.getContext === 'function') {
+        import('./medallion-webgl.mjs')
+          .then(({ createMedallionWebGL }) => {
+            webglRenderer = createMedallionWebGL(canvas, {
+              initialMatrix: quatToGlMat3(state.q),
+              onReady: () => {
+                medallion.dataset.medallionRenderer = 'webgl2';
+                webglRenderer?.setReducedMotion(Boolean(reducedQuery?.matches));
+                webglRenderer?.setOrientation(
+                  quatToGlMat3(state.q),
+                  Boolean(state.active || dragging),
+                );
+              },
+              onFail: () => {
+                medallion.dataset.medallionRenderer = 'css3d';
+                webglRenderer?.dispose();
+                webglRenderer = null;
+              },
+            });
+            reducedQuery?.addEventListener?.('change', () => {
+              webglRenderer?.setReducedMotion(Boolean(reducedQuery?.matches));
+            });
+          })
+          .catch(() => {
+            medallion.dataset.medallionRenderer = 'css3d';
+          });
+      }
 
       const stopLoop = () => {
         if (rafId !== null) {
