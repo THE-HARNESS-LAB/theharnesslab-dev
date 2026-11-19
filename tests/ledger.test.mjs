@@ -130,11 +130,10 @@ test('outbound links stay on the .dev allowlist and the private repos are never 
   const bad = hrefs.filter((h) => !isAllowedDevLink(h) && !(citations.has(new URL(h).hostname) && fieldNotes.includes(h)));
   assert.deepEqual(bad, []);
   assert.doesNotMatch(html, /github\.com\/spencerandtheteagues/);
-  assert.doesNotMatch(html, /https?:\/\/(?:www\.)?brandstream\.my/i);
-  for (const live of ['https://title-desk.com/', 'https://desktop.title-desk.com/', 'https://artificiallandman.io/', 'https://apex-build.dev/', 'https://theharnesslab.com/']) {
+  for (const live of ['https://title-desk.com/', 'https://desktop.title-desk.com/', 'https://artificiallandman.io/', 'https://brandstream.my/', 'https://apex-build.dev/', 'https://theharnesslab.com/']) {
     assert.ok(hrefs.includes(live), live);
   }
-  assert.equal(isAllowedDevLink('https://brandstream.my/'), false);
+  assert.equal(isAllowedDevLink('https://brandstream.my/'), true);
   assert.equal(isAllowedDevLink('https://github.com/spencerandtheteagues/apex-build-platform'), false);
   assert.equal(isAllowedDevLink('https://github.com/THE-HARNESS-LAB/titledesk'), true);
   assert.equal(isAllowedDevLink('https://example.com/'), false);
@@ -210,7 +209,6 @@ test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay va
     assert.match(doc, /max-snippet:-1,max-video-preview:-1/, name);
     assert.match(doc, /property="og:image:width"\s+content="1200"/, name);
     assert.match(doc, /property="og:image:height"\s+content="630"/, name);
-    assert.doesNotMatch(doc, /https?:\/\/(?:www\.)?brandstream\.my/i, `${name} must not link brandstream.my while DNS is locked`);
     assert.doesNotMatch(doc, /happy[\s-]?homes|charlie|screen[\s-]?saver|HarnessLabSaver/i, name);
 
     const imgs = [...doc.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
@@ -270,7 +268,7 @@ test('SEO, AI-engine discovery files, JSON-LD graphs, and subpage parity stay va
     assert.match(content, /1,031,828/);
     assert.match(content, /3,922/);
     assert.doesNotMatch(content, /New Mexico/i, llmFile);
-    assert.doesNotMatch(content, /brandstream\.my/i, llmFile);
+    assert.match(content, /https:\/\/brandstream\.my\//, llmFile);
     assert.doesNotMatch(content, /happy[\s-]?homes|charlie|screen[\s-]?saver|HarnessLabSaver/i, llmFile);
   }
 });
@@ -333,7 +331,6 @@ test('SHARED-FACTS naming, legal entity, OPSEC scrub, security.txt, and accessib
     /GOLD002TX/i,
     /gte002tx/i,
     /rogue-tools/i,
-    /brandstream\.my/i,
     /\/Users\/spencerteague/i,
     /\/home\/spencer/i,
     /Nero Marquina/i,

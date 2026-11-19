@@ -13,7 +13,7 @@ The Harness Lab operates across two paired properties:
 **Verification & Scope Provenance (as of `2026-11-18`):**
 - Repository LOC, commit counts, and suite totals on `.dev` are commit-pinned forensics excluding `node_modules`, lockfiles, generated/vendored artifacts, and binaries, deduplicated across shared trees (`1,031,828` authored LOC across `3,922` tracked default/release commits).
 - Chapter IV state-machine laboratories execute pure zero-I/O teaching reducers in `engineering.mjs` (no network calls, persistence, or live provider dispatch).
-- Live production platforms (`title-desk.com`, `desktop.title-desk.com`, `artificiallandman.io`, `apex-build.dev`, `theharnesslab.com`) are linked directly.
+- Live production platforms (`title-desk.com`, `desktop.title-desk.com`, `artificiallandman.io`, `brandstream.my`, `apex-build.dev`, `theharnesslab.com`) are linked directly.
 
 **Foundry Invariant:** Models participate in bounded interpretation; deterministic harness code owns state, authority, isolation, exact domain arithmetic, and release proof. An untrusted candidate never mutates authoritative state until an immutable out-of-worktree evaluator, null-tested regression witness, and cryptographic manifest receipt establish exact byte identity.
 
@@ -124,7 +124,7 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 
 | # | Build | Category | Duration | Commits | Initial -> Latest LOC | Live Surface |
 |---|---|---|---|---:|---:|---|
-| 01 | MyAIMediaMgr -> BrandStreams | Flagship SaaS Platform | 14 Months | 1,364 | 9,683 -> 81,254 | Case study on theharnesslab.com |
+| 01 | MyAIMediaMgr -> BrandStreams | Flagship SaaS Platform | 14 Months | 1,364 | 9,683 -> 81,254 | https://brandstream.my/ |
 | 02 | AEGIS App Architect | Cloud AI Builder Lineage (#1) | 1 Month (Rapid Sprint) | 1 | 46,927 -> 46,927 | Archive |
 | 03 | Starfish Prime / Neon Builder | Cloud AI Builder Lineage (#2) | 1 Month (Rapid Sprint) | 9 | 407 -> 3,509 | Archive |
 | 04 | SilverGuard ElderCare | Mobile & Healthcare AI App | 1 Month (Rapid Sprint) | 16 | 0 -> 35,705 | Archive |

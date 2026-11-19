@@ -77,8 +77,8 @@ export const LEDGER_BUILDS = Object.freeze([
       }
     ],
     "lineage": "Lineage: MyAiMediaMgr → MAIMM → MYAIMEDIAMANAGER-V8.1 → MAIMM_FINAL_PROD | BrandStreams · Final_MyAiMediaMgr_website",
-    "liveUrl": null,
-    "liveLabel": null,
+    "liveUrl": "https://brandstream.my/",
+    "liveLabel": "brandstream.my",
     "idea": "Spencer's first major AI SaaS platform — built to give small and medium-sized businesses an autonomous AI social-media agency capable of multi-slot campaign planning, brand-consistent image/video generation, approval workflows, and multi-platform scheduling across Instagram, Facebook, X, LinkedIn, and TikTok. Born in July 2025 when early cloud sandboxes (Replit) repeatedly corrupted environments and forced full rebuilds (v1 -> v6 -> v8.1 -> v10 -> MAIMM_FINAL_PROD -> BrandStreams), directly inspiring Spencer to build Apex-Build.",
     "architecture": "TypeScript full-stack monorepo: React + Vite + Tailwind + Framer Motion client (client/src, 155+ components/views including 14-slot Campaign Board V2, Multi-Model AI Brainstorm Studio, Grok Imagine Studio, Content Calendar, and Approval Queue) paired with an Express + Drizzle ORM + PostgreSQL + BullMQ/Redis worker backend (server/), Stripe billing, Ayrshare default-deny per-tenant profile routing, and Docker/Traefik production deployment.",
     "aiLandscape": {
