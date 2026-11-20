@@ -3718,9 +3718,9 @@ summary::-webkit-details-marker {
   .build-card-top .build-index, .build-card-top .status-pill, .harness-card-top .status-pill,
   .pillar-index .status-pill, .system-top .status-pill, dd .status-pill, p .status-pill, .status-pill,
   details.build-details > summary, .build-details .build-lineage, .build-details .build-langs,
-  dl dt, li > time, li > code, p > code, span > code, .formula code,
+  dl dt, li > time, .formula code,
   .bench-top .bench-role, .footer-col h3, .footer-bottom span,
-  p.provenance-meta, .provenance-meta code, .provenance-meta strong, span .inline-link,
+  .provenance-meta strong, span .inline-link,
   .chapter-head .chapter-eyebrow, .chapter-eyebrow .chapter-numeral, .chapter .chapter-number,
   div .eyebrow, p .eyebrow, li .eyebrow, .telemetry-cell .telemetry-label, .ledger-monument .telemetry-label,
   .telemetry-sub code, .system-heading .system-domain, li .pipeline-num, ol.stage-rail li,
@@ -3734,4 +3734,6 @@ summary::-webkit-details-marker {
   }
   /* These two lines set their font with !important (shorthand) above, so the floor has to match it. */
   .build-details .build-lineage, .build-details .build-langs { font-size: 12px !important; }
+  /* Inline code is 0.84em of its text: floor it without shrinking code that sits in larger body copy. */
+  code { font-size: max(12px, 0.84em); }
 }
