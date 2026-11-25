@@ -130,9 +130,10 @@ test('outbound links stay on the .dev allowlist and the private repos are never 
   const bad = hrefs.filter((h) => !isAllowedDevLink(h) && !(citations.has(new URL(h).hostname) && fieldNotes.includes(h)));
   assert.deepEqual(bad, []);
   assert.doesNotMatch(html, /github\.com\/spencerandtheteagues/);
-  for (const live of ['https://title-desk.com/', 'https://desktop.title-desk.com/', 'https://artificiallandman.io/', 'https://brandstream.my/', 'https://apex-build.dev/', 'https://theharnesslab.com/']) {
+  for (const live of ['https://title-desk.com/', 'https://desktop.title-desk.com/', 'https://artificiallandman.io/', 'https://ailandman.io/', 'https://brandstream.my/', 'https://apex-build.dev/', 'https://theharnesslab.com/']) {
     assert.ok(hrefs.includes(live), live);
   }
+  assert.equal(isAllowedDevLink('https://ailandman.io/'), true);
   assert.equal(isAllowedDevLink('https://brandstream.my/'), true);
   assert.equal(isAllowedDevLink('https://github.com/spencerandtheteagues/apex-build-platform'), false);
   assert.equal(isAllowedDevLink('https://github.com/THE-HARNESS-LAB/titledesk'), true);
@@ -161,6 +162,7 @@ test('galleries ship the required screens and copy every image into assets/', ()
   assert.equal(GALLERIES['titledesk-web'].items.length, 5);
   assert.equal(GALLERIES['titledesk-desktop'].items.length, 8);
   assert.equal(GALLERIES['artificial-landman'].items.length, 5);
+  assert.equal(GALLERIES['ai-landman'].items.length, 5);
   for (const g of Object.values(GALLERIES)) {
     for (const item of g.items) {
       assert.ok(existsSync(join(root, item.src)), item.src);

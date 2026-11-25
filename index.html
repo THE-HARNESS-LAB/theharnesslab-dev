@@ -60,6 +60,7 @@
         "https://title-desk.com/",
         "https://desktop.title-desk.com/",
         "https://artificiallandman.io/",
+        "https://ailandman.io/",
         "https://apex-build.dev/"
       ],
       "knowsAbout": [
@@ -220,6 +221,19 @@
       "description": "Hosted Texas mineral title examination for land teams, brokerages and operators who run many assignments. Artificial Landman runs the same Texas mineral-interest engine as Title-Desk, sold and supported on its own."
     },
     {
+      "@type": "SoftwareApplication",
+      "@id": "https://ailandman.io/#software",
+      "name": "AI Landman",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://ailandman.io/",
+      "image": "https://theharnesslab.dev/assets/products/ai-landman-seal-640.webp",
+      "author": {
+        "@id": "https://theharnesslab.com/#organization"
+      },
+      "description": "Remote Texas oil and gas mineral title examination across all 254 Texas counties supporting uploaded deed packets and full-service county clerk retrieval, dual Gemini sessions with deterministic fraction verification and independent third-model page-image review, and emailed source-linked draft Excel workbooks."
+    },
+    {
       "@type": "FAQPage",
       "@id": "https://theharnesslab.dev/#faq",
       "mainEntity": [
@@ -228,7 +242,7 @@
           "name": "What is The Harness Lab Engineering Foundry (theharnesslab.dev)?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "theharnesslab.dev is the systems R&D and verification foundry of The Harness Lab LLC (founded by Spencer Teague in Tom Green County, Texas; commercial studio at theharnesslab.com). It documents the in-house harnesses, deterministic state machines, 12-tool pinned verification bench, and 27-build commit ledger (1,031,828 deduplicated authored lines of code across 3,922 commits as of 2026-11-18) behind live platforms including Title-Desk, Title-Desk Agent, Artificial Landman, and APEX.BUILD."
+            "text": "theharnesslab.dev is the systems R&D and verification foundry of The Harness Lab LLC (founded by Spencer Teague in Tom Green County, Texas; commercial studio at theharnesslab.com). It documents the in-house harnesses, deterministic state machines, 12-tool pinned verification bench, and 27-build commit ledger (1,031,828 deduplicated authored lines of code across 3,922 commits as of 2026-11-18) behind live platforms including Title-Desk, Title-Desk Agent, Artificial Landman, AI Landman, and APEX.BUILD."
           }
         },
         {
@@ -684,10 +698,10 @@
   <section class="section" id="title-engines">
     <div class="wrap">
       <div class="chapter-head">
-        <p class="chapter-eyebrow"><span class="chapter-numeral">II</span> Flagship Product Engineering · Title-Desk, Title-Desk Agent &amp; Artificial Landman</p>
+        <p class="chapter-eyebrow"><span class="chapter-numeral">II</span> Flagship Product Engineering · Title-Desk, Title-Desk Agent, Artificial Landman &amp; AI Landman</p>
         <h2>Texas mineral title examination, engineered to <em>survive the courthouse.</em></h2>
-        <p class="lead">Three products on one Texas mineral-interest engine: hosted <strong>Title-Desk</strong> for independent landmen and abstractors, cross-platform <strong>Title-Desk Agent</strong>, and hosted <strong>Artificial Landman</strong> for land teams, brokerages and operators. Together they span 312,379 raw authored lines across an August–November 2026 four-month campaign of 1,662 all-branch commits (including ~16,732 shared engine lines between the two hosted platforms counted once in the deduplicated 1,031,828 studio total) — and they were the proving ground for the harnesses in Chapter I.</p>
-        <p class="provenance-meta"><strong>Verification &amp; Scope Provenance ·</strong> Live production platforms (<code>title-desk.com</code>, <code>desktop.title-desk.com</code>, <code>artificiallandman.io</code>) + commit-pinned repository forensics as of 2026-11-18. Scope: Texas, one county per run, current mineral interest (<code>MI</code>) owners only; outputs are draft examinations for review by a qualified landman or attorney, never a title opinion.</p>
+        <p class="lead">Four live products built on our Texas mineral-interest engine: hosted <strong>Title-Desk</strong> for independent landmen and abstractors, cross-platform <strong>Title-Desk Agent</strong>, hosted <strong>Artificial Landman</strong> for land teams, brokerages and operators, and statewide <strong>AI Landman</strong> across all 254 Texas counties. The core campaign spans 312,379 raw authored lines across August–November 2026 and 1,662 all-branch commits (including ~16,732 shared engine lines counted once in the deduplicated 1,031,828 studio total) plus the 22,810-LOC <code>ailandman.io</code> service — the proving ground for the harnesses in Chapter I.</p>
+        <p class="provenance-meta"><strong>Verification &amp; Scope Provenance ·</strong> Live production platforms (<code>title-desk.com</code>, <code>desktop.title-desk.com</code>, <code>artificiallandman.io</code>, <code>ailandman.io</code>) + commit-pinned repository forensics as of 2026-11-18 (with AI Landman Nov 2026 service sprint telemetry). Scope: Texas, one county per run, current mineral interest (<code>MI</code>) owners only; outputs are draft examinations for review by a qualified landman or attorney, never a title opinion.</p>
       </div>
 
       <article class="engine-block" id="engine-titledesk">
@@ -825,6 +839,51 @@
       </div>
   <!-- GALLERY:artificial-landman:END -->
         <p class="engine-links"><a class="text-link" href="https://artificiallandman.io/">artificiallandman.io ↗</a></p>
+      </article>
+
+      <article class="engine-block" id="engine-ai-landman">
+        <div class="engine-head">
+          <div>
+            <div class="system-top" style="margin-bottom:14px;">
+              <img class="system-seal" src="/assets/products/ai-landman-seal-640.webp" width="64" height="64" loading="lazy" alt="AI Landman bronze medallion seal">
+              <div class="system-heading">
+                <p class="eyebrow">Hosted Platform · ailandman.io · All 254 Texas Counties</p>
+                <h3>AI Landman</h3>
+              </div>
+            </div>
+            <p class="lead">Remote Texas oil and gas mineral title examination across all 254 Texas counties. Paste the client’s assignment instructions to upload existing courthouse records or request full-service county clerk retrieval with an operator-approved copy budget — two Gemini sessions examine records separately, deterministic code verifies every mineral fraction, an independent third model checks the final answer against page images, and the source-linked draft Excel workbook arrives by email for review by a qualified landman or attorney.</p>
+          </div>
+          <dl class="vitrine-stats">
+            <div><dt>Service LOC</dt><dd>22,810</dd></div>
+            <div><dt>Commits</dt><dd>121</dd></div>
+            <div><dt>Coverage</dt><dd>All 254 TX counties</dd></div>
+            <div><dt>Window</dt><dd>1 Month (Rapid Sprint)</dd></div>
+          </dl>
+        </div>
+        <!-- GALLERY:ai-landman:START -->
+  <div class="marquina-card showcase-gallery" data-gallery="ai-landman">
+        <div class="gallery-tabs" role="tablist" aria-label="AI Landman screens">
+          <button class="cockpit-tab gallery-tab is-active" id="gal-ai-landman-0" type="button" role="tab" aria-selected="true" aria-controls="gal-ai-landman-panel" data-gallery-tab="0">01 Landing</button>
+          <button class="cockpit-tab gallery-tab" id="gal-ai-landman-1" type="button" role="tab" aria-selected="false" aria-controls="gal-ai-landman-panel" tabindex="-1" data-gallery-tab="1">02 Sign-In</button>
+          <button class="cockpit-tab gallery-tab" id="gal-ai-landman-2" type="button" role="tab" aria-selected="false" aria-controls="gal-ai-landman-panel" tabindex="-1" data-gallery-tab="2">03 Run Options</button>
+          <button class="cockpit-tab gallery-tab" id="gal-ai-landman-3" type="button" role="tab" aria-selected="false" aria-controls="gal-ai-landman-panel" tabindex="-1" data-gallery-tab="3">04 Workbook</button>
+          <button class="cockpit-tab gallery-tab" id="gal-ai-landman-4" type="button" role="tab" aria-selected="false" aria-controls="gal-ai-landman-panel" tabindex="-1" data-gallery-tab="4">05 Verification</button>
+        </div>
+        <div class="cockpit-stage gallery-stage" id="gal-ai-landman-panel" role="tabpanel" aria-labelledby="gal-ai-landman-0" data-gallery-panel>
+          <button class="bezel gallery-viewport" type="button" data-gallery-zoom aria-label="Inspect full-resolution screen: Statewide Texas mineral title landing">
+            <img data-gallery-img src="/assets/showcase/ai-landman/01-landing.webp" srcset="/assets/showcase/ai-landman/01-landing-640.webp 640w, /assets/showcase/ai-landman/01-landing.webp 2880w" sizes="(min-width: 1180px) 760px, 92vw" width="2880" height="1800" loading="lazy" alt="AI Landman landing page with a surveyor automaton reading a courthouse deed book">
+            <span class="gallery-zoom-pill" aria-hidden="true">Inspect ⤢</span>
+          </button>
+          <div class="cockpit-meta" aria-live="polite">
+            <span class="eyebrow" data-gallery-code>01 / 05 · STATEWIDE TEXAS</span>
+            <h4 data-gallery-title>Statewide Texas mineral title landing</h4>
+            <p class="cockpit-caption" data-gallery-caption>AI Landman (ailandman.io) covers all 254 Texas counties — paste assignment instructions, upload existing records or request county clerk retrieval, and receive the finished draft workbook by email.</p>
+          </div>
+        </div>
+        <script type="application/json" data-gallery-items>[{"src":"/assets/showcase/ai-landman/01-landing.webp","src640":"/assets/showcase/ai-landman/01-landing-640.webp","width":2880,"height":1800,"group":"STATEWIDE TEXAS","tab":"01 Landing","title":"Statewide Texas mineral title landing","caption":"AI Landman (ailandman.io) covers all 254 Texas counties — paste assignment instructions, upload existing records or request county clerk retrieval, and receive the finished draft workbook by email.","alt":"AI Landman landing page with a surveyor automaton reading a courthouse deed book"},{"src":"/assets/showcase/ai-landman/02-login.webp","src640":"/assets/showcase/ai-landman/02-login-640.webp","width":2880,"height":1800,"group":"ACCOUNT","tab":"02 Sign-In","title":"Passwordless workspace sign-in","caption":"Passwordless email sign-in link protected by Turnstile verification — enter an email address to open active assignments with no stored password.","alt":"AI Landman passwordless email sign-in screen"},{"src":"/assets/showcase/ai-landman/03-run-options.webp","src640":"/assets/showcase/ai-landman/03-run-options-640.webp","width":2880,"height":1800,"group":"RUN SCOPE","tab":"03 Run Options","title":"Upload & full-service retrieval options","caption":"Compare uploaded deed packets against full-service county clerk research and record purchasing with an operator-approved copy budget.","alt":"AI Landman run options comparing uploaded document runs and full-service county clerk retrieval"},{"src":"/assets/showcase/ai-landman/04-sample-workbook.webp","src640":"/assets/showcase/ai-landman/04-sample-workbook-640.webp","width":2880,"height":1800,"group":"SAMPLE WORKBOOK","tab":"04 Workbook","title":"Reeves County sample workbook","caption":"Inspectable Reeves County sample deliverable tracing mineral ownership across two tracts with exact rational fractions, net mineral acres, and cited source deeds.","alt":"AI Landman verified mineral ownership sample workbook table for Reeves County, Texas"},{"src":"/assets/showcase/ai-landman/05-verification-flow.webp","src640":"/assets/showcase/ai-landman/05-verification-flow-640.webp","width":2880,"height":1800,"group":"VERIFICATION","tab":"05 Verification","title":"Dual Gemini + third-model page check","caption":"Two Gemini sessions examine records separately while deterministic code checks every fraction; an independent third model audits the final answer against page images and unresolved items lead the curative requirements.","alt":"AI Landman verification workflow showing dual-examiner review and emailed workbook delivery"}]</script>
+      </div>
+  <!-- GALLERY:ai-landman:END -->
+        <p class="engine-links"><a class="text-link" href="https://ailandman.io/">ailandman.io ↗</a> <a class="text-link" href="/landman-title-systems/">Landman title systems monograph →</a></p>
       </article>
     </div>
   </section>
@@ -1176,12 +1235,69 @@
             <a class="text-link" href="/business-software-engineering/">Business Systems Notes →</a>
           </div>
         </article>
+
+        <!-- System 5: AI Landman -->
+        <article class="marquina-card system-card">
+          <div class="system-card-body">
+            <div class="system-top">
+              <img class="system-seal" src="/assets/products/ai-landman-seal-640.webp" width="64" height="64" loading="lazy" alt="AI Landman bronze medallion seal">
+              <div class="system-heading">
+                <span class="system-domain">ailandman.io · All 254 Texas Counties</span>
+                <h3>AI Landman</h3>
+              </div>
+              <span class="status-pill">22,810 LOC · 121 Commits</span>
+            </div>
+            <p>Remote Texas mineral title examination service supporting both uploaded deed packets and full-service county clerk record retrieval across all 254 Texas counties, running atop our shared exact-fraction title engine.</p>
+            <ul class="system-invariants">
+              <li><strong>Assignment-first scope &amp; retrieval:</strong> Accepts pasted assignment instructions with explicit tract reconciliation and operator-approved county record copy budgets.</li>
+              <li><strong>Dual Gemini + independent 3rd-model check:</strong> Independent model verification against page images allows one repair and routes any unresolved tract straight to curative requirements.</li>
+              <li><strong>Emailed draft workbook delivery:</strong> Delivers a source-linked draft Excel workbook with cited deeds, exact rational mineral fractions, and net mineral acres for review by a qualified landman or attorney.</li>
+            </ul>
+            <div class="bezel system-preview">
+              <img src="/assets/showcase/ai-landman/01-landing-640.webp" srcset="/assets/showcase/ai-landman/01-landing-640.webp 640w, /assets/showcase/ai-landman/01-landing.webp 2880w" sizes="(min-width: 960px) 560px, 90vw" width="2880" height="1800" loading="lazy" alt="AI Landman landing page for statewide Texas mineral title examination">
+            </div>
+          </div>
+          <div class="system-links">
+            <a class="text-link" href="https://ailandman.io/">ailandman.io ↗</a>
+            <a class="text-link" href="#engine-ai-landman">Inspect AI Landman Gallery ↑</a>
+            <a class="text-link" href="/landman-title-systems/">Read Landman Architecture →</a>
+          </div>
+        </article>
+
+        <!-- System 6: APEX.BUILD -->
+        <article class="marquina-card system-card">
+          <div class="system-card-body">
+            <div class="system-top">
+              <img class="system-seal" src="/assets/products/apex-build-logo-640.webp" width="64" height="64" loading="lazy" alt="APEX.BUILD metallic triangle emblem">
+              <div class="system-heading">
+                <span class="system-domain">apex-build.dev · 9-Agent Cloud IDE</span>
+                <h3>APEX.BUILD</h3>
+              </div>
+              <span class="status-pill">377,197 LOC · 1,064 Commits</span>
+            </div>
+            <p>Multi-AI cloud software development environment where nine specialist agents plan, code, test, and verify full-stack applications inside hardened containers alongside a cloud Monaco IDE.</p>
+            <ul class="system-invariants">
+              <li><strong>Go + Monaco cloud architecture:</strong> 261,673-LOC Go orchestration backend paired with an 87,497-LOC React/TypeScript Monaco IDE and AST build-contract graph.</li>
+              <li><strong>Sandboxed execution &amp; heartbeats:</strong> Docker seccomp isolation, dead-agent heartbeat monitoring, backpressure routing, and live token/spend controls.</li>
+              <li><strong>Encrypted BYOK routing:</strong> AES-256-GCM bring-your-own-key provider vault with multi-model lane routing and rollback-safe diff review.</li>
+            </ul>
+            <div class="bezel system-preview">
+              <img src="/assets/showcase/apex-build/03-landing-latest-blue-steel-1440x900-640.webp" srcset="/assets/showcase/apex-build/03-landing-latest-blue-steel-1440x900-640.webp 640w, /assets/showcase/apex-build/03-landing-latest-blue-steel-1440x900.webp 1600w" sizes="(min-width: 960px) 560px, 90vw" width="1600" height="1000" loading="lazy" alt="APEX.BUILD enterprise blue-steel landing hero and nine-agent workspace preview">
+            </div>
+          </div>
+          <div class="system-links">
+            <a class="text-link" href="https://apex-build.dev/">apex-build.dev ↗</a>
+            <a class="text-link" href="#build-apex-build">Inspect APEX.BUILD Ledger ↓</a>
+            <a class="text-link" href="/business-software-engineering/">Business Systems Notes →</a>
+          </div>
+        </article>
       </div>
       <div class="live-platforms" aria-label="Live production platforms">
         <span class="eyebrow">Live production platforms</span>
         <a class="text-link" href="https://title-desk.com/">title-desk.com ↗</a>
         <a class="text-link" href="https://desktop.title-desk.com/">desktop.title-desk.com ↗</a>
         <a class="text-link" href="https://artificiallandman.io/">artificiallandman.io ↗</a>
+        <a class="text-link" href="https://ailandman.io/">ailandman.io ↗</a>
         <a class="text-link" href="https://brandstream.my/">brandstream.my ↗</a>
         <a class="text-link" href="https://apex-build.dev/">apex-build.dev ↗</a>
         <a class="text-link" href="https://theharnesslab.com/">theharnesslab.com ↗</a>
@@ -2874,7 +2990,7 @@ type Verdict =
         <h3>Foundry Chapters (.dev)</h3>
         <ul>
           <li><a href="#perihelion-loop">I · Perihelion Loop &amp; In-House Harnesses</a></li>
-          <li><a href="#title-engines">II · Title-Desk, Title-Desk Agent &amp; Artificial Landman</a></li>
+          <li><a href="#title-engines">II · Title-Desk, Artificial Landman &amp; AI Landman</a></li>
           <li><a href="#architecture">III · Three-Plane Architecture</a></li>
           <li><a href="#execution-lab">IV · Execution &amp; Karpathy Labs</a></li>
           <li><a href="#systems">V · Production Systems</a></li>
@@ -2904,6 +3020,7 @@ type Verdict =
           <li><a href="https://title-desk.com/">Title-Desk (title-desk.com) ↗</a></li>
           <li><a href="https://desktop.title-desk.com/">Title-Desk Agent ↗</a></li>
           <li><a href="https://artificiallandman.io/">Artificial Landman ↗</a></li>
+          <li><a href="https://ailandman.io/">AI Landman (ailandman.io) ↗</a></li>
           <li><a href="https://apex-build.dev/">APEX.BUILD ↗</a></li>
         </ul>
       </div>

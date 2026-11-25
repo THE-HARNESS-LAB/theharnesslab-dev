@@ -13,7 +13,7 @@ The Harness Lab operates across two paired properties:
 **Verification & Scope Provenance (as of `2026-11-18`):**
 - Repository LOC, commit counts, and suite totals on `.dev` are commit-pinned forensics excluding `node_modules`, lockfiles, generated/vendored artifacts, and binaries, deduplicated across shared trees (`1,031,828` authored LOC across `3,922` tracked default/release commits).
 - Chapter IV state-machine laboratories execute pure zero-I/O teaching reducers in `engineering.mjs` (no network calls, persistence, or live provider dispatch).
-- Live production platforms (`title-desk.com`, `desktop.title-desk.com`, `artificiallandman.io`, `brandstream.my`, `apex-build.dev`, `theharnesslab.com`) are linked directly.
+- Live production platforms (`title-desk.com`, `desktop.title-desk.com`, `artificiallandman.io`, `ailandman.io`, `brandstream.my`, `apex-build.dev`, `theharnesslab.com`) are linked directly.
 
 **Foundry Invariant:** Models participate in bounded interpretation; deterministic harness code owns state, authority, isolation, exact domain arithmetic, and release proof. An untrusted candidate never mutates authoritative state until an immutable out-of-worktree evaluator, null-tested regression witness, and cryptographic manifest receipt establish exact byte identity.
 
@@ -97,6 +97,10 @@ Engineered across a 4-month campaign (`August–November 2026`, from the Aug 2 T
 ### 5.3 Artificial Landman (`https://artificiallandman.io/`)
 - **Scale:** 23,148 hosted LOC, 54 commits, acceptance suite at commit `520f777`.
 - **Positioning:** Hosted Texas mineral title examination for land teams, brokerages and operators who run many assignments. Artificial Landman runs the same Texas mineral-interest engine as Title-Desk, packaged, sold and supported on its own.
+
+### 5.4 AI Landman (`https://ailandman.io/`)
+- **Scale:** 22,810 service LOC, 121 commits (November 2026 sprint), covering all 254 Texas counties atop The Harness Lab's shared Texas mineral-interest engine.
+- **Positioning:** Remote Texas oil and gas mineral title examination accepting pasted assignment instructions for uploaded deed packets or full-service county clerk retrieval with operator-approved copy budgets, running dual Gemini examiners + deterministic fraction checks + independent third-model page-image verification, and emailing a source-linked draft Excel workbook for review by a qualified landman or attorney.
 
 ---
 

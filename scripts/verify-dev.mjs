@@ -243,7 +243,7 @@ try {
 
   // Galleries: every tab swaps the stage; zoom opens the shared lightbox with
   // working prev/next; Escape closes and focus returns to the zoom button.
-  for (const id of ['rogue-agents', 'titledesk-web', 'titledesk-desktop', 'artificial-landman']) {
+  for (const id of ['rogue-agents', 'titledesk-web', 'titledesk-desktop', 'artificial-landman', 'ai-landman']) {
     const g = page.locator(`[data-gallery="${id}"]`);
     await g.scrollIntoViewIfNeeded();
     const tabs = g.locator('[data-gallery-tab]');
@@ -269,7 +269,7 @@ try {
     assert.equal(await dialog.evaluate((d) => d.open), false);
     assert.ok(await zoom.evaluate((el) => el === document.activeElement), `${id}: focus restored`);
   }
-  results.push('Rogue Agents (4), Title-Desk (5), Title-Desk Agent (8) and Artificial Landman (5) galleries switch, zoom, page and close with focus restored.');
+  results.push('Rogue Agents (4), Title-Desk (5), Title-Desk Agent (8), Artificial Landman (5) and AI Landman (5) galleries switch, zoom, page and close with focus restored.');
 
   // Single screenshot buttons (harness card + every build card that has one).
   const shots = page.locator('[data-lightbox-src]');
@@ -357,7 +357,7 @@ try {
       }
       assert.equal(periHeights.size, 1, `Perihelion cockpit height jitter at ${width}px: ${[...periHeights]}`);
 
-      for (const gid of ['rogue-agents', 'titledesk-web', 'titledesk-desktop', 'artificial-landman']) {
+      for (const gid of ['rogue-agents', 'titledesk-web', 'titledesk-desktop', 'artificial-landman', 'ai-landman']) {
         const gal = page.locator(`[data-gallery="${gid}"]`);
         const gTabs = gal.locator('[data-gallery-tab]');
         const gCount = await gTabs.count();
@@ -384,7 +384,7 @@ try {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(base, { waitUntil: 'networkidle' });
   await page.screenshot({ path: `${out}/desktop-hero.png` });
-  for (const id of ['harness-vitrine', 'title-engines', 'build-ledger']) {
+  for (const id of ['harness-vitrine', 'title-engines', 'systems', 'build-ledger']) {
     await page.locator(`#${id}`).screenshot({ path: `${out}/desktop-${id}.png`, style: '.site-header, .skip { visibility: hidden !important; }' });
   }
   await page.setViewportSize({ width: 390, height: 844 });
